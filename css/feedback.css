@@ -1,0 +1,47 @@
+.rating {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.circle:hover {
+    transform: scale(1.1);
+}
+.selected {
+    border-color: #007bff;
+}
+
+ /* Centering the form content */
+ .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Center vertically on the viewport */
+}
+/* Additional CSS for increasing the size of the button */
+#submitBtn {
+    padding: 15px 30px; /* Adjust padding for larger button */
+    font-size: 18px; /* Increase font size */
+    border-radius: 8px; /* Add rounded corners */
+    background-color: #007bff; /* Change button color */
+    color: #fff; /* Change text color */
+    border: none; /* Remove border */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#submitBtn:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}

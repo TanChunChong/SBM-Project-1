@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/feedback.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Feedback Form</h2>
+
+        <form id="feedbackForm" action="#" method="POST">
+            <div class="rating">
+                <div class="circle" id="good" onclick="setRating('Bad')">Bad</div>
+                <div class="circle" id="ok" onclick="setRating('Ok')">Ok</div>
+                <div class="circle" id="veryGood" onclick="setRating('Good')">Good</div>
+            </div>
+            <div>
+                <label for="reason">Reason for Rating:</label><br>
+                <textarea id="reason" name="reason" rows="4" cols="50"></textarea>
+            </div>
+            <div>
+                <input type="checkbox" id="contact" name="contact">
+                <label for="contact">May we contact you for further feedback?</label>
+            </div>
+            <input type="hidden" name="rating" id="rating">
+            <button id="submitBtn" type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
