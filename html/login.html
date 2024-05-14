@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+    }
+    .input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 25px;
+      border-width: 2px;
+      border-color: #B24DFF;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    }
+    .input[type="email"], .input[type="password"] {
+      border-color: #6495ED;
+    }
+    .button {
+      width: 100%;
+      padding: 10px;
+      background-color: #B24DFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background-color: #B24DFF;
+    }
+    .forgot-password {
+      margin-top: 10px;
+      font-size: 14px;
+      text-align: center;
+      color: #444;
+      text-decoration: none;
+    }
+    .sign-up {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: #444;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login">
+        <p><h1>Login</h1></p>
+    </div>
+    <div class="form">
+      <form>
+        <label for="email">Email</label>
+        <input type="email" id="email" class="input" placeholder="Enter your email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" class="input" placeholder="Enter your password" required>
+        <button type="submit" class="button">Login</button>
+      </form>
+      <a href="signup.html" class="forgot-password">Forgot your password?</a>
+      <a href="signup.html" class="sign-up">Don't have an Account? Sign up</a>
+    </div>
+  </div>
+</body>
+</html>
