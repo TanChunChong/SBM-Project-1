@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="../css/editprofile.css">
+</head>
+<body>
+  <!-- Edit Profile Form -->
+  <div class="edit-profile-container">
+    <a href="index.html">
+      <img src="logo.png" alt="Logo" class="logo">
+    </a>
+    <h2>Edit Profile</h2>
+    <form>
+      <!-- Username Input Field -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" required>
+      </div>
+
+      <!-- Email Input Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter email" required>
+      </div>
+
+      <!-- Password Input Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" required>
+      </div>
+
+      <!-- Confirm Password Input Field -->
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required>
+      </div>
+
+      <!-- Update Button -->
+      <div class="button-group">
+        <button type="submit" class="update-btn">Update</button>
+      </div>
+
+      <!-- Cancel Button -->
+      <div class="button-group">
+        <button type="reset" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
