@@ -14,8 +14,6 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
-
 .circle:hover {
     transform: scale(1.1);
 }
@@ -23,14 +21,42 @@
     border-color: #007bff;
 }
 
- /* Centering the form content */
- .container {
+/* Centering the form content */
+.container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh; /* Center vertically on the viewport */
 }
+
+#feedbackForm {
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Adjust max width as needed */
+    text-align: center; /* Center align form content */
+}
+
+/* Center align the question */
+#reasons {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+/* Center align textarea */
+#reason {
+    width: 100%; /* Make the textarea full width */
+    border-radius: 10px;
+}
+
+/* Center align checkbox and label */
+input[type="checkbox"] {
+    margin-right: 5px; /* Adjust margin as needed */
+}
+label[for="contact"] {
+    display: inline-block; /* Make label inline-block for alignment */
+    text-align: left; /* Align label text to the left */
+}
+
 /* Additional CSS for increasing the size of the button */
 #submitBtn {
     padding: 15px 30px; /* Adjust padding for larger button */
@@ -41,7 +67,8 @@
     border: none; /* Remove border */
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 30px;
 }
 #submitBtn:hover {
-    background-color: #0056b3; /* Darker color on hover */
+    background-color: #fff; /* Darker color on hover */
 }
