@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
     background-color: #FFFCED;
     font-family: Arial, sans-serif;
@@ -37,40 +39,97 @@ h2 {
 .coloured-layer {
     background-color: #BAC4FF;
     position: absolute;
-    top: calc(100% + 20px);
-    left: -21px;
-    width: calc(100% + 21px);
-    height: calc(100vh - 100% - 20px);
-    border-top-left-radius: 35px;
+    top: calc(100% + 20px); /* Position it 20 pixels below the paragraph */
+    left: -21px; /* Adjusted to match the negative value of the left margin of .heading-container */
+    width: calc(100% + 21px); /* Extend it to fill the entire width including the left margin */
+    height: calc(100vh - 100% - 20px); /* Extend it all the way down */
+    border-top-left-radius: 35px; /* Apply border-radius to top corners */
     border-top-right-radius: 35px;
+    z-index: 0; /* Ensure it is behind other content */
 }
 
 .rectangular-container {
     overflow-x: auto; /* Enable horizontal scrolling */
     white-space: nowrap; /* Prevent line breaks */
-    display: flex;
-    gap: 19px;
+    display: flex; /* Use Flexbox to layout rectangular boxes horizontally */
+    gap: 19px; /* Set the gap between rectangular boxes */
     position: absolute;
-    top: calc(100% + 60px);
-    left: 2%;
-    width: calc(98.1%);
+    top: calc(100% + 60px); /* Position it 40 pixels below the top of the coloured layer */
+    left: 2%; /* Position it 2% from the left */
+    width: 98.1%; /* Adjust width to fit screen and exclude scrollbar width */
+    z-index: 1; /* Ensure it is above the coloured layer */
 }
 
 .rectangular-box {
     background-color: #F5F5F5;
     width: auto; 
-    height: 50px;
-    border-radius: 8px;
-    padding: 0 15px;
-    display: flex;
+    height: 50px; /* Set the height */
+    border-radius: 8px; /* Add border radius */
+    padding: 0 15px; /* Add padding */
+    display: flex; /* Center align text */
     align-items: center;
 }
 
-.box-text {
-    font-size: 23px;
-    color: #333;
-    text-align: center;
-    margin: 0;
+.rectangle-text {
+    font-size: 23px; /* Font size for text inside rectangular box */
+    color: #333; /* Text color */
+    text-align: center; /* Center align the text */
+    margin: 0; /* Remove default margin */
+}
+
+.popular-topics {
+    font-size: 20px; /* Font size for "Popular Topics" text */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Text color */
+    margin-top: 0.5%; /* Margin of 15px from the top */
+    position: absolute;
+    top: calc(100% + 125px); /* Position it below the rectangular container */
+    left: 2%; /* Align with the left margin of the container */
+    z-index: 1; /* Ensure it is above the coloured layer */
+}
+
+.square-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    display: flex; /* Use Flexbox to layout square boxes horizontally */
+    gap: 19px; /* Set the gap between square boxes */
+    position: absolute;
+    top: calc(100% + 87.5%); /* Position it below the "Popular Topics" text */
+    left: 2%; /* Position it 2% from the left */
+    width: calc(98.1%); /* Adjust width to fit screen and exclude scrollbar width, add extra padding */
+    padding-bottom: 12px; /* Add extra padding at the bottom */
+    z-index: 1; /* Ensure it is above the coloured layer */
+}
+
+.square-box {
+    background-color: #F5F5F5;
+    width: 157px; /* Set width to 157px */
+    height: 157px; /* Set height to 157px */
+    border-radius: 19px; /* Add border radius */
+    display: flex; /* Center align text */
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent boxes from shrinking */
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2); /* Add drop shadow */
+    position: relative; /* Positioning context for the text */
+}
+
+.square-text {
+    position: absolute;
+    top: 0%; /* Padding from the top */
+    left: 18px; /* Padding from the left */
+    font-size: 20px; /* Font size */
+    color: #333; /* Text color */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.square-text-below {
+    position: absolute;
+    top: 25%; /* Padding from the top */
+    left: 18px; /* Padding from the left */
+    font-size: 18px; /* Font size */
+    color: #333; /* Text color */
+    font-weight: normal; /* Not bolded */
 }
 
 .search-icon {
