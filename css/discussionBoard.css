@@ -1,0 +1,93 @@
+body {
+    background-color: #FFFCED;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Hide horizontal overflow for the entire page */
+}
+
+.heading-container {
+    margin-top: 14px;
+    margin-left: 21px;
+    position: relative; /* Positioning context for absolute positioning */
+}
+
+h2 {
+    color: #333;
+    text-align: left;
+    font-size: 40px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 53px;
+}
+
+.greeting {
+    margin-top: 27px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.find-topics {
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+}
+
+.coloured-layer {
+    background-color: #BAC4FF;
+    position: absolute;
+    top: calc(100% + 20px);
+    left: -21px;
+    width: calc(100% + 21px);
+    height: calc(100vh - 100% - 20px);
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+}
+
+.rectangular-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks */
+    display: flex;
+    gap: 19px;
+    position: absolute;
+    top: calc(100% + 60px);
+    left: 2%;
+    width: calc(98.1%);
+}
+
+.rectangular-box {
+    background-color: #F5F5F5;
+    width: auto; 
+    height: 50px;
+    border-radius: 8px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+.box-text {
+    font-size: 23px;
+    color: #333;
+    text-align: center;
+    margin: 0;
+}
+
+.search-icon {
+    position: absolute;
+    top: 80%;
+    right: 27px;
+    width: 35px;
+    height: 35px;
+}
+
+/* Hide scrollbar track */
+::-webkit-scrollbar {
+    width: 0;  /* Set the width of the scrollbar to zero */
+    background: transparent;  /* Set the background color of the scrollbar track */
+}
+
+/* Hide scrollbar thumb (the draggable scrolling handle) */
+::-webkit-scrollbar-thumb {
+    background: transparent;  /* Set the background color of the scrollbar thumb */
+}
