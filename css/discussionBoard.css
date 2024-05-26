@@ -42,7 +42,7 @@ h2 {
     top: calc(100% + 20px); /* Position it 20 pixels below the paragraph */
     left: -21px; /* Adjusted to match the negative value of the left margin of .heading-container */
     width: calc(100% + 21px); /* Extend it to fill the entire width including the left margin */
-    height: calc(100vh - 100% - 20px); /* Extend it all the way down */
+    height: 10; /* Extend it all the way down */
     border-top-left-radius: 35px; /* Apply border-radius to top corners */
     border-top-right-radius: 35px;
     z-index: 0; /* Ensure it is behind other content */
@@ -93,7 +93,7 @@ h2 {
     display: flex; /* Use Flexbox to layout square boxes horizontally */
     gap: 19px; /* Set the gap between square boxes */
     position: absolute;
-    top: calc(100% + 87.5%); /* Position it below the "Popular Topics" text */
+    top: calc(100% + 170px); /* Adjust this value to correctly position below the "Popular Topics" text */
     left: 2%; /* Position it 2% from the left */
     width: calc(98.1%); /* Adjust width to fit screen and exclude scrollbar width, add extra padding */
     padding-bottom: 12px; /* Add extra padding at the bottom */
@@ -132,12 +132,111 @@ h2 {
     font-weight: normal; /* Not bolded */
 }
 
+.vertical-rectangular-container {
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex; /* Use Flexbox to layout rectangular boxes vertically */
+    flex-direction: column; /* Ensure the boxes flow downwards */
+    gap: 30px; /* Set the gap between rectangular boxes */
+    position: absolute;
+    top: calc(285%); /* Adjust this value to position it below the square container */
+    left: 1.5%; /* Position it 2% from the left */
+    width: calc(98.6%); /* Adjust width to fit screen and exclude scrollbar width */
+    height: 115vh;
+    z-index: 1; /* Ensure it is above the coloured layer */
+}
+
+
+.vertical-rectangular-box {
+    background-color: #F5F5F5;
+    width: 94%;
+    min-height: 157px; /* Set a minimum height */
+    max-height: auto; /* Set a maximum height */
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden; /* Hide overflow content */
+}
+
+.vertical-rectangle-title {
+    position: absolute;
+    top: 5%;
+    left: 17.5%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.vertical-rectangle-username {
+    position: absolute;
+    top: 23%;
+    left: 17.5%;
+    font-size: 16px;
+    color: #666;
+}
+
+.vertical-rectangle-text {
+    font-size: 23px; /* Font size for text inside rectangular box */
+    color: #333; /* Text color */
+    text-align: center; /* Center align the text */
+    margin: 0; /* Remove default margin */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.vertical-saved-icon {
+    position: absolute;
+    top: 12.5%;
+    right: 5%;
+    height: 17.5%; /* Adjust size as needed */;
+}
+
+.vertical-like-icon {
+    position: absolute; /* Position the icon absolutely */
+    bottom: 12.5%; /* Adjust the distance from the bottom */
+    left: 10%; /* Adjust the distance from the left */
+    fill: #fff; /* Set fill color to white */
+    z-index: 1; /* Ensure it is above other content */
+}
+
+.votes {
+    position: absolute;
+    bottom: 13%; /* Adjust the distance from the bottom */
+    left: 18.5%; /* Adjust the distance from the left */
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.vertical-rectangle-icon {
+    fill: #fff;
+    position: absolute;
+    bottom: 13%; /* Adjust the distance from the bottom */
+    left: 45%; /* Adjust the distance from the left */
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.comments {
+    position: absolute;
+    bottom: 13%; /* Adjust the distance from the bottom */
+    left: 53%; /* Adjust the distance from the left */
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1;
+}
+
 .search-icon {
     position: absolute;
     top: 80%;
-    right: 27px;
-    width: 35px;
-    height: 35px;
+    right: 5%;
+    height: 20%;
 }
 
 /* Hide scrollbar track */
