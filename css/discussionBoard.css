@@ -1,5 +1,3 @@
-/* styles.css */
-
 body {
     background-color: #FFFCED;
     font-family: Arial, sans-serif;
@@ -42,7 +40,7 @@ h2 {
     top: calc(100% + 20px); /* Position it 20 pixels below the paragraph */
     left: -21px; /* Adjusted to match the negative value of the left margin of .heading-container */
     width: calc(100% + 21px); /* Extend it to fill the entire width including the left margin */
-    height: 10; /* Extend it all the way down */
+    height: 10px; /* Extend it all the way down */
     border-top-left-radius: 35px; /* Apply border-radius to top corners */
     border-top-right-radius: 35px;
     z-index: 0; /* Ensure it is behind other content */
@@ -141,70 +139,80 @@ h2 {
     top: calc(285%); /* Adjust this value to position it below the square container */
     left: 1.5%; /* Position it 2% from the left */
     width: calc(98.6%); /* Adjust width to fit screen and exclude scrollbar width */
-    height: 115vh;
+    height: 135vh;
     z-index: 1; /* Ensure it is above the coloured layer */
 }
 
-
 .vertical-rectangular-box {
     background-color: #F5F5F5;
-    width: 94%;
-    min-height: 157px; /* Set a minimum height */
-    max-height: auto; /* Set a maximum height */
+    width: 83%;
+    height: auto; /* Increase minimum height to accommodate content */
     border-radius: 19px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; /* Ensure elements stack vertically */
+    justify-content: space-between; /* Add space between items */
     flex-shrink: 0;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
     position: relative;
+    padding: 20px; /* Add padding for spacing */
     overflow: hidden; /* Hide overflow content */
+}
+
+.profile-image {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%; /* Make it a circle */
+    background-color: #ccc; /* Placeholder color */
+    position: relative;
+    top: 0; /* Align with title */
+    left: 0; /* Align with title */
+    z-index: 1; /* Ensure it's above other content */
 }
 
 .vertical-rectangle-title {
-    position: absolute;
-    top: 5%;
-    left: 17.5%;
     font-size: 20px;
     font-weight: bold;
     color: #333;
+    margin-bottom: -10px; /* Add margin to separate from the text below */
+}
+
+.title-and-username {
+    display: inline-block; /* Make title and username inline */
+    vertical-align: top; /* Align to the top of the line */
+    margin-left: 50px; /* Adjust margin to create space for the profile image */
+    margin-top: -60px; /* Adjust margin to create space for the profile image */
 }
 
 .vertical-rectangle-username {
-    position: absolute;
-    top: 23%;
-    left: 17.5%;
     font-size: 16px;
     color: #666;
+    margin-bottom: 10px; /* Add margin to separate from the text below */
 }
 
 .vertical-rectangle-text {
-    font-size: 23px; /* Font size for text inside rectangular box */
+    font-size: 16px; /* Set a smaller font size for better spacing */
     color: #333; /* Text color */
-    text-align: center; /* Center align the text */
+    text-align: left; /* Left align the text */
     margin: 0; /* Remove default margin */
     overflow: hidden; /* Hide overflow content */
+    flex-grow: 1; /* Allow the text to take up remaining space */
+    margin-bottom: 30px; /* Add margin to separate from the icons below */
 }
 
-.vertical-saved-icon {
+.vertical-like-icon,
+.vertical-rectangle-icon {
     position: absolute;
-    top: 12.5%;
-    right: 5%;
-    height: 17.5%; /* Adjust size as needed */;
+    bottom: 20px; /* Adjust the distance from the bottom */
 }
 
 .vertical-like-icon {
-    position: absolute; /* Position the icon absolutely */
-    bottom: 12.5%; /* Adjust the distance from the bottom */
-    left: 10%; /* Adjust the distance from the left */
-    fill: #fff; /* Set fill color to white */
-    z-index: 1; /* Ensure it is above other content */
+    left: 20px; /* Adjust the distance from the left */
 }
 
 .votes {
     position: absolute;
-    bottom: 13%; /* Adjust the distance from the bottom */
-    left: 18.5%; /* Adjust the distance from the left */
+    bottom: 20px; /* Adjust the distance from the bottom */
+    left: 50px; /* Adjust the distance from the left */
     margin: 0;
     font-size: 16px;
     font-weight: bold;
@@ -212,24 +220,24 @@ h2 {
 }
 
 .vertical-rectangle-icon {
-    fill: #fff;
+    left: 150px; /* Adjust the distance from the left */
+}
+
+.comments {
     position: absolute;
-    bottom: 13%; /* Adjust the distance from the bottom */
-    left: 45%; /* Adjust the distance from the left */
+    bottom: 20px; /* Adjust the distance from the bottom */
+    left: 180px; /* Adjust the distance from the left */
     margin: 0;
     font-size: 16px;
     font-weight: bold;
     z-index: 1;
 }
 
-.comments {
+.vertical-saved-icon {
     position: absolute;
-    bottom: 13%; /* Adjust the distance from the bottom */
-    left: 53%; /* Adjust the distance from the left */
-    margin: 0;
-    font-size: 16px;
-    font-weight: bold;
-    z-index: 1;
+    top: 30px;
+    right:30px;
+    fill: #fff; /* Optionally set the fill color */
 }
 
 .search-icon {
