@@ -1,4 +1,5 @@
 function setRating(rating) {
+    console.log("Clicked rating:", rating);
     document.getElementById('rating').value = rating;
     // Remove color classes from all circles
     var circles = document.getElementsByClassName('circle');

@@ -14,9 +14,26 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
+/* Add color styles for different ratings */
+.bad {
+    background-color: red;
+}
+
+.ok {
+    background-color: yellow;
+}
+
+.good {
+    background-color: green;
+}
+
+
+/* Increase the size of circles on hover */
 .circle:hover {
     transform: scale(1.1);
 }
+
 .selected {
     border-color: #007bff;
 }
@@ -59,16 +76,39 @@ label[for="contact"] {
 
 /* Additional CSS for increasing the size of the button */
 #submitBtn {
-    padding: 15px 30px; /* Adjust padding for larger button */
+    padding: 15px 50px; /* Adjust padding for larger button */
     font-size: 18px; /* Increase font size */
     border-radius: 8px; /* Add rounded corners */
-    background-color: #007bff; /* Change button color */
-    color: #fff; /* Change text color */
+    background-color: #BAC4FF; /* Change button color */
+    color: #000; /* Change text color to white */
     border: none; /* Remove border */
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 30px;
+    width: 350px; /* Increase button width */
 }
 #submitBtn:hover {
-    background-color: #fff; /* Darker color on hover */
+    background-color: #0056b3; /* Darker color on hover */
 }
+
+
+.header {
+    margin-top: 20px; /* Add margin to move the header down */
+}
+
+.header a {
+    display: inline-block;
+    margin-left: 20px; /* Adjust as needed */
+}
+
+.header h1 {
+    margin-left: 20px; /* Adjust as needed */
+}
+
+.container {
+    margin-top: -100px; /* Adjust the value as needed */
+}
+
+
+
+

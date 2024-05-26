@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
-    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/feedback.css">
+    <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="stylesheet" href="../css/global.css">
 </head>
 <body>
+    <div class="header">
+        <a href="../html/settings.html">
+            <img src="../resources/arrow-left.svg" alt="Back Arrow" width="40" height="40">
+        </a>
+        <h1>Feedback</h1>
+    </div>
     <div class="container">
-        <h2>Feedback Form</h2>
-
         <form id="feedbackForm" action="#" method="POST">
+            <!-- Your form content -->
             <div class="rating">
-                <div class="circle" id="good" onclick="setRating('Bad')">Bad</div>
+                <div class="circle" id="bad" onclick="setRating('Bad')">Bad</div>
                 <div class="circle" id="ok" onclick="setRating('Ok')">Ok</div>
-                <div class="circle" id="veryGood" onclick="setRating('Good')">Good</div>
+                <div class="circle" id="good" onclick="setRating('Good')">Good</div>
             </div>
             <div>
                 <label for="reason" id="reasons">What are the main reasons for this rating?</label><br>
@@ -29,7 +35,21 @@
             <button id="submitBtn" type="submit">Submit</button>
         </form>
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/contact.js"></script>
+    <div class="navbar">
+        <a href="../html/home.html">
+          <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friends.html">
+          <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+          <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+        </a>
+        <a href="../html/settings.html">
+          <img src="../resources/settings.svg" alt="Settings">
+        </a>
+    </div>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/feedback.js"></script>
 </body>
 </html>
