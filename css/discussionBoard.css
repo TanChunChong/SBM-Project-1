@@ -3,13 +3,13 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Hide horizontal overflow for the entire page */
+    overflow-x: hidden;
 }
 
 .heading-container {
     margin-top: 14px;
     margin-left: 21px;
-    position: relative; /* Positioning context for absolute positioning */
+    position: relative;
 }
 
 h2 {
@@ -37,196 +37,195 @@ h2 {
 .coloured-layer {
     background-color: #BAC4FF;
     position: absolute;
-    top: calc(100% + 20px); /* Position it 20 pixels below the paragraph */
-    left: -21px; /* Adjusted to match the negative value of the left margin of .heading-container */
-    width: calc(100% + 21px); /* Extend it to fill the entire width including the left margin */
-    height: 10px; /* Extend it all the way down */
-    border-top-left-radius: 35px; /* Apply border-radius to top corners */
+    top: 200px;
+    left: -21px;
+    width: calc(100% + 21px);
+    height: 10px;
+    border-top-left-radius: 35px;
     border-top-right-radius: 35px;
-    z-index: 0; /* Ensure it is behind other content */
+    z-index: 0;
 }
 
-.rectangular-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevent line breaks */
-    display: flex; /* Use Flexbox to layout rectangular boxes horizontally */
-    gap: 19px; /* Set the gap between rectangular boxes */
+.popular-trending-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    gap: 19px;
     position: absolute;
-    top: calc(100% + 60px); /* Position it 40 pixels below the top of the coloured layer */
-    left: 2%; /* Position it 2% from the left */
-    width: 98.1%; /* Adjust width to fit screen and exclude scrollbar width */
-    z-index: 1; /* Ensure it is above the coloured layer */
+    top: 240px;
+    left: 2%;
+    width: 98.1%;
+    z-index: 1;
 }
 
-.rectangular-box {
+.popular-trending-box {
     background-color: #F5F5F5;
     width: auto; 
-    height: 50px; /* Set the height */
-    border-radius: 8px; /* Add border radius */
-    padding: 0 15px; /* Add padding */
-    display: flex; /* Center align text */
+    height: 50px;
+    border-radius: 8px;
+    padding: 0 15px;
+    display: flex;
     align-items: center;
 }
 
-.rectangle-text {
-    font-size: 23px; /* Font size for text inside rectangular box */
-    color: #333; /* Text color */
-    text-align: center; /* Center align the text */
-    margin: 0; /* Remove default margin */
+.popular-trending-text {
+    font-size: 23px;
+    color: #333;
+    text-align: center;
+    margin: 0;
 }
 
 .popular-topics {
-    font-size: 20px; /* Font size for "Popular Topics" text */
-    font-weight: bold; /* Bold text */
-    color: #333; /* Text color */
-    margin-top: 0.5%; /* Margin of 15px from the top */
-    position: absolute;
-    top: calc(100% + 125px); /* Position it below the rectangular container */
-    left: 2%; /* Align with the left margin of the container */
-    z-index: 1; /* Ensure it is above the coloured layer */
-}
-
-.square-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    display: flex; /* Use Flexbox to layout square boxes horizontally */
-    gap: 19px; /* Set the gap between square boxes */
-    position: absolute;
-    top: calc(100% + 170px); /* Adjust this value to correctly position below the "Popular Topics" text */
-    left: 2%; /* Position it 2% from the left */
-    width: calc(98.1%); /* Adjust width to fit screen and exclude scrollbar width, add extra padding */
-    padding-bottom: 12px; /* Add extra padding at the bottom */
-    z-index: 1; /* Ensure it is above the coloured layer */
-}
-
-.square-box {
-    background-color: #F5F5F5;
-    width: 157px; /* Set width to 157px */
-    height: 157px; /* Set height to 157px */
-    border-radius: 19px; /* Add border radius */
-    display: flex; /* Center align text */
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0; /* Prevent boxes from shrinking */
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2); /* Add drop shadow */
-    position: relative; /* Positioning context for the text */
-}
-
-.square-text {
-    position: absolute;
-    top: 0%; /* Padding from the top */
-    left: 18px; /* Padding from the left */
-    font-size: 20px; /* Font size */
-    color: #333; /* Text color */
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.square-text-below {
-    position: absolute;
-    top: 25%; /* Padding from the top */
-    left: 18px; /* Padding from the left */
-    font-size: 18px; /* Font size */
-    color: #333; /* Text color */
-    font-weight: normal; /* Not bolded */
-}
-
-.vertical-rectangular-container {
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex; /* Use Flexbox to layout rectangular boxes vertically */
-    flex-direction: column; /* Ensure the boxes flow downwards */
-    gap: 30px; /* Set the gap between rectangular boxes */
-    position: absolute;
-    top: calc(285%); /* Adjust this value to position it below the square container */
-    left: 1.5%; /* Position it 2% from the left */
-    width: calc(98.6%); /* Adjust width to fit screen and exclude scrollbar width */
-    height: 135vh;
-    z-index: 1; /* Ensure it is above the coloured layer */
-}
-
-.vertical-rectangular-box {
-    background-color: #F5F5F5;
-    width: 83%;
-    height: auto; /* Increase minimum height to accommodate content */
-    border-radius: 19px;
-    display: flex;
-    flex-direction: column; /* Ensure elements stack vertically */
-    justify-content: space-between; /* Add space between items */
-    flex-shrink: 0;
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
-    position: relative;
-    padding: 20px; /* Add padding for spacing */
-    overflow: hidden; /* Hide overflow content */
-}
-
-.profile-image {
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Adjust size as needed */
-    border-radius: 50%; /* Make it a circle */
-    background-color: #ccc; /* Placeholder color */
-    position: relative;
-    top: 0; /* Align with title */
-    left: 0; /* Align with title */
-    z-index: 1; /* Ensure it's above other content */
-}
-
-.vertical-rectangle-title {
     font-size: 20px;
     font-weight: bold;
     color: #333;
-    margin-bottom: -10px; /* Add margin to separate from the text below */
+    margin-top: 0.5%;
+    position: absolute;
+    top: 310px;
+    left: 2%;
+    z-index: 1;
+}
+
+.topics-container {
+    overflow-x: auto;
+    display: flex;
+    gap: 19px;
+    position: absolute;
+    top: calc(350px);
+    left: 2%;
+    width: calc(98.1%);
+    padding-bottom: 12px;
+    z-index: 1;
+}
+
+.topics-box {
+    background-color: #F5F5F5;
+    width: 157px;
+    height: 157px;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.topics-text {
+    position: absolute;
+    top: 0%;
+    left: 18px;
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+}
+
+.topics-posts-count {
+    position: absolute;
+    top: 25%;
+    left: 18px;
+    font-size: 18px;
+    color: #333;
+    font-weight: normal;
+}
+
+.posts-container {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: absolute;
+    top: calc(535px);
+    left: 1.5%;
+    width: calc(98.6%);
+    height: 135vh;
+    z-index: 1;
+}
+
+.posts-rectangular-box {
+    background-color: #F5F5F5;
+    width: 83%;
+    height: auto;
+    border-radius: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.posts-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: -10px;
 }
 
 .title-and-username {
-    display: inline-block; /* Make title and username inline */
-    vertical-align: top; /* Align to the top of the line */
-    margin-left: 50px; /* Adjust margin to create space for the profile image */
-    margin-top: -60px; /* Adjust margin to create space for the profile image */
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 50px;
+    margin-top: -60px;
 }
 
-.vertical-rectangle-username {
+.posts-username {
     font-size: 16px;
     color: #666;
-    margin-bottom: 10px; /* Add margin to separate from the text below */
+    margin-bottom: 10px;
 }
 
-.vertical-rectangle-text {
-    font-size: 16px; /* Set a smaller font size for better spacing */
-    color: #333; /* Text color */
-    text-align: left; /* Left align the text */
-    margin: 0; /* Remove default margin */
-    overflow: hidden; /* Hide overflow content */
-    flex-grow: 1; /* Allow the text to take up remaining space */
-    margin-bottom: 30px; /* Add margin to separate from the icons below */
+.posts-text-description {
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    margin: 0;
+    overflow: hidden;
+    flex-grow: 1;
+    margin-bottom: 30px;
 }
 
-.vertical-like-icon,
-.vertical-rectangle-icon {
+.posts-like-icon,
+.posts-comment-icon {
     position: absolute;
-    bottom: 20px; /* Adjust the distance from the bottom */
+    bottom: 20px;
 }
 
-.vertical-like-icon {
-    left: 20px; /* Adjust the distance from the left */
+.posts-like-icon {
+    left: 20px;
 }
 
 .votes {
     position: absolute;
-    bottom: 20px; /* Adjust the distance from the bottom */
-    left: 50px; /* Adjust the distance from the left */
+    bottom: 20px;
+    left: 50px;
     margin: 0;
     font-size: 16px;
     font-weight: bold;
     z-index: 1;
 }
 
-.vertical-rectangle-icon {
-    left: 150px; /* Adjust the distance from the left */
+.posts-comment-icon {
+    left: 150px;
 }
 
 .comments {
     position: absolute;
-    bottom: 20px; /* Adjust the distance from the bottom */
-    left: 180px; /* Adjust the distance from the left */
+    bottom: 20px;
+    left: 180px;
     margin: 0;
     font-size: 16px;
     font-weight: bold;
@@ -237,7 +236,11 @@ h2 {
     position: absolute;
     top: 30px;
     right:30px;
-    fill: #fff; /* Optionally set the fill color */
+    fill: #fff;
+}
+
+.search-container {
+    position: relative;
 }
 
 .search-icon {
@@ -245,15 +248,36 @@ h2 {
     top: 80%;
     right: 5%;
     height: 20%;
+    cursor: pointer
 }
 
-/* Hide scrollbar track */
+.search-box {
+    width: calc(100% - 42px);
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    display: none;
+    margin-top: 32px;
+    padding-right: calc(10px);
+}
+
+.search-close-icon {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+    font-weight: bold;
+    font-size:larger;
+}
+
 ::-webkit-scrollbar {
-    width: 0;  /* Set the width of the scrollbar to zero */
-    background: transparent;  /* Set the background color of the scrollbar track */
+    width: 0;
+    background: transparent;
 }
 
-/* Hide scrollbar thumb (the draggable scrolling handle) */
 ::-webkit-scrollbar-thumb {
-    background: transparent;  /* Set the background color of the scrollbar thumb */
+    background: transparent;
 }
