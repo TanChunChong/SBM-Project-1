@@ -5,76 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PWA UI</title>
     <link rel="stylesheet" href="../css/discussionBoard.css">
+    <link rel="stylesheet" href="../css/viewPosts.css">
 </head>
 <body>
+    <a href="discussionBoard.html" class="back-link">
+        <img src="../resources/backArrow.svg" alt="Back" class="back-icon">
+    </a>
     <div class="heading-container">
-        <h2>Discussion</h2>
-        <h2>Board</h2>
-        <p class="greeting">Hi, Username</p>
-        <p class="find-topics">Find topics that you like to read</p>
-        <div class="search-container">
-            <input type="text" class="search-box" placeholder="Search..." style="display: none;">
-            <div class="search-close-icon" style="display: none;">X</div>
+        <button class="create-post-btn">Create a post</button>
+        <p class="topic-title">*Insert topic title*</p>
+        <!-- Permanent search bar -->
+        <div class="viewPost-search-container">
+            <input type="text" class="viewPost-search-box" placeholder="Search...">
+            <img src="../resources/search.svg" alt="Search" class="search-icon">
         </div>
-        <div class="coloured-layer"></div>
-        <div class="popular-trending-container">
-            <!-- Rectangular boxes for the first row -->
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Popular</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Recommended</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Trending</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Latest</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Hot</p>
-            </div>
-        </div>
-        <p class="popular-topics">Popular Topics</p> <!-- Added "Popular Topics" text -->
-        <div class="topics-container"> <!-- New container for square boxes -->
-            <!-- Square boxes for the second row -->
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">Java</p>
-                <p class="topics-posts-count">5 posts</p>
-            </a>
-            
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">Python</p>
-                <p class="topics-posts-count">10 posts</p>
-            </a>
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">JavaScript</p>
-                <p class="topics-posts-count">7 posts</p>
-            </a>
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">HTML</p>
-                <p class="topics-posts-count">3 posts</p>
-            </a>
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">CSS</p>
-                <p class="topics-posts-count">6 posts</p>
-            </a>
-            
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">React</p>
-                <p class="topics-posts-count">8 posts</p>
-            </a>
-            
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">Angular</p>
-                <p class="topics-posts-count">4 posts</p>
-            </a>
-            
-            <a href="viewPosts.html" class="topics-box">
-                <p class="topics-text">Node.js</p>
-                <p class="topics-posts-count">9 posts</p>
-            </a>
-        </div>
+        <div class="viewPost-coloured-layer"></div>
         <div class="posts-container"> <!-- New vertical container for rectangular boxes -->
             <div class="posts-rectangular-box">
                 <div class="profile-image"></div>
@@ -232,8 +177,7 @@
                 <p class="comments">20 comments</p>
             </div>
         </div>
-        <img src="../resources/search.svg" alt="Search Icon" class="search-icon">
     </div>
-    <script src="../js/discussionBoard.js"></script>
+    <script src="../js/viewPosts.js"></script>
 </body>
 </html>
