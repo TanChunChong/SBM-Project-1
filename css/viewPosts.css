@@ -5,7 +5,7 @@
     margin-bottom: 7px;
 }
 
-.posts-container {
+.viewPosts-container {
     overflow-y: auto;
     display: flex;
     flex-direction: column;

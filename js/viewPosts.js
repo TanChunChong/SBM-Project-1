@@ -1,13 +1,11 @@
 window.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
-
-    searchIcon.addEventListener('click', toggleSearchBox);
 });
 
 function adjustColouredLayerHeight() {
     const colouredLayer = document.querySelector('.viewPost-coloured-layer');
-    const verticalRectangularContainer = document.querySelector('.posts-container');
+    const verticalRectangularContainer = document.querySelector('.viewPosts-container');
     const verticalRectangularBoxes = document.querySelectorAll('.posts-rectangular-box');
 
     // Calculate the total height of the vertical rectangular boxes
