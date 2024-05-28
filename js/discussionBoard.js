@@ -4,42 +4,29 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const searchIcon = document.querySelector('.search-icon');
     searchIcon.addEventListener('click', toggleSearchBox);
+
+    const icons = document.querySelectorAll('.feather-bookmark, .posts-like-icon');
+    icons.forEach(function(icon) {
+        icon.addEventListener('click', function() {
+            toggleFillColor(icon);
+        });
+    });
 });
 
 function adjustColouredLayerHeight() {
     const colouredLayer = document.querySelector('.coloured-layer');
     const postsContainer = document.querySelector('.posts-container');
-
-    // Calculate the height of the posts container including its top position
-    const postsContainerHeight = postsContainer.offsetHeight + postsContainer.offsetTop;
-
-    // Set the height of the coloured layer to match the height of the posts container
-    colouredLayer.style.height = `${postsContainerHeight}px`;
+    colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
 }
 
 function toggleSearchBox() {
-    const greeting = document.querySelector('.greeting');
-    const findTopics = document.querySelector('.find-topics');
-    const searchIcon = document.querySelector('.search-icon');
-    const searchBox = document.querySelector('.search-box');
-    const searchCloseIcon = document.querySelector('.search-close-icon');
-
-    if (searchBox.style.display === 'none') {
-        // Show search elements
-        greeting.style.display = 'none';
-        findTopics.style.display = 'none';
-        searchIcon.style.display = 'none';
-        searchBox.style.display = 'block';
-        searchCloseIcon.style.display = 'block';
-    } else {
-        // Hide search elements
-        greeting.style.display = 'block';
-        findTopics.style.display = 'block';
-        searchIcon.style.display = 'block';
-        searchBox.style.display = 'none';
-        searchCloseIcon.style.display = 'none';
-    }
+    const elements = ['.greeting', '.find-topics', '.search-icon', '.search-box', '.search-close-icon'];
+    elements.forEach(function(selector) {
+        const element = document.querySelector(selector);
+        element.style.display = (element.style.display === 'none') ? 'block' : 'none';
+    });
 }
 
-const searchCloseIcon = document.querySelector('.search-close-icon');
-searchCloseIcon.addEventListener('click', toggleSearchBox);
+function toggleFillColor(icon) {
+    icon.style.fill = (icon.style.fill === 'lightblue') ? '#fff' : 'lightblue';
+}
