@@ -1,53 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Profile</title>
-  <link rel="stylesheet" href="../css/editProfile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="../css/editprofile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/navBar.css">
 </head>
 <body>
-  <!-- Edit Profile Form -->
-  <div class="edit-profile-container">
-    <a href="index.html">
-      <img src="logo.png" alt="Logo" class="logo">
-    </a>
-    <h2>Edit Profile</h2>
-    <form>
-      <!-- Username Input Field -->
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter username" required>
-      </div>
+    <div class="go-back">
+        <a href="#"> <!-- Add a link to navigate back -->
+            <i class="fas fa-arrow-left"></i> <!-- Arrow pointing left icon -->
+        </a>
+    </div>
+    <div class="container">
+        <form class="edit-profile-form">
+            <div class="profile-header">
+                <h1>Edit Profile</h1>
+                <img src="../resources/superhero.png" alt="Profile Picture" class="profile-icon">
+            </div>
+            <div class="input-container">
+                <i class="fa fa-user icon"></i>
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" placeholder="Password">
+            </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" placeholder="New Password">
+            </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" placeholder="Confirm New Password">
+            </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" placeholder="Old Password">
+            </div>
+            <div class="buttons-container">
+                <button type="submit" class="update-btn">Update</button>
+                <button type="button" class="cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </div>
 
-      <!-- Email Input Field -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter email" required>
-      </div>
-
-      <!-- Password Input Field -->
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter password" required>
-      </div>
-
-      <!-- Confirm Password Input Field -->
-      <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required>
-      </div>
-
-      <!-- Update Button -->
-      <div class="button-group">
-        <button type="submit" class="update-btn">Update</button>
-      </div>
-
-      <!-- Cancel Button -->
-      <div class="button-group">
-        <button type="reset" class="cancel-btn">Cancel</button>
-      </div>
-    </form>
-  </div>
+    <div class="navbar">
+        <a href="../html/home.html">
+            <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friends.html">
+            <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+            <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+        </a>
+        <a href="../html/settings.html">
+            <img src="../resources/settings.svg" alt="Settings">
+        </a>
+    </div>
 </body>
 </html>

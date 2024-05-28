@@ -1,85 +1,105 @@
-/* Global Styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .edit-profile-container {
-    max-width: 300px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0,0, 0.1);
-  }
-  
-  h2 {
-    margin-top: 0;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .logo {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: auto;
-    cursor: pointer;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .button-group {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .update-btn, .cancel-btn {
-    width: 45%;
-    height: 40px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .update-btn {
-    background-color: #BAC4FF;
-    color: #fff;
-  }
-  
-  .cancel-btn {background-color: #ccc;
-    color: #333;
-  }
-  
-  /* Mobile Styles */
-  @media only screen and (max-width: 600px) {
-    .edit-profile-container {
-      width: 90%;
-      margin: 20px auto;
-    }
-  
-    .update-btn, .cancel-btn {
-      width: 100%;
-    }
-  }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fffde7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  margin: 0;
+}
+
+.go-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.go-back i {
+  color: #888;
+  font-size: 24px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.edit-profile-form {
+  padding: 20px 30px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h1 {
+  margin: 0;
+  text-align: left;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.input-container .icon {
+  margin-right: 10px;
+  color: #888;
+}
+
+.input-container input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+}
+
+.profile-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #b3b3ff;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.cancel-btn {
+  background-color: white;
+  border: 1px solid #555;
+  color: red;
+}
+
+button:hover {
+  background-color: #a3a3ff;
+}
