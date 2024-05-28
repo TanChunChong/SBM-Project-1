@@ -1,0 +1,89 @@
+body {
+    background-color: #FFFCED;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.back-link {
+    position: absolute;
+    top: 20px;
+    left: 5%;
+    z-index: 2; /* Ensure it's above other content */
+}
+
+.back-icon {
+    height: 26px; /* Adjust size as needed */
+}
+
+.allSettings {
+    margin-top: 80px;
+    margin-bottom: 7px;
+}
+
+.settingsTitle {
+    margin-top: 80px;
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    margin-left: 5%;
+}
+
+.settingsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 54px;
+    border: 1px solid black;
+    padding: 0 10px;
+}
+
+.settingsName {
+    font-size: 150%;
+}
+
+.toggle-button {
+    width: 60px;
+    height: 34px;
+    position: relative;
+    display: inline-block;
+}
+
+.toggle-button input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 17px; /* Increased to match the height */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px; /* Increased to match the new toggle height */
+    width: 26px;  /* Increased to match the new toggle width */
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Adjusted to match the new size */
+}
