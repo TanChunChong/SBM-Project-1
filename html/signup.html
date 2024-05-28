@@ -1,115 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f2f2f2;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #fff;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    }
-    .form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 20px;
-    }
-    .input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: none;
-      border-radius: 25px;
-      border-width: 2px;
-      border-color: #B24DFF;
-      font-size: 16px;
-      outline: none;
-      box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
-    }
-    .button {
-      width: 100%;
-      padding: 10px;
-      background-color: #B24DFF;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .button:hover {
-      background-color: #B24DFF;
-    }
-    .forgot-password {
-      margin-top: 10px;
-      font-size: 14px;
-      text-align: center;
-      color: #444;
-      text-decoration: none;
-    }
-    .sign-up {
-      margin-top: 20px;
-      font-size: 14px;
-      text-align: center;
-      color: #444;
-      text-decoration: underline;
-    }
-    .terms-and-conditions {
-      margin-top: 10px;
-      font-size: 14px;
-      text-align: center;
-      color: #444;
-    }
-    .checkbox {
-      margin-top: 5px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-    .checkbox input[type="checkbox"] {
-      margin-right: 5px;
-    }
+<html lang="en">
 
-    .sign-up{
-        margin-right: 10px;
-    }
-  </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign-Up Page</title>
+  <link rel="stylesheet" href="../css/signup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+
 <body>
   <div class="container">
-    <div id="sign-up">
-        <p><h1>Sign-up</h1></p>
-    </div>
-    <div class="form">
-      <form>
-        <label for="username">Username</label>
-        <input type="text" id="username" class="input" placeholder="Enter your username" required>
-        <label for="email">Email</label>
-        <input type="email" id="email" class="input" placeholder="Enter your email" required><label for="password">Password</label>
-        <input type="password" id="password" class="input" placeholder="Enter your password" required>
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" class="input" placeholder="Confirm your password" required>
-        <div class="checkbox">
-         <input type="checkbox" id="terms-and-conditions" required>
-          <label for="terms-and-conditions" class="terms-and-conditions">I have read and agreed to the <a href="#">terms and conditions</a></label>
-        </div>
-        <button type="submit" class="button">Sign Up</button>
-      </form>
-      <a href="login.html" class="forgot-password">Already have an account? Log in</a>
-    </div>
+    <form class="sign-up-form">
+      <h1>SIGN-UP</h1>
+      <div class="input-container">
+        <i class="fa fa-user icon"></i>
+        <input type="text" placeholder="Username" required>
+      </div>
+      <div class="input-container">
+        <i class="fa fa-envelope icon"></i>
+        <input type="email" placeholder="Email" required>
+      </div>
+      <div class="input-container">
+        <i class="fa fa-lock icon"></i>
+        <input type="password" placeholder="Password" required>
+      </div>
+      <div class="input-container">
+        <i class="fa fa-lock icon"></i>
+        <input type="password" placeholder="Confirm Password" required>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" required>
+        <label>I read and agree to terms and conditions</label>
+      </div>
+      <button type="submit">SIGN-UP</button>
+      <p>Already have an Account? <a href="#">Log-in</a></p>
+    </form>
   </div>
 </body>
+
 </html>

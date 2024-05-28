@@ -1,0 +1,282 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffde7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.sign-up-form {
+    text-align: left;
+    max-width: 400px;
+    width: 90%;
+}
+
+.sign-up-form h1 {
+    margin-bottom: 20px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 2px solid #ddd; /* Increased border width */
+    border-radius: 25px;
+    padding: 10px;
+    background-color: #fff; /* Ensure textboxes have a white background */
+}
+
+.input-container .icon {
+    margin-right: 10px;
+    color: #888;
+}
+
+.input-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    min-width: 0;
+    background-color: #fff; /* Ensure textboxes have a white background */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.checkbox-container input {
+    margin-right: 10px;
+    transform: scale(1.8); /* Increased the size of the checkbox */
+    border: 3px solid #ddd; /* Increased border width */
+}
+
+button {
+    background-color: #b3b3ff;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    padding: 20px 20px; /* Increased padding for height */
+    font-size: 24px; /* Increased font size for the button */
+    cursor: pointer;
+    margin: 0 auto 20px auto; /* Center the button */
+    width: 50%; /* Set the width of the button to 50% */
+    display: block; /* Ensure the button is a block element */
+}
+
+button:hover {
+    background-color: #a3a3ff;
+}
+
+p {
+    font-size: 18px; /* Increased font size */
+    text-align: center; /* Center-align the text */
+}
+
+p a {
+    color: #0000ff;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .sign-up-form {
+        padding: 15px 20px;
+    }
+
+    .input-container {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .input-container .icon {
+        margin-bottom: 0;
+    }
+
+    .checkbox-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkbox-container input {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .sign-up-form {
+        padding: 10px 15px;
+    }
+
+    button {
+        padding: 20px; /* Increased padding for height */
+        font-size: 20px; /* Increased font size for the button */
+        width: 70%; /* Adjust the button width for small screens */
+    }
+
+    p {
+        font-size: 16px; /* Increased font size for small screens */
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffde7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.sign-up-form {
+    text-align: left;
+    max-width: 400px;
+    width: 90%;
+}
+
+.sign-up-form h1 {
+    margin-bottom: 20px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 2px solid #ddd; /* Increased border width */
+    border-radius: 25px;
+    padding: 10px;
+    background-color: #fff; /* Ensure textboxes have a white background */
+}
+
+.input-container .icon {
+    margin-right: 10px;
+    color: #888;
+}
+
+.input-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    min-width: 0;
+    background-color: #fff; /* Ensure textboxes have a white background */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.checkbox-container input {
+    margin-right: 10px;
+    transform: scale(1.8); /* Increased the size of the checkbox */
+    border: 3px solid #ddd; /* Increased border width */
+}
+
+button {
+    background-color: #b3b3ff;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    padding: 20px 20px; /* Increased padding for height */
+    font-size: 24px; /* Increased font size for the button */
+    cursor: pointer;
+    margin: 0 auto 20px auto; /* Center the button */
+    width: 50%; /* Set the width of the button to 50% */
+    display: block; /* Ensure the button is a block element */
+}
+
+button:hover {
+    background-color: #a3a3ff;
+}
+
+p {
+    font-size: 18px; /* Increased font size */
+    text-align: center; /* Center-align the text */
+}
+
+p a {
+    color: #0000ff;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .sign-up-form {
+        padding: 15px 20px;
+    }
+
+    .input-container {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .input-container .icon {
+        margin-bottom: 0;
+    }
+
+    .checkbox-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkbox-container input {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .sign-up-form {
+        padding: 10px 15px;
+    }
+
+    button {
+        padding: 20px; /* Increased padding for height */
+        font-size: 20px; /* Increased font size for the button */
+        width: 70%; /* Adjust the button width for small screens */
+    }
+
+    p {
+        font-size: 16px; /* Increased font size for small screens */
+    }
+}
