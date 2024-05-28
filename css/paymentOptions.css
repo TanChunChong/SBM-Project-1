@@ -1,0 +1,165 @@
+.header {
+    margin-top: 20px; /* Add margin to move the header down */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Add padding to the sides if needed */
+}
+
+.header a {
+    display: inline-block;
+}
+
+.header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center; /* Center the text horizontally */
+}
+
+#addCard {
+    margin: 0;
+}
+
+#creditCard {
+    margin: 0;
+}
+
+#wifi {
+    margin: 0;
+}
+
+#credit-top {
+    background-color: #BAC4FF;
+    height: 80px;
+    width: 250px;
+    margin: auto; /* Center the element horizontally */
+    margin-top: 100px; /* Adjust top margin as needed */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%; /* Adjust padding to center the icons */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+#credit-bottom {
+    background-color: #fff;
+    height: 140px;
+    width: 250px;
+    margin: auto; /* Center the element horizontally */
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%; /* Adjust padding if needed */
+    margin-top: -5px; /* Remove gap by slightly overlapping */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+#credit-info {
+    display: flex;
+    align-items: center;
+}
+
+#credit-info h2 {
+    margin-right: 70px; /* Adjust spacing between h2 and .cvc-container */
+}
+
+.cvc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#credit-info h5, #credit-info h3 {
+    margin: 0;
+}
+
+#credit-info h5 {
+    margin-bottom: 5px; /* Adjust spacing between h5 and h3 */
+}
+
+#nextPages {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 0; /* Ensure no gap between items */
+    margin-top: 50px; /* Adjust margin to your preference */
+}
+
+#topUp, #pay {
+    width: 150px;
+    height: 80px;
+    background-color: #fff;
+    margin: 0; /* Ensure no margins are applied */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    padding: 10px; /* Add padding for better spacing */
+    text-align: center; /* Center text horizontally */
+    border: 2px solid #000; /* Add border to divs */
+    text-decoration: none; /* Remove underline from text */
+}
+
+#topUp img, #pay img {
+    margin-bottom: 10px; /* Add margin below the image */
+}
+
+#topUp h3, #pay h3 {
+    margin: 0; /* Remove default margin from the h3 element */
+    text-decoration: none; /* Remove underline from text */
+}
+
+#topUp {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+#pay {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+/* Ensure links do not have underline */
+#nextPages a {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit color from parent */
+}
+
+#box {
+    width: 350px;
+    height: 100px;
+    background-color: #fff;
+    margin: auto; /* Center the element horizontally */
+    margin-top: 50px; /* Add margin from the top */
+    border-radius: 25px; /* Add border radius */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+    padding: 10px; /* Add padding for content */
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Use flexbox to arrange children */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+#box.selected {
+    background-color: green;
+    cursor: pointer;
+  }  
+
+.one{
+    margin-right: 30px;
+}
+
+.two{
+    margin-left: 40px;
+}
+
+#subscribe{
+    margin-left: 50px;
+}
+
+
