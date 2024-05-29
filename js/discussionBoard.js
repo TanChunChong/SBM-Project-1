@@ -19,7 +19,6 @@ function adjustColouredLayerHeight() {
     colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
 }
 
-
 function toggleSearchBox() {
     const greeting = document.querySelector('.greeting');
     const findTopics = document.querySelector('.find-topics');

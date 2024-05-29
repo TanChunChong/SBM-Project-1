@@ -236,7 +236,6 @@ h2 {
     position: absolute;
     top: 30px;
     right:30px;
-    fill: #fff;
 }
 
 .search-container {
@@ -284,6 +283,5 @@ h2 {
 
 .feather.feather-bookmark.vertical-saved-icon,
 .feather.feather-thumbs-up.posts-like-icon {
-    fill: #fff; /* Default fill color (white) */
     cursor: pointer;
 }

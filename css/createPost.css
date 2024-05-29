@@ -1,0 +1,108 @@
+body {
+    background-color: #FFFCED;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.app-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure the app bar takes full width */
+    background-color: #BAC4FF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.close-button {
+    text-decoration: none;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px; /* Space between X and the title */
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.post-button {
+    background-color: #007BFF;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.post-button:hover {
+    background-color: #0056b3;
+}
+
+.create-post-container {
+    margin-top: 60px; /* Adjust this value based on the app bar height */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%; /* Ensure the container takes full width */
+}
+
+.create-post-form .form-group {
+    margin-bottom: 15px;
+}
+
+.create-post-form input,
+.create-post-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.create-post-form textarea {
+    width: 100%;
+    padding: 15px; /* Increased padding to give more space */
+    border: 2px solid #000;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    height: 50vh;
+}
+
+.create-post-form input:focus,
+.create-post-form textarea:focus {
+    border-color: #BAC4FF;
+    outline: none;
+}
+
+.create-post-form input::placeholder,
+.create-post-form textarea::placeholder {
+    color: #000;
+}
+
+.icon-group {
+    display: flex;
+    gap: 30px; /* Increase the gap between icons */
+}
+
+.icon-group img {
+    width: 40px; /* Increase the size of the icons */
+    height: 40px;
+}
