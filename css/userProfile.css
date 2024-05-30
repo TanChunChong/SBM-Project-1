@@ -1,0 +1,114 @@
+.pfp{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 7px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF ;
+    height: 500px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border: solid 2px #707070;
+    border-radius: 20px;
+    width: 72%;
+    margin-left: 20px;
+    overflow-y: auto;
+}
+
+.title{
+    
+    font-size: 25px;
+    position: relative;
+    top:35px;
+}
+.name {
+    font-size: 25px;
+    position: relative;
+    bottom: 30px;
+
+}
+
+.date {
+    font-size: 15px;
+    position: relative;
+    bottom: 20px;
+}
+
+.description {
+    font-size: 18px;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 25px;
+
+}
+.overview{
+    position: relative;
+    top: 65px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.card{
+    background-color: #fffced;
+    border: solid 2px #707070;  
+    height: 75px;
+    width: 150px;
+    border-radius: 13px;
+    text-align: center;
+    margin: 5px;
+}
+
+.big{
+    font-size: 25px;
+    position: relative;
+    bottom: 18px;
+}
+.small{
+    font-size: 12px;
+    position: relative;
+    bottom: 18px;
+}
+
+.svg-image{
+    padding-top: 7px;
+    padding-right: 90px;
+}
+.svg-image3{
+    padding-top: 7px;
+    padding-right: 90px;
+    padding-bottom: 8px;
+}
+
+
+.svg-image2{
+    padding-top: 5px;
+    padding-right: 90px;
+}
+
+.button {
+    background-color: #BAC4FF;
+    border: solid 2px #707070 ;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;    
+    margin: 4px 2px;
+    position: relative;
+    top: 135px;
+    border-radius: 16px;
+    width: 362px;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
