@@ -1,0 +1,108 @@
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.first{
+    position: relative;
+    top: 12px;
+}
+
+.second{
+    position: relative;
+    top: 17px;
+}
+
+.third{
+    position: relative;
+    top: 13px;
+}
+
+
+.navBarLeft {
+    flex: 1;
+    padding: 0px;
+}
+
+.navBarRight {
+    display: flex;
+    gap: 20px;
+}
+
+body{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100vh;
+}
+
+.hello{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.username{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.bodyH{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.seeall{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bodyB{
+    font-size: 16px;
+    position: relative;
+    top: 5px;
+}
+
+.appBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.widget{
+    height: 59px;
+    width: 59px;
+    border-radius: 14px;
+    border: solid 2px black;
+    background-color: white;
+    text-align: center;
+}
+
+.text{
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+
+.fab {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
