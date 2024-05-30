@@ -22,7 +22,7 @@ body {
     font-weight: bold;
 }
 
-.viewPosts-container {
+.savedPosts-container {
     overflow-y: auto;
     display: flex;
     flex-direction: column;

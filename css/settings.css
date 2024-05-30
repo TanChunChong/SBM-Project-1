@@ -65,14 +65,14 @@ body {
     bottom: 0;
     background-color: #ccc;
     transition: 0.4s;
-    border-radius: 17px; /* Increased to match the height */
+    border-radius: 17px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px; /* Increased to match the new toggle height */
-    width: 26px;  /* Increased to match the new toggle width */
+    height: 26px;
+    width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -85,5 +85,5 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px); /* Adjusted to match the new size */
+    transform: translateX(26px);
 }
