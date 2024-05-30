@@ -95,7 +95,7 @@ body{
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #ff4081;
+    background-color: #E3E5F4;
     color: white;
     border: none;
     outline: none;
@@ -105,4 +105,5 @@ body{
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid black;
 }
