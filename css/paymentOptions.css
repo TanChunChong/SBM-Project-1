@@ -130,12 +130,16 @@
     color: inherit; /* Inherit color from parent */
 }
 
+#box-container {
+    height: 200px; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
 #box {
     width: 350px;
-    height: 100px;
     background-color: #fff;
     margin: auto; /* Center the element horizontally */
-    margin-top: 50px; /* Add margin from the top */
+    margin-top: 10px; /* Add margin from the top */
     border-radius: 25px; /* Add border radius */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
     padding: 10px; /* Add padding for content */
@@ -145,21 +149,28 @@
     align-items: center; /* Center items vertically */
 }
 
-#box.selected {
-    background-color: green;
-    cursor: pointer;
-  }  
-
-.one{
+.one {
     margin-right: 30px;
 }
 
-.two{
+.two {
     margin-left: 40px;
 }
+
 
 #subscribe{
     margin-left: 50px;
 }
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}
+
+a:hover {
+    text-decoration: none; /* Remove underline on hover */
+    color: inherit; /* Inherit color from parent */
+}
+
 
 
