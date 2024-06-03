@@ -1,0 +1,138 @@
+body {
+    background-color: #F8F4E6;
+}
+
+.header {
+    margin-top: 20px; /* Add margin to move the header down */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Add padding to the sides if needed */
+}
+
+.header a {
+    display: inline-block;
+}
+
+.header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center; /* Center the text horizontally */
+}
+
+#addCard {
+    margin: 0;
+}
+
+#credit-top {
+    background-color: #BAC4FF;
+    height: 80px;
+    width: 250px;
+    margin: auto; /* Center the element horizontally */
+    margin-top: 100px; /* Adjust top margin as needed */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%; /* Adjust padding to center the icons */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+#credit-bottom {
+    background-color: #fff;
+    height: 140px;
+    width: 250px;
+    margin: auto; /* Center the element horizontally */
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%; /* Adjust padding if needed */
+    margin-top: -5px; /* Remove gap by slightly overlapping */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+#credit-info {
+    display: flex;
+    align-items: center;
+}
+
+#credit-info h2 {
+    margin-right: 70px; /* Adjust spacing between h2 and .cvc-container */
+}
+
+.cvc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#credit-info h5, #credit-info h3 {
+    margin: 0;
+}
+
+#credit-info h5 {
+    margin-bottom: 5px; /* Adjust spacing between h5 and h3 */
+}
+
+#payment-details-container {
+    margin-top: 150px; /* Move the payment details section further down */
+    text-align: center; /* Center the heading */
+}
+
+#payment-details-container h3 {
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+#payment-details {
+    background-color: #fff;
+    width: 250px;
+    margin: 0 auto; /* Center the element horizontally */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#confirm-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust top margin if needed */
+    margin-bottom: 50px; /* Adjust bottom margin to fit above the navbar */
+}
+
+#confirm-button {
+    width: 150px; /* Reduce the width of the button */
+    padding: 10px;
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Adjust font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+#confirm-button:hover {
+    background-color: #BAC4ff;
+}
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #F8F4E6;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}

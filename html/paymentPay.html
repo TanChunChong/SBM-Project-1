@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Pay</title>
+    <link rel="stylesheet" href="../css/paymentPay.css">
+    <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body>
+    <div class="header">
+        <a href="../html/settings.html">
+            <img src="../resources/arrow-left.svg" alt="Back Arrow" width="40" height="40">
+        </a>
+        <h2>Pay</h2>
+        <a href="../html/paymentAddCard.html">
+            <img src="../resources/addCredit.svg" alt="Add Credit" width="40" height="40" id="addCard">
+        </a>
+    </div>
+    <div id="credit-top">
+        <img src="../resources/card.svg" alt="Credit Card" width="40" height="40" id="creditCard">
+        <img src="../resources/wifi.svg" alt="Wifi" width="40" height="40" id="wifi">
+    </div>
+    <div id="credit-bottom">
+        <div id="credit-info">
+            <h2>**** **** **** 1234</h2>
+            <div class="cvc-container">
+                <h5>CVC</h5>
+                <h3>059</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="payment-details-container">
+        <h3>Payment Details</h3>
+        <div id="payment-details">
+            <div class="payment-row">
+                <span id="plan-name">Monthly Subscription Plan</span>
+                <span id="plan-price">$10</span>
+            </div>
+            <div class="payment-row">
+                <span>Total</span>
+                <span id="total-price">$10</span>
+            </div>
+        </div>
+    </div>
+    <div id="confirm-container">
+        <button id="confirm-button">Confirm Payment</button>
+    </div>
+
+    <div class="navbar">
+        <a href="../html/home.html">
+            <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friends.html">
+            <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+            <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+        </a>
+        <a href="../html/settings.html">
+            <img src="../resources/settings.svg" alt="Settings">
+        </a>
+    </div>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/paymentPay.js"></script>
+</body>
+</html>

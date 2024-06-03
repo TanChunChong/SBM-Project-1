@@ -1,0 +1,126 @@
+body {
+    background-color: #F8F4E6;
+}
+
+.header {
+    margin-top: 20px; /* Add margin to move the header down */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Add padding to the sides if needed */
+}
+
+.header a {
+    display: inline-block;
+}
+
+.header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center; /* Center the text horizontally */
+}
+
+#addCard {
+    margin: 0;
+}
+
+#credit-top {
+    background-color: #BAC4FF;
+    height: 80px;
+    width: 250px;
+    margin: auto; /* Center the element horizontally */
+    margin-top: 100px; /* Adjust top margin as needed */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%; /* Adjust padding to center the icons */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+#credit-bottom {
+    background-color: #fff;
+    height: 140px;
+    width: 250px;
+    margin: auto; /* Center the element horizontally */
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%; /* Adjust padding if needed */
+    margin-top: -5px; /* Remove gap by slightly overlapping */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+#credit-info {
+    display: flex;
+    align-items: center;
+}
+
+#credit-info h2 {
+    margin-right: 70px; /* Adjust spacing between h2 and .cvc-container */
+}
+
+.cvc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#credit-info h5, #credit-info h3 {
+    margin: 0;
+}
+
+#credit-info h5 {
+    margin-bottom: 5px; /* Adjust spacing between h5 and h3 */
+}
+
+#top-up-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px; /* Adjust top margin as needed */
+    width: 300px; /* Align with credit card width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#top-up-container label {
+    margin-bottom: 20px; /* Adjust spacing between label and input */
+    font-size: 20px; /* Adjust font size */
+    color: #333; /* Adjust label color */
+    width: 100%; /* Make label full width */
+    text-align: left; /* Align text to the left */
+}
+
+#top-up-container input {
+    width: 100%; /* Make the input full width */
+    padding: 15px;
+    margin-bottom: 30px; /* Adjust spacing between input and button */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left; /* Align text to the left */
+    font-size: 18px; /* Adjust font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+#top-up-container button {
+    width: 100px;/* Make the button full width */
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Adjust font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+#top-up-container button:hover {
+    background-color: #45a049;
+}
+
+
