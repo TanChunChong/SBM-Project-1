@@ -17,46 +17,47 @@
     <img class="pfp" src="../resources/superhero.png" alt="SVG Example" height="168" width="185">
     <div class="container">
             <div class="name">
-                Friend Username
+                Friend Username                                                         <!--User's Name -->
             </div>
             <div class="date">
-                Joined January 2024
+                Joined January 2024                                                     <!--User's Join Date -->
             </div>
             <div class="description">
-                This is the user's about me, they can put anything they want here
+                This is the user's about me, they can put anything they want here       <!--User's Description -->
             </div>
    
         <div class="title">Overview</div>
         <div class="overview">
             <div class="card">
-                <img class="svg-image" src="../resources/zap.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Day Streak</div><br>
+                <img class="svg-image" src="../resources/zap.svg" alt="SVG Example">                    <!--Icon -->
+                 <div class="big">64</div>                                                              <!--Quantities -->                                                 
+                <div class="small">Day Streak</div><br>                                                 <!--Title -->
             </div>
             <div class="card">
-                <img class="svg-image3" src="../resources/battery-charging.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Reviews</div><br>
+                <img class="svg-image3" src="../resources/battery-charging.svg" alt="SVG Example">      <!--Icon -->
+                <div class="big">64</div>                                                               <!--Quantities -->     
+                <div class="small">Reviews</div><br>                                                    <!--Title -->
             </div>
         </div> 
-        <div class="overview">
-            <div class="card">
-                <img class="svg-image2" src="../resources/award.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Points - Qns</div><br>
+        <div class="overview">      <!--Row-->
+            <div class="card">      <!--2 cards-->
+                <img class="svg-image2" src="../resources/award.svg" alt="SVG Example">     <!--Icon -->
+                <div class="big">64</div>                                                   <!--Quantities -->
+                <div class="small">Points - Qns</div><br>                                   <!--Title -->
 
             </div>
-            <div class="card">
-                <img class="svg-image2" src="../resources/award.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Points - Tests</div><br>
+            <div class="card">      <!--2 cards-->
+                <img class="svg-image2" src="../resources/award.svg" alt="SVG Example">     <!--Icon -->
+                <div class="big">64</div>                                                   <!--Quantities -->
+                <div class="small">Points - Tests</div><br>                                 <!--Title -->
 
             </div>
         </div>
         </div>
+        <!-- Nested buttons -->
         <div class="groupbutton">
-            <input type="button" class="button2" value="View saved posts">
-            <input type="button" class="button" value="Edit">
+             <input type="button" class="button2" value="View saved posts" onclick="navigateTo('savedPosts.html')">     <!--Button that sends to savedPosts -->
+            <input type="button" class="button" value="Edit" onclick="navigateTo('editProfile.html')">      <!--Button that sends to editProfile -->
         </div>
         <div class="navbar">
             <a href="../html/home.html">
@@ -74,7 +75,11 @@
           </div>
           
           
-        
+          <script>//function to go to other pages
+            function navigateTo(url) {
+                window.location.href = url;
+            }
+        </script>
            
 </body>
 </html>
