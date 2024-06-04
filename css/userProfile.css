@@ -5,51 +5,63 @@
   padding-bottom: 7px;
 }
 
+body{
+    height: 950px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #FFFFFF ;
-    height: 500px;
     padding-left: 35px;
     padding-right: 35px;
+    background-color: #FFFFFF ;
+    height: 500px;
     border: solid 2px #707070;
     border-radius: 20px;
     width: 72%;
     margin-left: 20px;
-    overflow-y: auto;
 }
 
-.title{
-    
-    font-size: 25px;
-    position: relative;
-    top:35px;
-}
+
 .name {
     font-size: 25px;
-    position: relative;
-    bottom: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    /* position: relative;
+    bottom: 5px; */
 
 }
 
 .date {
     font-size: 15px;
-    position: relative;
-    bottom: 20px;
+    /* position: relative;
+    bottom: 0px; */
 }
 
 .description {
     font-size: 18px;
-    position: relative;
-    padding-left: 25px;
-    padding-right: 25px;
+    /* position: relative;
+    top:20px; */
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: auto;
 
 }
+
+.title{
+    height: 10px;
+    font-size: 25px;
+    padding-top: 30px;
+    /* position: relative;
+    top:60px; */
+}
+
 .overview{
     position: relative;
-    top: 65px;
+    top: 45px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -94,21 +106,40 @@
 .button {
     background-color: #BAC4FF;
     border: solid 2px #707070 ;
-    color: black;
+    color: black;   
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     font-size: 20px;    
-    margin: 4px 2px;
     position: relative;
-    top: 135px;
+    top:40px;
     border-radius: 16px;
     width: 362px;
   }
 
-  html, body {
-    height: 100%;
-    margin: 0; 
-    padding: 0;
-    overflow: auto;
+  .button2 {
+    background-color: #BAC4FF;
+    border: solid 2px #707070 ;
+    color: black;   
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;    
+    position: relative;
+    top: 30px;
+    border-radius: 16px;
+    width: 362px;
+  }
+  .groupbutton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  
+
+.fill{
+    height: 35px;
 }
