@@ -1,0 +1,107 @@
+/* CSS code to style the elements */
+/* Paste this CSS code in a file named styles.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFCED;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.container h1{
+    margin-top: 80px;
+}
+.container {
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 60px;
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    text-align: left;
+    font-size: 32px;
+    margin-left: 10px;
+}
+
+.go-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.go-back i {
+    color: #0F0101;
+    font-size: 48px;
+}
+
+.go-back span {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.question {
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Add background color to the question section */
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.options button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+    background-color: #f9f9f9; /* Add background color to the question section */
+
+}
+
+.options button.highlighted {
+    background-color: #BAC4FF; /* Highlighted option color */
+    color: #000000; /* Text color for highlighted option */
+    border: 2px solid #000000; /* Border for highlighted option */
+    border-radius: 5px;
+}
+
+.next-button {
+    background-color: #BAC4FF;
+    border-radius: 20px;
+    padding: 15px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    margin-top: 20px;
+    width: 100%;
+}
