@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFCED;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-top, .go-back {
+    display: inline;
+}
+
+.header-top {
+    margin-right: 120px;
+    padding-bottom: 50px;
+    font-size: 28px;
+    padding-top: 40px;
+    text-align: left;
+}
+
+.go-back {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.go-back i {
+    color: #0F0101;
+    font-size: 36px;
+}
+
+.container {
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 80px;
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    margin-top: 30px;
+    right: 20px;
+}
+
+.icons .icon {
+    margin-left: 15px;
+    border-radius: 50%;
+}
+
+.icons .icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.profile-icon {
+    margin-left: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+main {
+    padding: 16px;
+}
+
+.subject, .create-subject {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #FFFCED;
+}
+
+.subject .icon img, .create-subject .icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.subject .details, .create-subject .details {
+    flex-grow: 1;
+    margin-left: 16px;
+}
+
+.subject .details h2, .create-subject .details h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.subject .details p {
+    margin: 0;
+    color: #777;
+}
+
+.subject .edit a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 16px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 500px;
+}
+
+.navbar a img {
+    width: 30px;
+    height: 30px;
+}
+
+@media only screen and (max-width: 430px) and (max-height: 932px) {
+    .go-back {
+        top: 0;
+        left: 10px;
+    }
+
+    .go-back i {
+        font-size: 36px;
+    }
+
+    .icons {
+        top: 0;
+        right: 10px;
+    }
+
+    .icons .icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .profile-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
