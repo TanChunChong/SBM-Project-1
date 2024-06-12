@@ -9,7 +9,6 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     position: absolute;
     top: 175px;
     left: 1.5%;

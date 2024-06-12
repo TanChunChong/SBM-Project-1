@@ -13,8 +13,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     height: 100vh;
-    position: relative;
-    overflow: hidden;
+    position: relative; /* Ensures the go-back button stays in place */
+    overflow: hidden; /* Prevent body scroll */
 }
 
 .go-back {
@@ -24,34 +24,34 @@ body {
 }
 
 .go-back i {
-    color: #0F0101;
-    font-size: 48px;
+    color: #0F0101; /* Grey color */
+    font-size: 48px; /* Increased size */
 }
 
-.container {
+.bodyContainer {
     padding: 20px;
     width: 90%;
     max-width: 500px;
     text-align: center;
-    margin-top: 60px;
-    overflow-y: auto;
-    height: calc(100vh - 100px);
+    margin-top: 60px; /* Increased margin to move the container lower */
+    overflow-y: auto; /* Add vertical scroll */
+    height: calc(100vh - 100px); /* Adjust container height */
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* Increase space between header and content */
 }
 
 h1 {
-    text-align: left;
+    text-align: left; /* Align "Materials" to the left */
     font-size: 32px;
-    margin-left: 10px;
+    margin-left: 10px; /* Move h1 slightly to the right for better spacing */
 }
 
-.icons {
+.topIcons {
     display: flex;
     align-items: center;
     position: absolute;
@@ -59,16 +59,19 @@ h1 {
     right: 20px;
 }
 
-.icons .icon {
-    margin-left: 15px;
-    width: 32px;
-    height: 32px;
+.topIcons .timerIcon,
+.topIcons .remindersIcon,
+.topIcons .notificationsIcon {
+  margin-left: 15px;
+  width: 32px;
+  height: 32px;
 }
 
+
 .profile-icon {
-    margin-left: 15px;
-    width: 40px;
-    height: 40px;
+    margin-left: 15px; /* Increase space between icons */
+    width: 40px; /* Increased width */
+    height: 40px; /* Increased height */
     border-radius: 50%;
 }
 
@@ -78,8 +81,8 @@ h1 {
 
 .materials-image {
     width: 100%;
-    height: 180px;
-    border-radius: 10px;
+    height: 180px; /* Increased height */
+    border-radius: 10px; /* Added border radius */
 }
 
 .tabs {
@@ -108,29 +111,29 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: auto;
-    max-height: 400px;
-    padding-right: 10px;
+    overflow-y: auto; /* Make subjects scrollable */
+    max-height: 400px; /* Set a max height for the subjects container */
 }
 
 .subject {
     display: flex;
     align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #FFFCED;
+    padding: 10px; /* Padding around the text */
+    border-radius: 10px; /* Rounded corners */
+    position: relative; /* Add relative positioning to subject */
+    background-color: #FFFCED; /* Add background color to subjects */
 }
 
 .subject-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px; /* Increased size */
-    height: 80px; /* Increased size */
-    background-color: #ffff;
+    width: 60px; /* Increased size */
+    height: 60px; /* Increased size */
+    background-color: #FFFFFF;
     color: #fff;
-    border-radius: 16px; /* Rounded corners */
-    border: 3px solid #000000;
+    border: 1px solid #000000;
+    border-radius: 10px; /* Rounded corners for icon background */
     margin-right: 10px;
 }
 
@@ -141,31 +144,24 @@ h1 {
 
 .subject-info {
     flex-grow: 1;
-    text-align: left;
-    padding-right: 60px;
+    text-align: left; /* Align text to the left */
+    padding-right: 60px; /* Add padding to make room for circular progress */
 }
 
 .subject-info h3 {
     font-size: 16px;
     margin-bottom: 5px;
-    white-space: nowrap; /* Keep "mobile app development" in one line */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Show ellipsis for overflow */
 }
 
 .subject-info p {
     font-size: 14px;
     color: #666;
-    white-space: nowrap; /* Keep "you have completed" in one line */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Show ellipsis for overflow */
 }
 
 .subject-info p span.completed {
-    color: #00FF00; /* Change completed count to green */
+    color: #008000; /* Change 22/35 to green color */
 }
 
-/* Circular progress bar */
 .circular-progress {
     position: relative;
     width: 80px; /* Increased size */
@@ -181,7 +177,7 @@ h1 {
     position: absolute;
     width: 50px; /* Adjusted size */
     height: 50px; /* Adjusted size */
-    background-color: #fffde7;
+    background-color: #FFFCED;
     border: 2px solid #000000;
     border-radius: 50%;
     display: flex;
@@ -201,23 +197,8 @@ h1 {
     padding: 15px 40px; /* Increase padding for larger button */
     font-size: 16px;
     cursor: pointer;
-    margin-top: 250px; /* Move button to the bottom of the page */
     width: 100%; /* Make button full width */
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.navbar a {
-    display: inline-block;
-}
-
-.navbar img {
-    width: 30px;
-    height: 30px;
+    margin-bottom: 30px;
 }
 
 /* Media query for iPhone 14 Pro Max dimensions */
@@ -247,4 +228,8 @@ h1 {
         width: 45px; /* Further increase width */
         height: 45px; /* Further increase height */
     }
+}
+
+.subject-info p span.incomplete {
+    color: #FF0000; /* Change 12/35 to red color */
 }

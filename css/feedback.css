@@ -38,14 +38,14 @@
     border-color: #007bff;
 }
 
-/* Centering the form content */
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Center vertically on the viewport */
-}
+    margin: auto 0;
+    padding: 20vh 0;
+  }  
 
 #feedbackForm {
     width: 80%; /* Adjust width as needed */
@@ -85,8 +85,9 @@ label[for="contact"] {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 30px;
-    width: 350px; /* Increase button width */
+    width: 78vw; /* Increase button width */
 }
+
 #submitBtn:hover {
     background-color: #0056b3; /* Darker color on hover */
 }

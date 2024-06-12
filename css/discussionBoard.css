@@ -50,7 +50,6 @@ h2 {
     overflow-x: auto;
     white-space: nowrap;
     display: flex;
-    gap: 19px;
     position: absolute;
     top: 240px;
     left: 2%;
@@ -66,6 +65,7 @@ h2 {
     padding: 0 15px;
     display: flex;
     align-items: center;
+    margin-right: 19px;
 }
 
 .popular-trending-text {
@@ -89,7 +89,6 @@ h2 {
 .topics-container {
     overflow-x: auto;
     display: flex;
-    gap: 19px;
     position: absolute;
     top: calc(350px);
     left: 2%;
@@ -109,6 +108,7 @@ h2 {
     flex-shrink: 0;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
     position: relative;
+    margin-right: 19px;
 }
 
 .topics-text {
@@ -133,7 +133,6 @@ h2 {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     position: absolute;
     top: calc(535px);
     left: 1.5%;
@@ -155,6 +154,7 @@ h2 {
     position: relative;
     padding: 20px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .profile-image {

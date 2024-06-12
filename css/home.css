@@ -1,39 +1,41 @@
-.navBar {
+body{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100vh;
+}
+
+.topIcons {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.topIconsRight {
+    display: flex;
+    gap: 20px;
+}
+
 .first{
     position: relative;
     top: 12px;
+    padding-right: 10px;
 }
 
 .second{
     position: relative;
     top: 17px;
+    padding-right: 10px;
 }
 
 .third{
     position: relative;
     top: 13px;
+    padding-right: 10px;
 }
 
-
-.navBarLeft {
+.logo {
     flex: 1;
     padding: 0px;
-}
-
-.navBarRight {
-    display: flex;
-    gap: 20px;
-}
-
-body{
-    padding-left: 20px;
-    padding-right: 20px;
-    height: 100vh;
 }
 
 .hello{
@@ -46,12 +48,7 @@ body{
     font-weight: 600;
 }
 
-.bodyH{
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.seeall{
+.seeAll{
     font-size: 16px;
     font-weight: 600;
 }
@@ -61,19 +58,20 @@ body{
     justify-content: space-between;
     align-items: center;
 }
-.bodyB{
+
+.displayStudyYear{
     font-size: 16px;
     position: relative;
     top: 5px;
 }
 
-.appBar {
+.subjectRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.widget{
+.subjectContainer{
     height: 59px;
     width: 59px;
     border-radius: 14px;
@@ -82,13 +80,18 @@ body{
     text-align: center;
 }
 
-.text{
+.aboutUsTitle{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.aboutUsText{
     font-size: 20px;
     padding-top: 5px;
     padding-bottom: 30px;
 }
 
-.fab {
+.aiChatBot {
     position: fixed;
     bottom: 70px;
     right: 20px;

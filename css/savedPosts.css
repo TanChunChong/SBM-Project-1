@@ -26,7 +26,6 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     position: absolute;
     top: 70px;
     left: calc(5vw);
@@ -52,6 +51,7 @@ body {
     position: relative;
     padding: 20px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .profile-image {

@@ -40,6 +40,35 @@ body {
     font-size: 36px;
 }
 
+.topIcons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topIconsRight {
+    display: flex;
+    gap: 20px;
+}
+
+.first{
+    position: relative;
+    top: 12px;
+    padding-right: 10px;
+}
+
+.second{
+    position: relative;
+    top: 17px;
+    padding-right: 10px;
+}
+
+.third{
+    position: relative;
+    top: 13px;
+    padding-right: 10px;
+}
+
 .container {
     padding: 20px;
     width: 90%;

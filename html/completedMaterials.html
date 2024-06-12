@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/completedMaterials.css">
+    <link rel="stylesheet" href="../css/materials.css">
     <link rel="stylesheet" href="../css/navBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Completed Materials</title>
 </head>
 <body>
-    <div class="container">
+    <div class="bodyContainer">
         <header>
-            <div class="go-back">
+            <a href="home.html" class="go-back">
                 <i class="fas fa-arrow-left"></i>
-            </div>
+            </a>
             <h1>Materials</h1>
-            <div class="icons">
-                <img src="../resources/clock.svg" alt="Clock Icon" class="icon">
-                <img src="../resources/notification.svg" alt="Notification Icon" class="icon">
-                <img src="../resources/list.svg" alt="List Icon" class="icon">
+            <div class="topIcons">
+                <img src="../resources/clock.svg" alt="Timer" class="timerIcon">
+                <img src="../resources/list.svg" alt="Reminders" class="remindersIcon">
+                <img src="../resources/notification.svg" alt="Notifications" class="notificationsIcon">
                 <img src="../resources/superhero.png" alt="Profile Picture" class="profile-icon">
-            </div>
+              </div>              
         </header>
         <div class="materials-container">
             <img src="../resources/studyMaterials.jpg" alt="Materials Image" class="materials-image">
         </div>
         <div class="tabs">
-            <button>In Progress</button>
-            <button class="active">Completed</button>
-            <button>Leaderboards</button>
+            <button class="button" id="inProgressButton">In Progress</button>
+            <button class="active" id="completedButton">Completed</button>
+            <button class="button" id="leaderboardButton">Leaderboards</button>
         </div>
         <div class="subjects">
             <div class="subject">
@@ -51,18 +51,36 @@
     </div>
     <div class="navbar">
         <a href="../html/home.html">
-            <img src="../resources/home.svg" alt="Home">
+          <img src="../resources/home.svg" alt="Home">
         </a>
-        <a href="../html/friends.html">
-            <img src="../resources/Friends.svg" alt="Friends">
+        <a href="../html/friendsList.html">
+          <img src="../resources/Friends.svg" alt="Friends">
         </a>
         <a href="../html/discussionBoard.html">
-            <img src="../resources/Discussion_Board.svg" alt="Discussion Board">
+          <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
         </a>
         <a href="../html/settings.html">
-            <img src="../resources/settings.svg" alt="Settings">
+          <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
-    <script src="../js/completedMaterials.js"></script>
+    <script>
+        const inProgressButton = document.getElementById('inProgressButton');
+        
+        inProgressButton.addEventListener('click', () => {
+          window.location.href = 'studyMaterials.html';
+        });
+
+        const completedButton = document.getElementById('completedButton');
+        
+        completedButton.addEventListener('click', () => {
+          window.location.href = 'completedMaterials.html';
+        });
+
+        const leaderboardButton = document.getElementById('leaderboardButton');
+        
+        leaderboardButton.addEventListener('click', () => {
+          window.location.href = 'leaderboards.html';
+        });
+    </script>
 </body>
 </html>

@@ -144,7 +144,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 30px;
     top: calc(850px);
     left: 1.5%;
     height: calc(30% + 10px);
@@ -167,6 +166,7 @@ body {
     position: relative;
     padding: 20px;
     overflow: hidden;
+    margin-bottom: 30px;
 }
 
 .sampleImage{

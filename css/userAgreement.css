@@ -31,4 +31,6 @@ body {
     margin-bottom: 5px;
   }
 
-
+.userAgreementText {
+  padding-bottom: 7vh;
+}

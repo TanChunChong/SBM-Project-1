@@ -38,6 +38,10 @@ header {
     width: 40px;
 }
 
+.go-back a {
+    text-decoration: none;
+}
+
 .search {
     position: absolute;
     left: 50px;
