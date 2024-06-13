@@ -31,8 +31,8 @@ body {
 
 .go-back {
     position: absolute;
-    margin-top: 30px;
-    margin-left: 20px;
+    top: 20px;
+    left: 20px;
 }
 
 .go-back i {
@@ -40,33 +40,25 @@ body {
     font-size: 36px;
 }
 
-.topIcons {
+.icons {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
-.topIconsRight {
-    display: flex;
-    gap: 20px;
+.icons .icon {
+    margin-left: 15px;
+    width: 32px;
+    height: 32px;
 }
 
-.first{
-    position: relative;
-    top: 12px;
-    padding-right: 10px;
-}
-
-.second{
-    position: relative;
-    top: 17px;
-    padding-right: 10px;
-}
-
-.third{
-    position: relative;
-    top: 13px;
-    padding-right: 10px;
+.profile-icon {
+    margin-left: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .container {
@@ -77,31 +69,6 @@ body {
     margin-top: 80px;
     overflow-y: auto;
     height: calc(100vh - 100px);
-}
-
-.icons {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    margin-top: 30px;
-    right: 20px;
-}
-
-.icons .icon {
-    margin-left: 15px;
-    border-radius: 50%;
-}
-
-.icons .icon img {
-    width: 50px;
-    height: 50px;
-}
-
-.profile-icon {
-    margin-left: 15px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
 }
 
 main {
@@ -171,17 +138,21 @@ main {
     }
 
     .icons {
-        top: 0;
+        top: 10px;
         right: 10px;
     }
 
     .icons .icon {
-        width: 24px;
-        height: 24px;
+        width: 36px;
+        height: 36px;
     }
 
     .profile-icon {
-        width: 32px;
-        height: 32px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .container {
+        margin-top: 80px;
     }
 }
