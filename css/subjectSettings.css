@@ -80,6 +80,20 @@ main {
     background-color: #FFFCED;
 }
 
+.subject .icon{
+    border: 2px solid #0F0101;
+    background-color: #FFFF;
+    border-radius: 12px;
+    height: 55px;
+}
+
+.create-subject .icon{
+    border: 2px solid #0F0101;
+    background-color: #FFFF;
+    border-radius: 12px;
+    height: 52px;
+}
+
 .subject .icon img, .create-subject .icon img {
     width: 50px;
     height: 50px;

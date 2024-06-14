@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/addFriends.css">
-    <link rel="stylesheet" href="../css/navBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Friends</title>
+    <title>Add Friends</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="go-back">
+            <a href="home.html" class="go-back" style="text-decoration: none;">
                 <i class="fas fa-arrow-left"></i>
+            </a>
+            <input type="checkbox" id="search-toggle" class="search-toggle">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <label for="search-toggle" class="close-icon">
+                    <i class="fas fa-times"></i>
+                </label>
             </div>
-            <div class="search">
-                <input type="text" placeholder="Search" id="searchInput">
-                <span class="clear-btn" id="clearBtn">&times;</span>
+            <label for="search-toggle" class="search-icon">
+                <i class="fas fa-search"></i>
+            </label>
+            <div class="profile">
+                <i class="fas fa-user-circle"></i>
             </div>
         </header>
         <div class="friends-list">

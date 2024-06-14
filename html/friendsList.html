@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/friendsList.css">
-    <link rel="stylesheet" href="../css/navBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/friendsList.css">
     <title>Friends</title>
 </head>
 <body>
@@ -13,10 +12,17 @@
         <header>
             <a href="home.html" class="go-back" style="text-decoration: none;">
                 <i class="fas fa-arrow-left"></i>
-              </a>
-            <div class="search">
-                <i class="fas fa-search"></i>
+            </a>
+            <input type="checkbox" id="search-toggle" class="search-toggle">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <label for="search-toggle" class="close-icon">
+                    <i class="fas fa-times"></i>
+                </label>
             </div>
+            <label for="search-toggle" class="search-icon">
+                <i class="fas fa-search"></i>
+            </label>
             <div class="profile">
                 <i class="fas fa-user-circle"></i>
             </div>
