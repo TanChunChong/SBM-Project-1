@@ -67,7 +67,6 @@ h1 {
   height: 32px;
 }
 
-
 .profile-icon {
     margin-left: 15px; /* Increase space between icons */
     width: 40px; /* Increased width */
@@ -190,7 +189,7 @@ h1 {
     color: #666;
 }
 
-.personalise-button {
+.personaliseButton {
     background-color: #BAC4FF;
     border: none;
     border-radius: 20px;

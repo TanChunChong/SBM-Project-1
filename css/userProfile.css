@@ -143,3 +143,9 @@ body{
 .fill{
     height: 35px;
 }
+
+.back-icon {
+    height: 26px; /* Adjust size as needed */
+    margin-top: 12px;
+    margin-left: calc(3.2%)
+}

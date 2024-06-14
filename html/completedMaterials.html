@@ -16,11 +16,19 @@
             </a>
             <h1>Materials</h1>
             <div class="topIcons">
-                <img src="../resources/clock.svg" alt="Timer" class="timerIcon">
-                <img src="../resources/list.svg" alt="Reminders" class="remindersIcon">
-                <img src="../resources/notification.svg" alt="Notifications" class="notificationsIcon">
-                <img src="../resources/superhero.png" alt="Profile Picture" class="profile-icon">
-              </div>              
+              <a href="timer.html">
+                  <img src="../resources/clock.svg" alt="Timer" class="timerIcon">
+              </a>
+              <a href="reminders.html">
+                  <img src="../resources/list.svg" alt="Reminders" class="remindersIcon">
+              </a>
+              <a href="notifications.html">
+                  <img src="../resources/notification.svg" alt="Notifications" class="notificationsIcon">
+              </a>
+              <a href="userProfile.html" class="profile-icon-link">
+                  <img src="../resources/superhero.png" alt="Profile Picture" class="profile-icon">
+              </a>                  
+            </div>
         </header>
         <div class="materials-container">
             <img src="../resources/studyMaterials.jpg" alt="Materials Image" class="materials-image">
@@ -47,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <button class="personalise-button">Personalise</button>
+        <button class="personaliseButton" id="personaliseButton">Personalise</button>
     </div>
     <div class="navbar">
         <a href="../html/home.html">
@@ -80,6 +88,12 @@
         
         leaderboardButton.addEventListener('click', () => {
           window.location.href = 'leaderboards.html';
+        });
+
+        const personaliseButton = document.getElementById('personaliseButton');
+        
+        personaliseButton.addEventListener('click', () => {
+          window.location.href = 'subjectSettings.html';
         });
     </script>
 </body>

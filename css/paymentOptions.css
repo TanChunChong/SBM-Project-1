@@ -1,3 +1,7 @@
+body{
+    padding-bottom: 10vh;
+}
+
 .header {
     margin-top: 20px; /* Add margin to move the header down */
     display: flex;
@@ -147,6 +151,7 @@
     display: flex; /* Use flexbox to arrange children */
     justify-content: center; /* Center children horizontally */
     align-items: center; /* Center items vertically */
+    margin-bottom: 20px;
 }
 
 .one {
@@ -171,6 +176,3 @@ a:hover {
     text-decoration: none; /* Remove underline on hover */
     color: inherit; /* Inherit color from parent */
 }
-
-
-

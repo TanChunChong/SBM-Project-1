@@ -53,7 +53,7 @@ h1 {
     margin-left: 10px;
 }
 
-.icons {
+.topIcons {
     display: flex;
     align-items: center;
     position: absolute;
@@ -61,10 +61,12 @@ h1 {
     right: 20px;
 }
 
-.icons .icon {
-    margin-left: 15px;
-    width: 32px;
-    height: 32px;
+.topIcons .timerIcon,
+.topIcons .remindersIcon,
+.topIcons .notificationsIcon {
+  margin-left: 15px;
+  width: 32px;
+  height: 32px;
 }
 
 .profile-icon {
@@ -131,15 +133,6 @@ h1 {
     width: 100%;
     background-color: #BAC4FF;
     padding: 10px 0;
-}
-
-.navbar a {
-    display: inline-block;
-}
-
-.navbar img {
-    width: 30px;
-    height: 30px;
 }
 
 /* Media query for iPhone 14 Pro Max dimensions */

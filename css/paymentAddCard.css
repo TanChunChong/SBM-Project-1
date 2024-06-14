@@ -16,6 +16,7 @@ body {
     justify-content: space-between;
     padding: 20px; /* Adjust padding to move content down and provide spacing */
     text-align: center;
+    padding-left: calc(10px)
 }
 
 .header a {
@@ -33,15 +34,14 @@ body {
     margin: 0;
 }
 
-
 #cardForm {
     background-color: whitesmoke;
+    margin-top: 10%;
     padding: 20px; /* Adjust padding if more inner space is needed */
     border-radius: 50px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
     width: 80%;
     max-width: 500px; /* Sets a max-width for larger screens */
-    padding-bottom: 40px; /* Increase bottom padding for overall form height */
 }
 
 .form-group {

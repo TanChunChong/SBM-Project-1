@@ -17,30 +17,24 @@ body {
     overflow: hidden;
 }
 
-.header-top, .go-back {
-    display: inline;
-}
-
 .header-top {
-    margin-right: 120px;
-    padding-bottom: 50px;
     font-size: 28px;
-    padding-top: 40px;
     text-align: left;
+    display: inline;
 }
 
 .go-back {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    padding-left: 10px;
+    padding-top: 20px;
 }
 
 .go-back i {
     color: #0F0101;
-    font-size: 36px;
+    font-size: 48px
 }
 
-.icons {
+.topIcons {
     display: flex;
     align-items: center;
     position: absolute;
@@ -48,10 +42,12 @@ body {
     right: 20px;
 }
 
-.icons .icon {
-    margin-left: 15px;
-    width: 32px;
-    height: 32px;
+.topIcons .timerIcon,
+.topIcons .remindersIcon,
+.topIcons .notificationsIcon {
+  margin-left: 15px;
+  width: 32px;
+  height: 32px;
 }
 
 .profile-icon {
@@ -61,7 +57,7 @@ body {
     border-radius: 50%;
 }
 
-.container {
+.bodyContainer {
     padding: 20px;
     width: 90%;
     max-width: 500px;
@@ -107,24 +103,6 @@ main {
 .subject .edit a {
     text-decoration: none;
     color: #007bff;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 16px;
-    background-color: #fff;
-    border-top: 1px solid #ddd;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 500px;
-}
-
-.navbar a img {
-    width: 30px;
-    height: 30px;
 }
 
 @media only screen and (max-width: 430px) and (max-height: 932px) {

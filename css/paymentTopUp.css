@@ -82,7 +82,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 150px; /* Adjust top margin as needed */
+    margin-top: 5vh; /* Adjust top margin as needed */
     width: 300px; /* Align with credit card width */
     margin-left: auto;
     margin-right: auto;
@@ -117,6 +117,7 @@ body {
     cursor: pointer;
     font-size: 18px; /* Adjust font size */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    margin-bottom: 10vh
 }
 
 #top-up-container button:hover {
