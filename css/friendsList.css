@@ -140,7 +140,7 @@ header {
 .navbar {
     display: flex;
     justify-content: space-around;
-    background-color: #FFFFFF;
+    background-color: #e0e3f4;
     padding: 10px 0;
     position: fixed;
     bottom: 0;
