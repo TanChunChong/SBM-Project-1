@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/timer.css">
+    <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="manifest" href="../manifest.json">
+    <title>Timer</title>
+</head>
+<body>
+    <a href="home.html" class="back-link">
+        <img src="../resources/backArrow.svg" alt="Back" class="back-icon">
+    </a>
+    <p class="timer-title">Visual Timer</p>
+    <div class="cup-container">
+        <div class="cup">
+            <div class="cup-fill"></div>
+            <div class="steam"></div>
+        </div>
+    </div>
+    <div class="stopwatch" id="stopwatch">00:00:00</div>
+    <button class="start-button" onclick="startTimer()">Start Timer</button>
+    <div class="navbar">
+        <a href="../html/home.html">
+            <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friendsList.html">
+            <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+            <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+        </a>
+        <a href="../html/settings.html">
+            <img src="../resources/settings.svg" alt="Settings">
+        </a>
+    </div>
+    <script src="../js/timer.js"></script>
+</body>
+</html>
