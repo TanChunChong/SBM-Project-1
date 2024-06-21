@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="278.786" height="279.108" viewBox="0 0 278.786 279.108">
-  <g id="Cup" transform="translate(-0.003)">
-    <path id="Path_57" data-name="Path 57" d="M12.138,0h185.7S207,4.4,207,11.718V54.562h52.746s17.96,5.136,19.038,20.514V175.432s-3.66,13.562-17.591,16.485H208.083l-.369,54.221s-5.873,27.465-34.786,32.97H35.2S5.158,275.816.051,243.216V16.485S-1.425,2.554,12.138,0Z" transform="translate(0)" fill="#010101"/>
-    <path id="Path_58" data-name="Path 58" d="M6.493,3.883H187.259s3.859-1.107,3.859,5.76V58.274h60.719a15.242,15.242,0,0,1,10.441,15.378v92.866s-2.185,5.76-9.619,8.8H190.578l.284,62.9s-4.682,19.237-24.458,23.89H27.092S5.1,253.879,3.457,235.465V6.351S2.35,3.883,6.493,3.883Z" transform="translate(6.594 6.592)" fill="#fff" stroke="#231f20" stroke-miterlimit="10" stroke-width="1"/>
-    <rect id="Rectangle_203" data-name="Rectangle 203" width="49.994" height="73.345" transform="translate(196.904 86.992)"/>
-    <rect id="Rectangle_204" data-name="Rectangle 204" width="29.395" height="52.462" transform="translate(207.345 97.434)" fill="#fff" stroke="#231f20" stroke-miterlimit="10" stroke-width="1"/>
-  </g>
-</svg>

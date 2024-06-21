@@ -6,6 +6,10 @@ body {
     overflow-x: hidden;
 }
 
+.body-page {
+    padding-bottom: 700px;
+}
+
 .back-link {
     position: absolute;
     top: 20px;
@@ -21,64 +25,85 @@ body {
     margin-left: 20px;
 }
 
+.timer-container {
+    position: absolute;
+    text-align: center;
+    padding-top: 20vh;
+    padding-left: 21vw;
+}
+
 .cup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-}
-
-.cup {
     position: relative;
-    width: 100px;
-    height: 150px;
-    border: 5px solid black;
-    border-radius: 0 0 10px 10px;
-    overflow: hidden;
-    background-color: #fff;
+    width: 238px;
+    height: 331px;
 }
 
-.cup::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: -25px;
-    width: 50px;
-    height: 50px;
-    border: 5px solid black;
-    border-radius: 50%;
+#steam {
+    width: 150px;
 }
 
-.cup-fill {
-    position: absolute;
-    bottom: 0;
+#cup-border {
     width: 100%;
-    height: 0;
-    background-color: #00f;
-    transition: height 1s linear;
+    height: 100%;
 }
 
-.steam {
+#cup {
     position: absolute;
-    top: -20px;
-    width: 100%;
-    height: 20px;
-    background: url('../resources/steam.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    top: 3.5%;
+    left: 2.5%;
+    width: 95%;
+    height: 92%;
+}
+
+/* Initially hide the cup-water by clipping it completely */
+#cup-water {
+    position: absolute;
+    z-index: 100;
+    fill: #4077BC;
+    clip-path: inset(331px 0 0 0); /* Initially fully clipped */
+    transition: clip-path 1s linear; /* Smooth transition for clip-path */
+    top: 3.5%;
+    left: 2.5%;
+    width: 95%;
+    height: 92%;
+}
+
+.steam-container {
+    position: relative;
+    display: inline-block;
+    width: 105px;
+    height: 105px;
+    margin-top: -120px;
+    animation: blink 1s infinite;
+    display: none;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .stopwatch {
-    text-align: center;
     font-size: 24px;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
-.start-button {
-    display: block;
-    margin: 20px auto;
+#start-button, #reset-button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 150px;
     cursor: pointer;
+    border-radius: 100px;
+    border-style: solid;
+    border-color: black;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    width: 50px;
+    display: block;
+    padding-left: 43px;
+    padding-bottom: 60px;
 }
