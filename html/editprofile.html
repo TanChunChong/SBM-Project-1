@@ -11,8 +11,8 @@
 </head>
 <body>
     <div class="go-back">
-        <a href="userProfile.html"> <!-- Add a link to navigate back -->
-            <i class="fas fa-arrow-left"></i> <!-- Arrow pointing left icon -->
+        <a href="userProfile.html">
+            <i class="fas fa-arrow-left"></i>
         </a>
     </div>
     <div class="container">
@@ -28,10 +28,6 @@
             <div class="input-container">
                 <i class="fas fa-envelope icon"></i>
                 <input type="email" placeholder="Email" required>
-            </div>
-            <div class="input-container">
-                <i class="fas fa-lock icon"></i>
-                <input type="password" placeholder="Password">
             </div>
             <div class="input-container">
                 <i class="fas fa-lock icon"></i>
@@ -66,5 +62,13 @@
           <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
+
+    <script src="../js/jquery.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
+    <script type="module" src="../js/editProfile.js"></script>
 </body>
 </html>
