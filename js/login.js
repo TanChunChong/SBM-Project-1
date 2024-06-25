@@ -22,7 +22,10 @@ document.querySelector('.login-form').addEventListener('submit', async function 
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+            const userData = docSnap.data();
             console.log("User details found in Firestore. Redirecting to home...");
+            // Store the username in localStorage
+            localStorage.setItem('username', userData.username);
             // Redirect to home.html
             window.location.href = 'home.html';
         } else {

@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const username = localStorage.getItem('username');
+    if (username) {
+        document.querySelector('.greeting').textContent = "Hi, " + username;
+    } else {
+        console.log("Username not found in localStorage.");
+    }
+});
+
+
+//Without firebase
 window.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
