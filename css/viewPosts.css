@@ -82,3 +82,11 @@
 .create-post-btn:hover {
     background-color: #8FA5FF;
 }
+
+.posts-image {
+    width: 100%; /* Make the image take up the full width of its container */
+    height: auto; /* Adjust the height automatically to maintain the aspect ratio */
+    display: block; /* Ensure the image behaves like a block element */
+    margin: 0 auto; /* Center the image horizontally if needed */
+    margin-bottom: 40px;
+}
