@@ -198,6 +198,13 @@ h2 {
     margin-bottom: 30px;
 }
 
+.read-more {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
 .posts-like-icon,
 .posts-comment-icon {
     position: absolute;
@@ -284,4 +291,12 @@ h2 {
 .feather.feather-bookmark.vertical-saved-icon,
 .feather.feather-thumbs-up.posts-like-icon {
     cursor: pointer;
+}
+
+.posts-image {
+    width: 100%; /* Make the image take up the full width of its container */
+    height: auto; /* Adjust the height automatically to maintain the aspect ratio */
+    display: block; /* Ensure the image behaves like a block element */
+    margin: 0 auto; /* Center the image horizontally if needed */
+    margin-bottom: 40px;
 }
