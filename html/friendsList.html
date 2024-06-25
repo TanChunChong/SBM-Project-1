@@ -8,26 +8,17 @@
     <link rel="manifest" href="../manifest.json">
     <title>Friends</title>
 </head>
+<input type="checkbox" id="search-toggle" class="search-toggle">
 <body>
     <div class="container">
-        <header>
-            <a href="home.html" class="go-back" style="text-decoration: none;">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <input type="checkbox" id="search-toggle" class="search-toggle">
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <label for="search-toggle" class="close-icon">
-                    <i class="fas fa-times"></i>
-                </label>
+        <div class="app-bar">
+            <div class="app-bar-items">
+                <a href="home.html" class="back-link">
+                    <img src="../resources/backArrow.svg" alt="Back" class="close-button">
+                </a>
+                <input type="checkbox" id="search-toggle" class="search-toggle">
             </div>
-            <label for="search-toggle" class="search-icon">
-                <i class="fas fa-search"></i>
-            </label>
-            <div class="profile">
-                <i class="fas fa-user-circle"></i>
-            </div>
-        </header>
+        </div>
         <div class="friends-list">
             <div class="friend-entry">
                 <img src="../resources/superhero.png" alt="User Icon">
