@@ -35,7 +35,7 @@ document.querySelector('.sign-up-form').addEventListener('submit', async functio
             username: username,
             email: email,
             password: password, // Only for demonstration. Use hashed passwords in production.
-            confirmPassword: confirmPassword
+            confirmPassword: confirmPassword,
         });
 
         alert('User signed up successfully!');

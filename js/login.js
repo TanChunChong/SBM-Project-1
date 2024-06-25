@@ -26,6 +26,8 @@ document.querySelector('.login-form').addEventListener('submit', async function 
             console.log("User details found in Firestore. Redirecting to home...");
             // Store the username in localStorage
             localStorage.setItem('username', userData.username);
+            localStorage.setItem('description', userData.description);
+            localStorage.setItem('userId', user.uid);
             // Redirect to home.html
             window.location.href = 'home.html';
         } else {
