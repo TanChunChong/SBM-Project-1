@@ -10,6 +10,10 @@ body{
     align-items: center;
 }
 
+.body-container {
+    margin-left: calc(-1.3vw);
+}
+
 .topIconsRight {
     display: flex;
     gap: 20px;
@@ -89,6 +93,10 @@ body{
     font-size: 20px;
     padding-top: 5px;
     padding-bottom: 30px;
+}
+
+.aboutUsImage {
+    margin-left: calc(-1.3vw);
 }
 
 .aiChatBot {

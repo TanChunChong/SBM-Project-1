@@ -6,99 +6,103 @@
     <link rel="stylesheet" href="../css/addFriends.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="manifest" href="../manifest.json">
-    <title>Add Friends</title>
+    <link rel="stylesheet" href="../css/navBar.css">
+    <title>App Bar Example</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="home.html" class="go-back" style="text-decoration: none;">
-                <i class="fas fa-arrow-left"></i>
+    <div class="app-bar" id="appBar">
+        <div class="app-bar-left">
+            <a href="home.html">
+                <img src="../resources/backArrow.svg" alt="Back" class="icon" id="backArrow">
             </a>
-            <input type="checkbox" id="search-toggle" class="search-toggle">
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <label for="search-toggle" class="close-icon">
-                    <i class="fas fa-times"></i>
-                </label>
+            <img src="../resources/search.svg" alt="Search" class="icon" id="searchIcon">
+        </div>
+        <div class="app-bar-right">
+            <a href="userProfile.html" id="profileLink">
+                <div class="profile-picture" id="profilePicture"></div>
+            </a>
+            <div class="search-bar" id="searchBar">
+                <input type="text" placeholder="Search" id="searchInput">
+                <img src="../resources/close.svg" alt="Close" id="closeIcon">
             </div>
-            <label for="search-toggle" class="search-icon">
-                <i class="fas fa-search"></i>
-            </label>
-            <div class="profile">
-                <i class="fas fa-user-circle"></i>
-            </div>
-        </header>
-        <div class="friends-list">
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Alpha</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Bravo</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Charlie</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Delta</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Echo</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Foxtrot</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Golf</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Hotel</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">India</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Juliet</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
-            <div class="friend-entry">
-                <img src="../resources/superhero.png" alt="User Icon">
-                <div class="name">Kilo</div>
-                <div class="delete"><i class="fas fa-plus"></i></div>
-            </div>
+        </div>
+    </div>
+    <div class="friends-list" id="friendsList">
+        <div class="friend-item">
+            <img src="../resources/bear.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">John Doe</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/cat.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Jane Smith</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/chicken.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Alice Johnson</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/dog.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Michael Brown</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/giraffe.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Emily Davis</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/gorilla.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Daniel Wilson</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/panda.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Sophia Moore</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/rabbit.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">James Anderson</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/cat.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Chloe Thompson</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/chicken.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Liam Martinez</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/dog.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Olivia Garcia</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
+        </div>
+        <div class="friend-item">
+            <img src="../resources/giraffe.png" alt="Profile" class="friend-pic">
+            <div class="friend-name">Noah Martinez</div>
+            <img src="../resources/plus.svg" alt="Add Friend" class="add-friend-icon">
         </div>
     </div>
     <div class="navbar">
         <a href="../html/home.html">
-          <img src="../resources/home.svg" alt="Home">
+            <img src="../resources/home.svg" alt="Home">
         </a>
         <a href="../html/friendsList.html">
-          <img src="../resources/Friends.svg" alt="Friends">
+            <img src="../resources/friends.svg" alt="Friends">
         </a>
         <a href="../html/discussionBoard.html">
-          <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+            <img src="../resources/discussion_board.svg" alt="Discussion Board">
         </a>
         <a href="../html/settings.html">
-          <img src="../resources/settings.svg" alt="Settings">
+            <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
+    <script src="../js/addFriends.js"></script>
 </body>
 </html>
