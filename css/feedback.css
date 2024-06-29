@@ -1,7 +1,7 @@
 .rating {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 50px;
+    margin-bottom: 10px; /* Reduce margin to move elements up */
 }
 .circle {
     width: 80px;
@@ -42,20 +42,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto 0;
-    padding: 20vh 0;
-}  
+    margin-top: 0; /* Reduce margin to move elements up */
+    padding: 10vh 0 5vh 0; /* Adjust padding as needed to move elements closer together */
+}
 
 #feedbackForm {
     width: 80%; /* Adjust width as needed */
     max-width: 600px; /* Adjust max width as needed */
     text-align: center; /* Center align form content */
+    margin-top: 0; /* Remove top margin */
 }
 
 /* Center align the question */
 #reasons {
     text-align: center;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Reduce margin to move elements up */
 }
 
 /* Center align textarea */
@@ -65,11 +66,19 @@
 }
 
 /* Center align checkbox and label */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; /* Adjust margin-top if needed */
+}
+
 input[type="checkbox"] {
     margin-right: 5px; /* Adjust margin as needed */
 }
+
 label[for="contact"] {
-    display: inline-block; /* Make label inline-block for alignment */
+    display: inline; /* Ensure the label is inline */
     text-align: left; /* Align label text to the left */
 }
 
@@ -83,7 +92,7 @@ label[for="contact"] {
     border: none; /* Remove border */
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 30px;
+    margin-top: 20px; /* Reduce margin-top */
     width: 78vw; /* Increase button width */
 }
 
@@ -92,7 +101,7 @@ label[for="contact"] {
 }
 
 .header {
-    margin-top: 20px; /* Add margin to move the header down */
+    margin-top: 20px; /* Keep the margin to maintain space for header */
 }
 
 .header a {
@@ -105,11 +114,11 @@ label[for="contact"] {
 }
 
 .container {
-    margin-top: -100px; /* Adjust the value as needed */
+    margin-top: -50px; /* Further reduce the value to move the container up */
 }
 
 .back-icon {
     height: 26px; /* Adjust size as needed */
     margin-top: 12px;
-    margin-left: calc(3.2%)
+    margin-left: calc(3.2%);
 }
