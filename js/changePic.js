@@ -1,3 +1,5 @@
+// changePic.js
+
 import { db } from './firebaseConfig.js';
 import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
@@ -9,21 +11,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
-    const profilePicContainer = document.getElementById('current-profile-pic');
+    const profilePicContainer = document.querySelector('.profile-pic-container img');
     const imageGrid = document.getElementById('image-grid');
-    const usernameElement = document.getElementById('username');
-
-    if (!profilePicContainer || !imageGrid || !usernameElement) {
-        console.error('Required DOM elements not found.');
-        return;
-    }
 
     try {
-        // Fetch profile pictures from 'avatar' collection
+        // Fetch profile pictures
         const querySnapshot = await getDocs(collection(db, 'avatar'));
         querySnapshot.forEach((doc) => {
-            const imagePath = doc.data().imagepath; // Corrected field name
-            console.log(`Image path: ${imagePath}`); // Debug log
+            const imagePath = doc.data().path;
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
             imgElement.alt = "Profile Picture";
@@ -34,19 +29,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Update profile picture in the DOM
                 profilePicContainer.src = imagePath;
             });
-            const gridItem = document.createElement('div');
-            gridItem.classList.add('grid-item');
-            gridItem.appendChild(imgElement);
-            imageGrid.appendChild(gridItem);
+            imageGrid.appendChild(imgElement);
         });
 
-        // Fetch current profile picture and username
+        // Fetch current profile picture
         const userRef = doc(db, 'users', userId);
         const userDoc = await getDoc(userRef);
         if (userDoc.exists()) {
             const userData = userDoc.data();
             profilePicContainer.src = userData.imagepath || "../resources/defaultProfile.png";
-            usernameElement.textContent = userData.username || "No username provided.";
+            document.querySelector('.username').textContent = userData.username || "Username";
         } else {
             console.log('No such document!');
         }
@@ -62,7 +54,7 @@ async function updateProfilePicture(userId, imagePath) {
             imagepath: imagePath
         });
         localStorage.setItem('imagepath', imagePath); // Update localStorage with the new image path
-        // Removed alert
+        alert('Profile picture updated successfully!');
     } catch (error) {
         console.error('Error updating profile picture:', error);
         alert('Failed to update profile picture. Please try again.');
