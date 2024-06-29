@@ -28,7 +28,6 @@
     background-color: green;
 }
 
-
 /* Increase the size of circles on hover */
 .circle:hover {
     transform: scale(1.1);
@@ -45,7 +44,7 @@
     align-items: center;
     margin: auto 0;
     padding: 20vh 0;
-  }  
+}  
 
 #feedbackForm {
     width: 80%; /* Adjust width as needed */
@@ -91,7 +90,6 @@ label[for="contact"] {
 #submitBtn:hover {
     background-color: #0056b3; /* Darker color on hover */
 }
-
 
 .header {
     margin-top: 20px; /* Add margin to move the header down */
