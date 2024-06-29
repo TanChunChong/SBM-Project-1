@@ -41,6 +41,9 @@ document.querySelector('.sign-up-form').addEventListener('submit', async functio
         alert('User signed up successfully!');
         console.log("User signed up successfully!");
 
+        // Redirect to login page
+        window.location.href = 'index.html';
+
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;

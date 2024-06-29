@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Fetch profile pictures
         const querySnapshot = await getDocs(collection(db, 'avatar'));
         querySnapshot.forEach((doc) => {
-            const imagePath = doc.data().path;
+            const imagePath = doc.data().imagepath; // Make sure 'imagepath' is correct
+            console.log(`Image path: ${imagePath}`); // Debug log
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
             imgElement.alt = "Profile Picture";
@@ -29,7 +30,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Update profile picture in the DOM
                 profilePicContainer.src = imagePath;
             });
-            imageGrid.appendChild(imgElement);
+            const gridItem = document.createElement('div');
+            gridItem.classList.add('grid-item');
+            gridItem.appendChild(imgElement);
+            imageGrid.appendChild(gridItem);
         });
 
         // Fetch current profile picture
@@ -37,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const userDoc = await getDoc(userRef);
         if (userDoc.exists()) {
             const userData = userDoc.data();
-            profilePicContainer.src = userData.imagepath || "../resources/defaultProfile.png";
+            profilePicContainer.src = userData.imagepath || "../resources/bear.png";
             document.querySelector('.username').textContent = userData.username || "Username";
         } else {
             console.log('No such document!');
@@ -54,7 +58,6 @@ async function updateProfilePicture(userId, imagePath) {
             imagepath: imagePath
         });
         localStorage.setItem('imagepath', imagePath); // Update localStorage with the new image path
-        alert('Profile picture updated successfully!');
     } catch (error) {
         console.error('Error updating profile picture:', error);
         alert('Failed to update profile picture. Please try again.');
