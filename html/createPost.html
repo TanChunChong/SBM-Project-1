@@ -19,7 +19,7 @@
         <button class="post-button">Post</button>
     </div>
     <div class="create-post-container">
-        <form class="create-post-form" action="/submit-post" method="POST">
+        <form class="create-post-form" id="create-post-form" action="/submit-post" method="POST">
             <div class="form-group">
                 <input type="text" id="post-title" name="post-title" placeholder="Add a title..." required>
             </div>
@@ -27,9 +27,11 @@
                 <textarea id="post-content" name="post-content" placeholder="Add a description..." rows="15" required></textarea>
             </div>
             <div class="icon-group">
-                <img src="../resources/addImage.svg" alt="Add Image">
-                <img src="../resources/addFile.svg" alt="Add File">
+                <img id="add-image" src="../resources/addImage.svg" alt="Add Image">
+                <img id="add-file" src="../resources/addFile.svg" alt="Add File">
             </div>
+            <input type="file" id="post-image" style="display: none;">
+            <input type="file" id="post-file" style="display: none;">
         </form>
     </div>
     <div class="navbar">
@@ -46,5 +48,6 @@
           <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
+    <script type="module" src="../js/createPost.js"></script>
 </body>
 </html>

@@ -1,0 +1,76 @@
+import { db, storage } from './firebaseConfig.js';
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const postForm = document.getElementById('create-post-form');
+    const postButton = document.querySelector('.post-button');
+    const addImageBtn = document.getElementById('add-image');
+    const addFileBtn = document.getElementById('add-file');
+    const postImageInput = document.getElementById('post-image');
+    const postFileInput = document.getElementById('post-file');
+
+    let imageFile = null;
+    let file = null;
+
+    addImageBtn.addEventListener('click', () => postImageInput.click());
+    addFileBtn.addEventListener('click', () => postFileInput.click());
+
+    postImageInput.addEventListener('change', (event) => {
+        imageFile = event.target.files[0];
+    });
+
+    postFileInput.addEventListener('change', (event) => {
+        file = event.target.files[0];
+    });
+
+    postButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        const title = document.getElementById('post-title').value;
+        const content = document.getElementById('post-content').value;
+        const userId = localStorage.getItem('userId');
+        const username = localStorage.getItem('username');
+
+        if (!userId || !username) {
+            alert('User information not found. Please log in again.');
+            return;
+        }
+
+        let imagePath = '';
+        let filePath = '';
+
+        try {
+            // Upload image if selected
+            if (imageFile) {
+                const imageRef = ref(storage, `postImages/${userId}/${imageFile.name}`);
+                const imageSnapshot = await uploadBytes(imageRef, imageFile);
+                imagePath = await getDownloadURL(imageSnapshot.ref);
+            }
+
+            // Upload file if selected
+            if (file) {
+                const fileRef = ref(storage, `postFiles/${userId}/${file.name}`);
+                const fileSnapshot = await uploadBytes(fileRef, file);
+                filePath = await getDownloadURL(fileSnapshot.ref);
+            }
+
+            // Add post to Firestore
+            await addDoc(collection(db, 'posts'), {
+                title,
+                content,
+                imagePath,
+                filePath,
+                username,
+                userId,
+                timestamp: new Date()
+            });
+
+            alert('Post created successfully!');
+            window.location.href = 'viewPosts.html';
+        } catch (error) {
+            console.error('Error creating post:', error);
+            alert('Failed to create post. Please try again.');
+        }
+    });
+});
