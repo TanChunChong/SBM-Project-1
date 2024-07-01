@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addFileBtn = document.getElementById('add-file');
     const postImageInput = document.getElementById('post-image');
     const postFileInput = document.getElementById('post-file');
+    const detailsList = document.getElementById('details-list');
 
     let imageFile = null;
     let file = null;
@@ -18,10 +19,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     postImageInput.addEventListener('change', (event) => {
         imageFile = event.target.files[0];
+        if (imageFile) {
+            const imageUrl = URL.createObjectURL(imageFile);
+            const imageItem = document.createElement('li');
+            imageItem.innerHTML = `<a href="${imageUrl}" download="${imageFile.name}">${imageFile.name}</a>`;
+            detailsList.appendChild(imageItem);
+        }
     });
 
     postFileInput.addEventListener('change', (event) => {
         file = event.target.files[0];
+        if (file) {
+            const fileUrl = URL.createObjectURL(file);
+            const fileItem = document.createElement('li');
+            fileItem.innerHTML = `<a href="${fileUrl}" download="${file.name}">${file.name}</a>`;
+            detailsList.appendChild(fileItem);
+        }
     });
 
     postButton.addEventListener('click', async (event) => {
@@ -55,22 +68,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 filePath = await getDownloadURL(fileSnapshot.ref);
             }
 
-            // Add post to Firestore
-            await addDoc(collection(db, 'posts'), {
+            const docRef = await addDoc(collection(db, "posts"), {
                 title,
                 content,
-                imagePath,
-                filePath,
-                username,
+                imageUrl: imagePath,
+                fileUrl: filePath,
                 userId,
-                timestamp: new Date()
+                username,
+                createdAt: new Date()
             });
 
             alert('Post created successfully!');
             window.location.href = 'viewPosts.html';
         } catch (error) {
-            console.error('Error creating post:', error);
-            alert('Failed to create post. Please try again.');
+            console.error('Error creating post: ', error);
+            alert('Error creating post. Please try again.');
         }
     });
 });

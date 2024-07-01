@@ -6,6 +6,10 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+.body-container {
+    margin-bottom: 50px;
+}
+
 .app-bar {
     position: fixed;
     top: 0;
@@ -99,10 +103,30 @@ body {
 
 .icon-group {
     display: flex;
-    gap: 30px; /* Increase the gap between icons */
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px; /* Space between icons and details list */
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    margin-right: 30px; /* Adjust this value for spacing between icon containers */
 }
 
 .icon-group img {
     width: 40px; /* Increase the size of the icons */
     height: 40px;
+    cursor: pointer;
+}
+
+.details-list {
+    font-size: 14px;
+    color: #000;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.details-list li {
+    margin-bottom: 10px; /* Space between list items */
 }
