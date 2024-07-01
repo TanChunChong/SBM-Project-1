@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <link rel="stylesheet" href="../css/settings.css">
-    <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="stylesheet" href="../css/settingsDark.css" id="dark-mode-stylesheet" disabled>
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
+    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
     <link rel="manifest" href="../manifest.json">
 </head>
 <body>
@@ -25,10 +27,10 @@
             <div class="settingsContainer">
                 <span class="settingsName">Dark Theme</span>
                 <label class="toggle-button">
-                    <input type="checkbox">
+                    <input type="checkbox" id="darkModeToggle">
                     <span class="slider"></span>
                 </label>
-            </div>
+            </div>            
             <div class="settingsContainer">
                 <span class="settingsName">Widget Customization</span>
                 <label class="toggle-button">
@@ -89,5 +91,7 @@
         </a>
     </div>
     <script src="../js/logout.js"></script>
+    <script src="../js/darkMode.js"></script>
+    <script src="../js/settings.js"></script>
 </body>
 </html>
