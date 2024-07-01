@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discussion Board</title>
     <link rel="stylesheet" href="../css/discussionBoard.css">
-    <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="stylesheet" href="../css/discussionBoardDark.css" id="dark-mode-stylesheet" disabled>
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
+    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
     <link rel="manifest" href="../manifest.json">
 </head>
 <body>
     <div class="heading-container">
-        <h2>Discussion</h2>
-        <h2>Board</h2>
+        <div class="heading">
+            <h2>Discussion</h2>
+            <h2>Board</h2>
+        </div>
         <p class="greeting">Hi, Username</p>
         <p class="find-topics">Find topics that you like to read</p>
         <div class="search-container">
@@ -267,5 +271,6 @@
         </a>
     </div>
     <script src="../js/discussionBoard.js"></script>
+    <script src="../js/darkMode.js"></script>
 </body>
 </html>
