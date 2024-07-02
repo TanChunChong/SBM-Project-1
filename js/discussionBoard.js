@@ -1,3 +1,6 @@
+import { auth, db } from './firebaseConfig.js';
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username');
     if (username) {
@@ -21,12 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     truncateText();
 });
-
-function adjustColouredLayerHeight() {
-    const colouredLayer = document.querySelector('.coloured-layer');
-    const postsContainer = document.querySelector('.posts-container');
-    colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
-}
 
 function toggleSearchBox() {
     const greeting = document.querySelector('.greeting');
