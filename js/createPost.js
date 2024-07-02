@@ -3,6 +3,7 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/fi
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Select DOM elements
     const postForm = document.getElementById('create-post-form');
     const postButton = document.querySelector('.post-button');
     const addImageBtn = document.getElementById('add-image');
@@ -11,9 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const postFileInput = document.getElementById('post-file');
     const detailsList = document.getElementById('details-list');
 
+    // Variables to store selected files
     let imageFile = null;
     let file = null;
 
+    // Event listener to trigger image input click
     addImageBtn.addEventListener('click', () => postImageInput.click());
     addFileBtn.addEventListener('click', () => postFileInput.click());
 
