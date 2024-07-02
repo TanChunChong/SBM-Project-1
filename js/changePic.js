@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         const querySnapshot = await getDocs(collection(db, 'avatar'));
         querySnapshot.forEach((doc) => {
             const imagePath = doc.data().imagepath; // Make sure 'imagepath' is correct
-            console.log(`Image path: ${imagePath}`); // Debug log
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
             imgElement.alt = "Profile Picture";

@@ -1,20 +1,36 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Retrieve and display the username
     const username = localStorage.getItem('username');
     if (username) {
         document.querySelector('.greeting').textContent = "Hi, " + username;
     } else {
         console.log("Username not found in localStorage.");
+        // Fetch username from Firestore if not found in localStorage
+        const userDocRef = doc(db, 'users', auth.currentUser.uid);
+        getDoc(userDocRef).then((doc) => {
+            if (doc.exists()) {
+                const userData = doc.data();
+                document.querySelector('.greeting').textContent = "Hi, " + userData.username;
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
     }
 
+    // Adjust the height of the coloured layer
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
 
+    // Add event listener for the search icon
     const searchIcon = document.querySelector('.search-icon');
     searchIcon.addEventListener('click', toggleSearchBox);
 
+    // Add event listeners for the icons
     const icons = document.querySelectorAll('.feather-bookmark, .posts-like-icon');
     icons.forEach(function(icon) {
         icon.addEventListener('click', function() {
@@ -22,8 +38,39 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Truncate the text
     truncateText();
+
+    // Load topics and inject them into the DOM
+    loadTopics();
 });
+
+function loadTopics() {
+    const topicsContainer = document.querySelector('.topics-container');
+    getDocs(collection(db, 'topics'))
+        .then(topicsSnapshot => {
+            topicsSnapshot.forEach(doc => {
+                const topic = doc.data();
+                const topicBox = document.createElement('a');
+                topicBox.href = "viewPosts.html";
+                topicBox.classList.add('topics-box');
+                topicBox.innerHTML = `
+                    <p class="topics-text">${topic.topicname}</p>
+                    <p class="topics-posts-count">${topic.postsnumber} posts</p>
+                `;
+                topicsContainer.appendChild(topicBox);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching topics: ', error);
+        });
+}
+
+function adjustColouredLayerHeight() {
+    const colouredLayer = document.querySelector('.coloured-layer');
+    const postsContainer = document.querySelector('.posts-container');
+    colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
+}
 
 function toggleSearchBox() {
     const greeting = document.querySelector('.greeting');
@@ -85,7 +132,7 @@ function truncateText() {
 }
 
 // Replace this with actual server-side handling logic
-const downloadFile = async () => {
+const downloadFile = () => {
     try {
         // Simulating server-side storage logic
         const fileData = "Sample file content"; // What is inside the text file
