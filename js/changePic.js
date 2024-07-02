@@ -1,5 +1,3 @@
-// changePic.js
-
 import { db } from './firebaseConfig.js';
 import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
