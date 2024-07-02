@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reminders.css">
+    <title>Reminders</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="home.html" class="go-back">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="title">Reminders</div>
+        </header>
+        <div class="date-selector">
+            <div class="current-date">
+                <img src="../resources/calender.svg" alt="Calendar Icon" class="calendar-icon">
+                <span id="currentMonthYear"></span>
+            </div>
+            <div class="date-range" id="dateRange"></div>
+        </div>
+        <div class="tasks">
+            <div class="section-title">Today's task</div>
+            <div class="task">
+                <div class="task-time">10am</div>
+                <div class="task-details task-green">
+                    <div class="task-title">Landing Page Design</div>
+                    <div class="task-info">
+                        <div class="task-schedule">
+                            <img src="../resources/clock.svg" alt="Clock Icon" class="icon"> 10am - 1pm <br>
+                            <img src="../resources/calendar2.svg" alt="Calendar Icon" class="icon"> May 29
+                        </div>
+                        <div class="task-progress-circle">
+                            <div class="task-progress">70%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="task">
+                <div class="task-time">2pm</div>
+                <div class="task-details task-yellow">
+                    <div class="task-title">Creating Website</div>
+                    <div class="task-info">
+                        <div class="task-schedule">
+                            <img src="../resources/clock.svg" alt="Clock Icon" class="icon"> 1pm - 4pm <br>
+                            <img src="../resources/calendar2.svg" alt="Calendar Icon" class="icon"> May 30
+                        </div>
+                        <div class="task-progress-circle">
+                            <div class="task-progress">30%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="../html/home.html">
+          <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friendsList.html">
+          <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+          <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+        </a>
+        <a href="../html/settings.html">
+          <img src="../resources/settings.svg" alt="Settings">
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="../js/reminders.js"></script>
+</body>
+</html>

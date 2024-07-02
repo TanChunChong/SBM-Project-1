@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/newReminders.css">
+    <title>New Reminders</title>
+</head>
+<body>
+    <header>
+        <a href="reminders.html" class="go-back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="title">Calendar</div>
+    </header>
+    <div class="container">
+        <div class="calendar">
+            <div class="current-date">
+                <img src="../resources/calender.svg" alt="Calendar Icon" class="calendar-icon">
+                <span id="currentDate"></span>
+            </div>
+            <div class="month">
+                <span class="arrow left" id="prevMonth">&#9664;</span>
+                <div class="month-name" id="monthName"></div>
+                <span class="arrow right" id="nextMonth">&#9654;</span>
+            </div>
+            <div class="days" id="calendarDays"></div>
+        </div>
+        <div class="add-reminders">
+            <div class="section-title">Add Reminders</div>
+            <input type="text" placeholder="Title">
+            <input type="text" placeholder="Location or Video Call">
+            <input type="time" placeholder="Start Time" id="startTime">
+            <input type="time" placeholder="End Time" id="endTime">
+            <input type="text" placeholder="Duration" id="duration" readonly>
+            <div class="colors">
+                <span class="color red" onclick="changeColor('red')"></span>
+                <span class="color pink" onclick="changeColor('pink')"></span>
+                <span class="color purple" onclick="changeColor('purple')"></span>
+                <span class="color blue" onclick="changeColor('blue')"></span>
+                <span class="color cyan" onclick="changeColor('cyan')"></span>
+                <span class="color green" onclick="changeColor('green')"></span>
+                <span class="color yellow" onclick="changeColor('yellow')"></span>
+            </div>
+            <button class="add-button">Add</button>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="../html/home.html">
+          <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friendsList.html">
+          <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+          <img src="../resources/Discussion_Board.svg" alt="Discussion Board">
+        </a>
+        <a href="../html/settings.html">
+          <img src="../resources/settings.svg" alt="Settings">
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="../js/newReminders.js"></script>
+</body>
+</html>

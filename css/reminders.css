@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFCED;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 60px; /* Space for the navbar */
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #BAC4FF;
+    padding: 10px;
+    height: 50px;
+}
+
+.go-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    text-decoration: none;
+}
+
+.go-back i {
+    color: #000;
+    font-size: 24px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 280px;
+}
+
+.date-selector {
+    background-color: #FFFCED;
+    padding: 10px;
+    text-align: center;
+}
+
+.current-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding-bottom: 50px;
+}
+
+.current-date .calendar-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.date-range {
+    display: flex;
+    justify-content: space-around;
+}
+
+.date {
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.date.active {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+.tasks {
+    background-color: #FFFCED;
+    padding: 10px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.task {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.task-time {
+    width: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.task-details {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.task-green {
+    background-color: #0DFB5C;
+}
+
+.task-yellow {
+    background-color: #FBFB0A;
+}
+
+.task-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.task-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.task-schedule {
+    font-size: 14px;
+}
+
+.task-schedule .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.task-progress-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #000;
+}
+
+.task-progress {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #FFFFFF;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+.navbar a {
+    display: inline-block;
+}
+
+.navbar img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Media query for iPhone 14 Pro Max dimensions */
+@media only screen and (max-width: 430px) and (max-height: 932px) {
+    .header {
+        padding: 10px 5px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .date-range .date {
+        font-size: 24px;
+    }
+
+    .date.active {
+        font-size: 28px;
+    }
+
+    .task-time {
+        width: 50px;
+        font-size: 12px;
+    }
+
+    .task-details {
+        padding: 8px;
+    }
+
+    .task-title {
+        font-size: 14px;
+    }
+
+    .task-schedule {
+        font-size: 12px;
+    }
+
+    .task-progress-circle {
+        width: 35px;
+        height: 35px;
+    }
+
+    .task-progress {
+        font-size: 12px;
+    }
+
+    .navbar img {
+        width: 25px;
+        height: 25px;
+    }
+}
