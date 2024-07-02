@@ -1,103 +1,162 @@
-import { db, storage } from './firebaseConfig.js';
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+import { auth, db } from './firebaseConfig.js';
+import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Select DOM elements
-    const postForm = document.getElementById('create-post-form');
-    const postButton = document.querySelector('.post-button');
-    const addImageBtn = document.getElementById('add-image');
-    const addFileBtn = document.getElementById('add-file');
-    const postImageInput = document.getElementById('post-image');
-    const postFileInput = document.getElementById('post-file');
-    const detailsList = document.getElementById('details-list');
+document.addEventListener('DOMContentLoaded', function () {
+    // Retrieve and display the username
+    const username = localStorage.getItem('username');
+    if (username) {
+        document.querySelector('.greeting').textContent = "Hi, " + username;
+    } else {
+        console.log("Username not found in localStorage.");
+        // Fetch username from Firestore if not found in localStorage
+        const userDocRef = doc(db, 'users', auth.currentUser.uid);
+        getDoc(userDocRef).then((doc) => {
+            if (doc.exists()) {
+                const userData = doc.data();
+                document.querySelector('.greeting').textContent = "Hi, " + userData.username;
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    }
 
-    // Variables to store selected files
-    let imageFile = null;
-    let file = null;
+    // Adjust the height of the coloured layer
+    adjustColouredLayerHeight();
+    window.addEventListener('resize', adjustColouredLayerHeight);
 
-    // Event listener to trigger image input click
-    addImageBtn.addEventListener('click', () => postImageInput.click());
-    
-    // Event listener to trigger file input click
-    addFileBtn.addEventListener('click', () => postFileInput.click());
+    // Add event listener for the search icon
+    const searchIcon = document.querySelector('.search-icon');
+    searchIcon.addEventListener('click', toggleSearchBox);
 
-    // Event listener for image file input change
-    postImageInput.addEventListener('change', (event) => {
-        imageFile = event.target.files[0];
-        if (imageFile) {
-            // Create a URL for the selected image
-            const imageUrl = URL.createObjectURL(imageFile);
-            // Create a list item to display the selected image
-            const imageItem = document.createElement('li');
-            imageItem.innerHTML = `<a href="${imageUrl}" download="${imageFile.name}">${imageFile.name}</a>`;
-            detailsList.appendChild(imageItem);
-        }
+    // Add event listeners for the icons
+    const icons = document.querySelectorAll('.feather-bookmark, .posts-like-icon');
+    icons.forEach(function(icon) {
+        icon.addEventListener('click', function() {
+            toggleFillColor(icon);
+        });
     });
 
-    // Event listener for file input change
-    postFileInput.addEventListener('change', (event) => {
-        file = event.target.files[0];
-        if (file) {
-            // Create a URL for the selected file
-            const fileUrl = URL.createObjectURL(file);
-            // Create a list item to display the selected file
-            const fileItem = document.createElement('li');
-            fileItem.innerHTML = `<a href="${fileUrl}" download="${file.name}">${file.name}</a>`;
-            detailsList.appendChild(fileItem);
-        }
-    });
+    // Truncate the text
+    truncateText();
 
-    // Event listener for form submission
-    postButton.addEventListener('click', async (event) => {
-        event.preventDefault(); // Prevent the default form submission
+    // Load topics and inject them into the DOM
+    loadTopics();
+});
 
-        // Retrieve form values
-        const title = document.getElementById('post-title').value;
-        const content = document.getElementById('post-content').value;
-        const userId = localStorage.getItem('userId');
-        const username = localStorage.getItem('username');
+function loadTopics() {
+    const topicsContainer = document.querySelector('.topics-container');
+    getDocs(collection(db, 'topics'))
+        .then(topicsSnapshot => {
+            topicsSnapshot.forEach(doc => {
+                const topic = doc.data();
+                const topicBox = document.createElement('a');
+                topicBox.href = "viewPosts.html";
+                topicBox.classList.add('topics-box');
+                topicBox.innerHTML = `
+                    <p class="topics-text">${topic.topicname}</p>
+                    <p class="topics-posts-count">${topic.postsnumber} posts</p>
+                `;
+                topicsContainer.appendChild(topicBox);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching topics: ', error);
+        });
+}
 
-        // Check if user information is available
-        if (!userId || !username) {
-            alert('User information not found. Please log in again.');
-            return;
-        }
+function adjustColouredLayerHeight() {
+    const colouredLayer = document.querySelector('.coloured-layer');
+    const postsContainer = document.querySelector('.posts-container');
+    colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
+}
 
-        let imagePath = ''; // Variable to store the image path
-        let filePath = '';  // Variable to store the file path
+function toggleSearchBox() {
+    const greeting = document.querySelector('.greeting');
+    const findTopics = document.querySelector('.find-topics');
+    const searchIcon = document.querySelector('.search-icon');
+    const searchBox = document.querySelector('.search-box');
+    const searchCloseIcon = document.querySelector('.search-close-icon');
 
-        try {
-            // Upload image to Firebase Storage if selected
-            if (imageFile) {
-                const imageRef = ref(storage, `postImages/${userId}/${imageFile.name}`);
-                const imageSnapshot = await uploadBytes(imageRef, imageFile);
-                imagePath = await getDownloadURL(imageSnapshot.ref); // Get the download URL for the image
-            }
+    if (searchBox.style.display === 'none') {
+        // Show search elements
+        greeting.style.display = 'none';
+        findTopics.style.display = 'none';
+        searchIcon.style.display = 'none';
+        searchBox.style.display = 'block';
+        searchCloseIcon.style.display = 'block';
+    } else {
+        // Hide search elements
+        greeting.style.display = 'block';
+        findTopics.style.display = 'block';
+        searchIcon.style.display = 'block';
+        searchBox.style.display = 'none';
+        searchCloseIcon.style.display = 'none';
+    }
+}
 
-            // Upload file to Firebase Storage if selected
-            if (file) {
-                const fileRef = ref(storage, `postFiles/${userId}/${file.name}`);
-                const fileSnapshot = await uploadBytes(fileRef, file);
-                filePath = await getDownloadURL(fileSnapshot.ref); // Get the download URL for the file
-            }
+function toggleFillColor(icon) {
+    icon.style.fill = (icon.style.fill === 'lightblue') ? '#fff' : 'lightblue';
+}
 
-            // Add post data to Firestore
-            const docRef = await addDoc(collection(db, "posts"), {
-                title,
-                content,
-                imageUrl: imagePath,
-                fileUrl: filePath,
-                userId,
-                username,
-                createdAt: new Date() // Store the creation date
+const searchCloseIcon = document.querySelector('.search-close-icon');
+searchCloseIcon.addEventListener('click', toggleSearchBox);
+
+function truncateText() {
+    const descriptions = document.querySelectorAll('.posts-text-description');
+    descriptions.forEach(description => {
+        const words = description.textContent.split(' ');
+        if (words.length > 60) {
+            const truncatedText = words.slice(0, 60).join(' ') + '... ';
+            const readMore = document.createElement('span');
+            readMore.textContent = 'read more';
+            readMore.classList.add('read-more');
+            readMore.addEventListener('click', function() {
+                description.textContent = words.join(' ');
+                description.appendChild(readMoreLess);
             });
 
-            alert('Post created successfully!'); // Alert user of successful post creation
-            window.location.href = 'viewPosts.html'; // Redirect to view posts page
-        } catch (error) {
-            console.error('Error creating post: ', error); // Log any errors
-            alert('Error creating post. Please try again.'); // Alert user of any errors
+            const readMoreLess = document.createElement('span');
+            readMoreLess.textContent = ' show less';
+            readMoreLess.classList.add('read-more');
+            readMoreLess.addEventListener('click', function() {
+                description.textContent = truncatedText;
+                description.appendChild(readMore);
+            });
+
+            description.textContent = truncatedText;
+            description.appendChild(readMore);
         }
+    });
+}
+
+// Replace this with actual server-side handling logic
+const downloadFile = () => {
+    try {
+        // Simulating server-side storage logic
+        const fileData = "Sample file content"; // What is inside the text file
+        const blob = new Blob([fileData], { type: 'application/octet-stream' });
+
+        // Create a link element to trigger download
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'sample.txt'; // Replace with actual file name
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    } catch (error) {
+        console.error('Error downloading file:', error);
+    }
+};
+
+// Event for clicking on download-file class
+document.addEventListener('DOMContentLoaded', function () {
+    const downloadLinks = document.querySelectorAll('.download-file');
+    downloadLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            downloadFile();
+        });
     });
 });
