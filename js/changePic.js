@@ -2,10 +2,9 @@ import { db } from './firebaseConfig.js';
 import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async function () {
-    const userId = localStorage.getItem('userId'); // Retrieve the user ID from localStorage
+    const userId = localStorage.getItem('userId');
 
     if (!userId) {
-        console.log('User ID not found in localStorage.');
         return;
     }
 
@@ -13,18 +12,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     const imageGrid = document.getElementById('image-grid');
 
     try {
-        // Fetch profile pictures
         const querySnapshot = await getDocs(collection(db, 'avatar'));
         querySnapshot.forEach((doc) => {
-            const imagePath = doc.data().imagepath; // Make sure 'imagepath' is correct
+            const imagePath = doc.data().imagepath;
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
             imgElement.alt = "Profile Picture";
             imgElement.classList.add('profile-pic');
             imgElement.addEventListener('click', () => {
-                // Update selected profile picture in Firestore
                 updateProfilePicture(userId, imagePath);
-                // Update profile picture in the DOM
                 profilePicContainer.src = imagePath;
             });
             const gridItem = document.createElement('div');
@@ -33,7 +29,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             imageGrid.appendChild(gridItem);
         });
 
-        // Fetch current profile picture
         const userRef = doc(db, 'users', userId);
         const userDoc = await getDoc(userRef);
         if (userDoc.exists()) {
@@ -54,9 +49,8 @@ async function updateProfilePicture(userId, imagePath) {
         await updateDoc(userRef, {
             imagepath: imagePath
         });
-        localStorage.setItem('imagepath', imagePath); // Update localStorage with the new image path
+        localStorage.setItem('imagepath', imagePath);
     } catch (error) {
-        console.error('Error updating profile picture:', error);
         alert('Failed to update profile picture. Please try again.');
     }
 }

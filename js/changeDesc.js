@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
             localStorage.setItem('description', description); // Update localStorage with the new description
             alert('Description updated successfully!');
+            // Redirect to userprofile.html
+            window.location.href = 'userprofile.html';
         } catch (error) {
             console.error('Error updating description:', error);
             alert('Failed to update description. Please try again.');

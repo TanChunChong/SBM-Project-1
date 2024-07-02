@@ -1,4 +1,4 @@
-import { db, storage } from './firebaseConfig.js';
+import { auth, db, storage } from './firebaseConfig.js';
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
@@ -44,14 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         const title = document.getElementById('post-title').value;
-        const content = document.getElementById('post-content').value;
-        const userId = localStorage.getItem('userId');
-        const username = localStorage.getItem('username');
+        const description = document.getElementById('post-content').value; // Changed field name
+        const user = auth.currentUser;
 
-        if (!userId || !username) {
-            alert('User information not found. Please log in again.');
+        if (!user) {
+            alert('User not authenticated. Please log in again.');
             return;
         }
+
+        // Fetch the username from localStorage
+        const username = localStorage.getItem('username');
+        if (!username) {
+            alert('Username not found. Please log in again.');
+            return;
+        }
+
+        console.log("User ID:", user.uid);  // Log the user ID
 
         let imagePath = '';
         let filePath = '';
@@ -59,28 +67,36 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // Upload image if selected
             if (imageFile) {
-                const imageRef = ref(storage, `postImages/${userId}/${imageFile.name}`);
+                const imageRef = ref(storage, `postImages/${user.uid}/${imageFile.name}`);
+                console.log("Uploading image:", imageFile.name);
                 const imageSnapshot = await uploadBytes(imageRef, imageFile);
                 imagePath = await getDownloadURL(imageSnapshot.ref);
+                console.log("Image uploaded to:", imagePath);
             }
 
             // Upload file if selected
             if (file) {
-                const fileRef = ref(storage, `postFiles/${userId}/${file.name}`);
+                const fileRef = ref(storage, `postFiles/${user.uid}/${file.name}`);
+                console.log("Uploading file:", file.name);
                 const fileSnapshot = await uploadBytes(fileRef, file);
                 filePath = await getDownloadURL(fileSnapshot.ref);
+                console.log("File uploaded to:", filePath);
             }
 
             const docRef = await addDoc(collection(db, "posts"), {
                 title,
-                content,
+                description, // Changed field name
                 imageUrl: imagePath,
                 fileUrl: filePath,
-                userId,
-                username,
-                createdAt: new Date()
+                userId: user.uid,
+                username: username,
+                createdAt: new Date(),
+                likes: 0,
+                commentCount: 0, // Initialize commentCount to 0
+                comments: [] // Initialize comments as an empty array
             });
 
+            console.log("Document added with ID:", docRef.id);
             alert('Post created successfully!');
             window.location.href = 'viewPosts.html';
         } catch (error) {
