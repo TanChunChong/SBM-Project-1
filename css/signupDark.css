@@ -1,0 +1,13 @@
+body {
+    background-color: #333;
+    color: #fff;
+}
+
+p a {
+    color: red;
+    text-decoration: none;
+}
+
+button{
+    background-color: #5D74FF;
+}
