@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateWaterLevel() {
         const maxWaterHeight = 331;
-        const maxTime = 7200; // Change time unit in seconds
+        const maxTime = 10; // Change time unit in seconds
         const filledHeight = Math.min((secondsElapsed / maxTime) * maxWaterHeight, maxWaterHeight);
         cupWater.style.clipPath = `inset(${maxWaterHeight - filledHeight}px 0 0 0)`;
     }
