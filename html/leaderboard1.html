@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/leaderboard1.css">
-    <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="stylesheet" href="../css/leaderboard1Dark.css" id="dark-mode-stylesheet" disabled>
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
+    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="manifest" href="../manifest.json">
     <title>Leaderboard</title>
@@ -22,8 +24,8 @@
                 <img src="../resources/trophy-svgrepo-com.svg" alt="Trophy Icon">
             </div>
             <div class="tabs">
-                <button class="active">Today</button>
-                <button>7 Days</button>
+                <button id="today-tab" class="active" onclick="toggleTabs('today')">Today</button>
+                <button id="seven-days-tab" class="inactive" onclick="toggleTabs('seven-days')">7 Days</button>
             </div>
             <div class="leaderboard">
                 <div class="entry">
@@ -78,5 +80,7 @@
           <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
+    <script src="../js/darkMode.js"></script>
+    <script src="../js/leaderboard1.js"></script>
 </body>
 </html>
