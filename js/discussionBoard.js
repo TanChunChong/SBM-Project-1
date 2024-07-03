@@ -9,16 +9,22 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.log("Username not found in localStorage.");
         // Fetch username from Firestore if not found in localStorage
-        const userDocRef = doc(db, 'users', auth.currentUser.uid);
-        getDoc(userDocRef).then((doc) => {
-            if (doc.exists()) {
-                const userData = doc.data();
-                document.querySelector('.greeting').textContent = "Hi, " + userData.username;
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                const userDocRef = doc(db, 'users', user.uid);
+                getDoc(userDocRef).then((doc) => {
+                    if (doc.exists()) {
+                        const userData = doc.data();
+                        document.querySelector('.greeting').textContent = "Hi, " + userData.username;
+                    } else {
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
             } else {
-                console.log("No such document!");
+                console.log("No user is signed in.");
             }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
         });
     }
 
@@ -32,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add event listeners for the icons
     const icons = document.querySelectorAll('.feather-bookmark, .posts-like-icon');
-    icons.forEach(function(icon) {
-        icon.addEventListener('click', function() {
+    icons.forEach(function (icon) {
+        icon.addEventListener('click', function () {
             toggleFillColor(icon);
         });
     });
@@ -52,7 +58,7 @@ function loadTopics() {
             topicsSnapshot.forEach(doc => {
                 const topic = doc.data();
                 const topicBox = document.createElement('a');
-                topicBox.href = "viewPosts.html";
+                topicBox.href = `viewPosts.html?topicID=${topic.topicname}`;
                 topicBox.classList.add('topics-box');
                 topicBox.innerHTML = `
                     <p class="topics-text">${topic.topicname}</p>
@@ -112,7 +118,7 @@ function truncateText() {
             const readMore = document.createElement('span');
             readMore.textContent = 'read more';
             readMore.classList.add('read-more');
-            readMore.addEventListener('click', function() {
+            readMore.addEventListener('click', function () {
                 description.textContent = words.join(' ');
                 description.appendChild(readMoreLess);
             });
@@ -120,7 +126,7 @@ function truncateText() {
             const readMoreLess = document.createElement('span');
             readMoreLess.textContent = ' show less';
             readMoreLess.classList.add('read-more');
-            readMoreLess.addEventListener('click', function() {
+            readMoreLess.addEventListener('click', function () {
                 description.textContent = truncatedText;
                 description.appendChild(readMore);
             });

@@ -1,23 +1,27 @@
-window.addEventListener('DOMContentLoaded', function () {
+// viewPosts.js
+
+document.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
 
     const likeIcons = document.querySelectorAll('.posts-like-icon');
     const savedIcons = document.querySelectorAll('.vertical-saved-icon');
 
-    likeIcons.forEach(function(icon) {
-        icon.addEventListener('click', function() {
+    likeIcons.forEach(function (icon) {
+        icon.addEventListener('click', function () {
             toggleFillColor(icon);
         });
     });
 
-    savedIcons.forEach(function(icon) {
-        icon.addEventListener('click', function() {
+    savedIcons.forEach(function (icon) {
+        icon.addEventListener('click', function () {
             toggleFillColor(icon);
         });
     });
 
     truncateText();
+    displayTopicTitle();
+    updateCreatePostLink(); // Call the function to update the create post link
 });
 
 function adjustColouredLayerHeight() {
@@ -43,7 +47,7 @@ function truncateText() {
             const readMore = document.createElement('span');
             readMore.textContent = 'read more';
             readMore.classList.add('read-more');
-            readMore.addEventListener('click', function() {
+            readMore.addEventListener('click', function () {
                 description.textContent = words.join(' ');
                 description.appendChild(readMoreLess);
             });
@@ -51,7 +55,7 @@ function truncateText() {
             const readMoreLess = document.createElement('span');
             readMoreLess.textContent = ' show less';
             readMoreLess.classList.add('read-more');
-            readMoreLess.addEventListener('click', function() {
+            readMoreLess.addEventListener('click', function () {
                 description.textContent = truncatedText;
                 description.appendChild(readMore);
             });
@@ -60,6 +64,33 @@ function truncateText() {
             description.appendChild(readMore);
         }
     });
+}
+
+function displayTopicTitle() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let topicID = urlParams.get('topicID');
+    if (!topicID) {
+        // Retrieve topic ID from localStorage if not found in URL parameters
+        topicID = localStorage.getItem('currentTopicID');
+    }
+    const topicTitleElement = document.querySelector('.topic-title');
+    if (topicID) {
+        topicTitleElement.textContent = topicID;
+    }
+}
+
+function updateCreatePostLink() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let topicID = urlParams.get('topicID');
+    if (!topicID) {
+        // Retrieve topic ID from localStorage if not found in URL parameters
+        topicID = localStorage.getItem('currentTopicID');
+    }
+    const createPostLink = document.querySelector('.create-post-link');
+
+    if (topicID && createPostLink) {
+        createPostLink.href = `createPost.html?topicID=${encodeURIComponent(topicID)}`;
+    }
 }
 
 // Replace this with actual server-side handling logic

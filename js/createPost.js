@@ -1,5 +1,5 @@
 import { auth, db, storage } from './firebaseConfig.js';
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, addDoc, doc, getDocs, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         const title = document.getElementById('post-title').value;
-        const description = document.getElementById('post-content').value; // Changed field name
+        const description = document.getElementById('post-content').value;
         const user = auth.currentUser;
 
         if (!user) {
@@ -59,7 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Extract topicID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicID = urlParams.get('topicID');
+        if (!topicID) {
+            alert('Topic ID not found. Please go back and select a topic.');
+            return;
+        }
+
         console.log("User ID:", user.uid);  // Log the user ID
+        console.log("Topic ID:", topicID);  // Log the topic ID
 
         let imagePath = '';
         let filePath = '';
@@ -85,20 +94,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const docRef = await addDoc(collection(db, "posts"), {
                 title,
-                description, // Changed field name
+                description,
                 imageUrl: imagePath,
                 fileUrl: filePath,
                 userId: user.uid,
                 username: username,
+                topicID: topicID,
                 createdAt: new Date(),
                 likes: 0,
-                commentCount: 0, // Initialize commentCount to 0
-                comments: [] // Initialize comments as an empty array
+                commentCount: 0,
+                comments: []
             });
 
             console.log("Document added with ID:", docRef.id);
+
+            // Fetch the topic document and update the postsnumber field
+            const topicQuerySnapshot = await getDocs(collection(db, 'topics'));
+            let topicFound = false;
+            topicQuerySnapshot.forEach(async (topicDoc) => {
+                const topicData = topicDoc.data();
+                if (topicData.topicname === topicID) {
+                    const topicRef = doc(db, 'topics', topicDoc.id);
+                    console.log(`Updating topic: ${topicDoc.id}`);
+                    await updateDoc(topicRef, {
+                        postsnumber: increment(1)
+                    });
+                    topicFound = true;
+                }
+            });
+
+            if (!topicFound) {
+                console.log(`No topic found for topicID: ${topicID}`);
+            }
+
             alert('Post created successfully!');
-            window.location.href = 'viewPosts.html';
+            window.location.href = `viewPosts.html?topicID=${encodeURIComponent(topicID)}`;
         } catch (error) {
             console.error('Error creating post: ', error);
             alert('Error creating post. Please try again.');
