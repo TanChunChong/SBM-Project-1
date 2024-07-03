@@ -1,5 +1,6 @@
-import { db } from './firebaseConfig.js';
+import { db, storage } from './firebaseConfig.js'; // Ensure storage is imported
 import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 document.addEventListener('DOMContentLoaded', async function () {
     const userId = localStorage.getItem('userId');
@@ -10,11 +11,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const profilePicContainer = document.querySelector('.profile-pic-container img');
     const imageGrid = document.getElementById('image-grid');
+    const storageRef = ref(storage, 'avatar');
 
     try {
-        const querySnapshot = await getDocs(collection(db, 'avatar'));
-        querySnapshot.forEach((doc) => {
-            const imagePath = doc.data().imagepath;
+        // List all files in the 'avatar' folder in Firebase Storage
+        const listResult = await listAll(storageRef);
+        listResult.items.forEach(async (itemRef) => {
+            const imagePath = await getDownloadURL(itemRef);
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
             imgElement.alt = "Profile Picture";
