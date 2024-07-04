@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/navBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="manifest" href="../manifest.json">
+    <title>Study Materials</title>
 </head>
 <body>
     <div class="bodyContainer">
@@ -35,7 +36,6 @@
         </div>
         <div class="tabs">
             <button class="active" id="inProgressButton">In Progress</button>
-            <button class="button" id="completedButton">Completed</button>
             <button class="button" id="leaderboardButton">Leaderboards</button>
         </div>
         <div class="subjects">
@@ -45,11 +45,11 @@
                 </div>
                 <div class="subject-info">
                     <h3>Algebra</h3>
-                    <p>You have completed <span class="completed">22 / 35</span> questions</p>
+                    <p>You have completed <span class="completed">22</span> questions</p>
                 </div>
-                <div class="circular-progress" data-progress="63">
+                <div class="circular-progress" data-points="220">
                     <div class="circle">
-                        <span>63%</span>
+                        <span>220</span>
                     </div>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                 </div>
                 <div class="subject-info">
                     <h3>Entrepreneurship</h3>
-                    <p>You have completed <span class="incomplete">12 / 35</span> questions</p>
+                    <p>You have completed <span class="incomplete">12</span> questions</p>
                 </div>
-                <div class="circular-progress" data-progress="34">
+                <div class="circular-progress" data-points="120">
                     <div class="circle">
-                        <span>34%</span>
+                        <span>120</span>
                     </div>
                 </div>
             </div>
@@ -73,11 +73,11 @@
                 </div>
                 <div class="subject-info">
                     <h3>Placeholder</h3>
-                    <p>You have completed <span class="incomplete">12 / 35</span> questions</p>
+                    <p>You have completed <span class="incomplete">12</span> questions</p>
                 </div>
-                <div class="circular-progress" data-progress="34">
+                <div class="circular-progress" data-points="120">
                     <div class="circle">
-                        <span>34%</span>
+                        <span>120</span>
                     </div>
                 </div>
             </div>
@@ -87,11 +87,11 @@
                 </div>
                 <div class="subject-info">
                     <h3>Placeholder</h3>
-                    <p>You have completed <span class="incomplete">12 / 35</span> questions</p>
+                    <p>You have completed <span class="incomplete">12</span> questions</p>
                 </div>
-                <div class="circular-progress" data-progress="34">
+                <div class="circular-progress" data-points="120">
                     <div class="circle">
-                        <span>34%</span>
+                        <span>120</span>
                     </div>
                 </div>
             </div>
@@ -112,30 +112,7 @@
           <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
-    <script>
-        const inProgressButton = document.getElementById('inProgressButton');
-        
-        inProgressButton.addEventListener('click', () => {
-          window.location.href = 'studyMaterials.html';
-        });
+    <script src="../js/studyMaterials.js"></script>
 
-        const completedButton = document.getElementById('completedButton');
-        
-        completedButton.addEventListener('click', () => {
-          window.location.href = 'completedMaterials.html';
-        });
-
-        const leaderboardButton = document.getElementById('leaderboardButton');
-        
-        leaderboardButton.addEventListener('click', () => {
-          window.location.href = 'leaderboard1.html';
-        });
-
-        const personaliseButton = document.getElementById('personaliseButton');
-        
-        personaliseButton.addEventListener('click', () => {
-          window.location.href = 'subjectSettings.html';
-        });
-    </script>
 </body>
 </html>

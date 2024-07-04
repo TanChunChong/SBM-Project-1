@@ -155,10 +155,15 @@ h1 {
 .subject-info p {
     font-size: 14px;
     color: #666;
+    white-space: nowrap; /* Ensure the text stays on one line */
 }
 
 .subject-info p span.completed {
-    color: #008000; /* Change 22/35 to green color */
+    color: #008000; /* Change text color for completed questions */
+}
+
+.subject-info p span.incomplete {
+    color: #008000; /* Change text color for incomplete questions */
 }
 
 .circular-progress {
@@ -227,8 +232,4 @@ h1 {
         width: 45px; /* Further increase width */
         height: 45px; /* Further increase height */
     }
-}
-
-.subject-info p span.incomplete {
-    color: #FF0000; /* Change 12/35 to red color */
 }
