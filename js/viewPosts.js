@@ -1,5 +1,3 @@
-// viewPosts.js
-
 document.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
