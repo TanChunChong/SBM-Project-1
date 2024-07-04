@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Load topics and inject them into the DOM
     loadTopics();
+
+    // Load posts and inject them into the DOM
+    loadPosts();
 });
 
 function loadTopics() {
@@ -69,6 +72,59 @@ function loadTopics() {
         })
         .catch(error => {
             console.error('Error fetching topics: ', error);
+        });
+}
+
+function loadPosts() {
+    const postsContainer = document.querySelector('.posts-container');
+    getDocs(collection(db, 'posts'))
+        .then(postsSnapshot => {
+            postsSnapshot.forEach(doc => {
+                const post = doc.data();
+                const postBox = document.createElement('div');
+                postBox.classList.add('posts-rectangular-box');
+
+                // Extract and decode the file name
+                let fileName = "";
+                if (post.fileUrl) {
+                    const url = new URL(post.fileUrl);
+                    fileName = decodeURIComponent(url.pathname.split('/').pop().split('%2F').pop());
+                }
+
+                // Log to check the extracted filename
+                console.log("File URL:", post.fileUrl);
+                console.log("Extracted fileName:", fileName);
+
+                postBox.innerHTML = `
+                    <div class="profile-image"></div>
+                    <div class="posts-text-container">
+                        <div class="title-and-username">
+                            <p class="posts-title">${post.title}</p>
+                            <p class="posts-username">${post.username}</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <p class="posts-text-description">${post.description}</p>
+                    ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
+                    ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file">${fileName}</a>` : ''}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon">
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                    </svg>
+                    <p class="votes">${post.likes} votes</p>
+                    <a href="viewSpecificPost.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </a>
+                    <p class="comments">${post.commentCount} comments</p>
+                `;
+                postsContainer.appendChild(postBox);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching posts: ', error);
         });
 }
 
@@ -136,33 +192,3 @@ function truncateText() {
         }
     });
 }
-
-// Replace this with actual server-side handling logic
-const downloadFile = () => {
-    try {
-        // Simulating server-side storage logic
-        const fileData = "Sample file content"; // What is inside the text file
-        const blob = new Blob([fileData], { type: 'application/octet-stream' });
-
-        // Create a link element to trigger download
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'sample.txt'; // Replace with actual file name
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    } catch (error) {
-        console.error('Error downloading file:', error);
-    }
-};
-
-// Event for clicking on download-file class
-document.addEventListener('DOMContentLoaded', function () {
-    const downloadLinks = document.querySelectorAll('.download-file');
-    downloadLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            downloadFile();
-        });
-    });
-});

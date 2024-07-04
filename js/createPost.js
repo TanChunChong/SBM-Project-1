@@ -1,5 +1,5 @@
 import { auth, db, storage } from './firebaseConfig.js';
-import { collection, addDoc, doc, getDocs, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, doc, setDoc, getDocs, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -92,7 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("File uploaded to:", filePath);
             }
 
-            const docRef = await addDoc(collection(db, "posts"), {
+            const createdAt = new Date().toISOString(); // Get the current date and time as ISO string
+            const customID = `${username}_${title}_${createdAt}`; // Create custom ID
+
+            const postDocRef = doc(db, "posts", customID); // Reference to the document with custom ID
+
+            await setDoc(postDocRef, {
                 title,
                 description,
                 imageUrl: imagePath,
@@ -100,13 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 userId: user.uid,
                 username: username,
                 topicID: topicID,
-                createdAt: new Date(),
+                createdAt: createdAt,
                 likes: 0,
                 commentCount: 0,
                 comments: []
             });
 
-            console.log("Document added with ID:", docRef.id);
+            console.log("Document added with custom ID:", customID);
 
             // Fetch the topic document and update the postsnumber field
             const topicQuerySnapshot = await getDocs(collection(db, 'topics'));
