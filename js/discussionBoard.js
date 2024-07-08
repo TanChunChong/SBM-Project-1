@@ -1,5 +1,5 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve and display the username
@@ -35,17 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listener for the search icon
     const searchIcon = document.querySelector('.search-icon');
     searchIcon.addEventListener('click', toggleSearchBox);
-
-    // Add event listeners for the icons
-    const icons = document.querySelectorAll('.feather-bookmark, .posts-like-icon');
-    icons.forEach(function (icon) {
-        icon.addEventListener('click', function () {
-            toggleFillColor(icon);
-        });
-    });
-
-    // Truncate the text
-    truncateText();
 
     // Load topics and inject them into the DOM
     loadTopics();
@@ -83,6 +72,7 @@ function loadPosts() {
                 const post = doc.data();
                 const postBox = document.createElement('div');
                 postBox.classList.add('posts-rectangular-box');
+                postBox.dataset.postId = doc.id; // Store the post ID in a data attribute
 
                 // Extract and decode the file name
                 let fileName = "";
@@ -90,10 +80,6 @@ function loadPosts() {
                     const url = new URL(post.fileUrl);
                     fileName = decodeURIComponent(url.pathname.split('/').pop().split('%2F').pop());
                 }
-
-                // Log to check the extracted filename
-                console.log("File URL:", post.fileUrl);
-                console.log("Extracted fileName:", fileName);
 
                 postBox.innerHTML = `
                     <div class="profile-image"></div>
@@ -109,7 +95,7 @@ function loadPosts() {
                     <p class="posts-text-description">${post.description}</p>
                     ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
                     ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file">${fileName}</a>` : ''}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon ${post.likedByUser ? 'liked' : ''}">
                         <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                     </svg>
                     <p class="votes">${post.likes} votes</p>
@@ -122,10 +108,44 @@ function loadPosts() {
                 `;
                 postsContainer.appendChild(postBox);
             });
+
+            // Add event listener for like icons using event delegation
+            postsContainer.addEventListener('click', function (event) {
+                if (event.target.closest('.posts-like-icon')) {
+                    const icon = event.target.closest('.posts-like-icon');
+                    const postId = icon.closest('.posts-rectangular-box').dataset.postId;
+                    toggleLike(icon, postId);
+                }
+            });
         })
         .catch(error => {
             console.error('Error fetching posts: ', error);
         });
+}
+
+function toggleLike(icon, postId) {
+    const postDocRef = doc(db, 'posts', postId);
+    getDoc(postDocRef).then(docSnapshot => {
+        if (docSnapshot.exists()) {
+            const postData = docSnapshot.data();
+            const currentLikes = postData.likes || 0;
+            const newLikes = icon.classList.contains('liked') ? currentLikes - 1 : currentLikes + 1;
+
+            updateDoc(postDocRef, { likes: newLikes })
+                .then(() => {
+                    icon.classList.toggle('liked');
+                    const likesCountElement = icon.nextElementSibling;
+                    likesCountElement.textContent = `${newLikes} votes`;
+                })
+                .catch(error => {
+                    console.error('Error updating likes: ', error);
+                });
+        } else {
+            console.error('No such post!');
+        }
+    }).catch(error => {
+        console.error('Error getting post:', error);
+    });
 }
 
 function adjustColouredLayerHeight() {
@@ -156,10 +176,6 @@ function toggleSearchBox() {
         searchBox.style.display = 'none';
         searchCloseIcon.style.display = 'none';
     }
-}
-
-function toggleFillColor(icon) {
-    icon.style.fill = (icon.style.fill === 'lightblue') ? '#fff' : 'lightblue';
 }
 
 const searchCloseIcon = document.querySelector('.search-close-icon');

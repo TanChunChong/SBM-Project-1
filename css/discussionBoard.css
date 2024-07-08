@@ -300,3 +300,9 @@ h2 {
     margin: 0 auto;
     margin-bottom: 40px;
 }
+
+/*Like color when clicked*/
+.liked {
+    fill: blue;
+    stroke: blue;
+}
