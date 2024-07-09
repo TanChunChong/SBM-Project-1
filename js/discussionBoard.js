@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("No user is signed in.");
             }
         });
-    }
+    } 
 
     // Adjust the height of the coloured layer
     adjustColouredLayerHeight();
