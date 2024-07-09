@@ -179,6 +179,10 @@ body {
     z-index: 999;
 }
 
+.comment-input:focus {
+    outline: none;
+}
+
 .comment-input {
     width: calc(100% - 72px); /* Adjusted for the send icon width */
     padding: 10px;
