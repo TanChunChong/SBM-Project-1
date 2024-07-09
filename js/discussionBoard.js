@@ -2,13 +2,10 @@ import { auth, db } from './firebaseConfig.js';
 import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Retrieve and display the username
     const username = localStorage.getItem('username');
     if (username) {
         document.querySelector('.greeting').textContent = "Hi, " + username;
     } else {
-        console.log("Username not found in localStorage.");
-        // Fetch username from Firestore if not found in localStorage
         auth.onAuthStateChanged((user) => {
             if (user) {
                 const userDocRef = doc(db, 'users', user.uid);
@@ -26,20 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("No user is signed in.");
             }
         });
-    } 
+    }
 
-    // Adjust the height of the coloured layer
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
 
-    // Add event listener for the search icon
     const searchIcon = document.querySelector('.search-icon');
     searchIcon.addEventListener('click', toggleSearchBox);
 
-    // Load topics and inject them into the DOM
     loadTopics();
-
-    // Load posts and inject them into the DOM
     loadPosts();
 });
 
@@ -68,54 +60,76 @@ function loadPosts() {
     const postsContainer = document.querySelector('.posts-container');
     getDocs(collection(db, 'posts'))
         .then(postsSnapshot => {
-            postsSnapshot.forEach(doc => {
-                const post = doc.data();
-                const postBox = document.createElement('div');
-                postBox.classList.add('posts-rectangular-box');
-                postBox.dataset.postId = doc.id; // Store the post ID in a data attribute
-
-                // Extract and decode the file name
-                let fileName = "";
-                if (post.fileUrl) {
-                    const url = new URL(post.fileUrl);
-                    fileName = decodeURIComponent(url.pathname.split('/').pop().split('%2F').pop());
+            const userPromises = {};
+            postsSnapshot.forEach(postDoc => {
+                const post = postDoc.data();
+                if (!userPromises[post.username]) {
+                    const userDocRef = doc(db, 'users', post.userId);
+                    userPromises[post.username] = getDoc(userDocRef);
                 }
-
-                postBox.innerHTML = `
-                    <div class="profile-image"></div>
-                    <div class="posts-text-container">
-                        <div class="title-and-username">
-                            <p class="posts-title">${post.title}</p>
-                            <p class="posts-username">${post.username}</p>
-                        </div>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    <p class="posts-text-description">${post.description}</p>
-                    ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
-                    ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file">${fileName}</a>` : ''}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon ${post.likedByUser ? 'liked' : ''}">
-                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
-                    </svg>
-                    <p class="votes">${post.likes} votes</p>
-                    <a href="viewSpecificPost.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                    </a>
-                    <p class="comments">${post.commentCount} comments</p>
-                `;
-                postsContainer.appendChild(postBox);
             });
 
-            // Add event listener for like icons using event delegation
-            postsContainer.addEventListener('click', function (event) {
-                if (event.target.closest('.posts-like-icon')) {
-                    const icon = event.target.closest('.posts-like-icon');
-                    const postId = icon.closest('.posts-rectangular-box').dataset.postId;
-                    toggleLike(icon, postId);
-                }
+            Promise.all(Object.values(userPromises)).then(userSnapshots => {
+                const usersData = {};
+                userSnapshots.forEach(userDoc => {
+                    if (userDoc.exists()) {
+                        const userData = userDoc.data();
+                        usersData[userData.username] = userData;
+                    }
+                });
+
+                postsSnapshot.forEach(postDoc => {
+                    const post = postDoc.data();
+                    const postBox = document.createElement('div');
+                    postBox.classList.add('posts-rectangular-box');
+                    postBox.dataset.postId = postDoc.id;
+
+                    let fileName = "";
+                    if (post.fileUrl) {
+                        const url = new URL(post.fileUrl);
+                        fileName = decodeURIComponent(url.pathname.split('/').pop().split('%2F').pop());
+                    }
+
+                    const user = usersData[post.username];
+                    const userAvatar = user ? user.imagepath : '../resources/default-avatar.png';
+
+                    console.log(`User: ${post.username}, Avatar: ${userAvatar}`); // Debugging line to check the fetched avatar URL
+
+                    postBox.innerHTML = `
+                        <div class="profile-image" style="background-image: url(${userAvatar});"></div>
+                        <div class="posts-text-container">
+                            <div class="title-and-username">
+                                <p class="posts-title">${post.title}</p>
+                                <p class="posts-username">${post.username}</p>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <p class="posts-text-description">${post.description}</p>
+                        ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
+                        ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file">${fileName}</a>` : ''}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon ${post.likedByUser ? 'liked' : ''}">
+                            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                        </svg>
+                        <p class="votes">${post.likes} votes</p>
+                        <a href="viewSpecificPost.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </a>
+                        <p class="comments">${post.commentCount} comments</p>
+                    `;
+                    postsContainer.appendChild(postBox);
+                });
+
+                postsContainer.addEventListener('click', function (event) {
+                    if (event.target.closest('.posts-like-icon')) {
+                        const icon = event.target.closest('.posts-like-icon');
+                        const postId = icon.closest('.posts-rectangular-box').dataset.postId;
+                        toggleLike(icon, postId);
+                    }
+                });
             });
         })
         .catch(error => {
@@ -151,7 +165,9 @@ function toggleLike(icon, postId) {
 function adjustColouredLayerHeight() {
     const colouredLayer = document.querySelector('.coloured-layer');
     const postsContainer = document.querySelector('.posts-container');
-    colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
+    if (colouredLayer && postsContainer) {
+        colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
+    }
 }
 
 function toggleSearchBox() {
@@ -161,15 +177,13 @@ function toggleSearchBox() {
     const searchBox = document.querySelector('.search-box');
     const searchCloseIcon = document.querySelector('.search-close-icon');
 
-    if (searchBox.style.display === 'none') {
-        // Show search elements
+    if (searchBox && searchBox.style.display === 'none') {
         greeting.style.display = 'none';
         findTopics.style.display = 'none';
         searchIcon.style.display = 'none';
         searchBox.style.display = 'block';
         searchCloseIcon.style.display = 'block';
     } else {
-        // Hide search elements
         greeting.style.display = 'block';
         findTopics.style.display = 'block';
         searchIcon.style.display = 'block';
@@ -179,7 +193,9 @@ function toggleSearchBox() {
 }
 
 const searchCloseIcon = document.querySelector('.search-close-icon');
-searchCloseIcon.addEventListener('click', toggleSearchBox);
+if (searchCloseIcon) {
+    searchCloseIcon.addEventListener('click', toggleSearchBox);
+}
 
 function truncateText() {
     const descriptions = document.querySelectorAll('.posts-text-description');

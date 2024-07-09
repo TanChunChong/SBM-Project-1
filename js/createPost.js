@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const createdAt = new Date().toISOString(); // Get the current date and time as ISO string
-            const customID = `${username}_${title}_${createdAt}`; // Create custom ID
+            const customID = `${createdAt}_${title}_${username}`; // Create custom ID
 
             const postDocRef = doc(db, "posts", customID); // Reference to the document with custom ID
 
