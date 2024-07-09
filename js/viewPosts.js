@@ -70,6 +70,9 @@ function displayTopicTitle() {
     if (!topicID) {
         // Retrieve topic ID from localStorage if not found in URL parameters
         topicID = localStorage.getItem('currentTopicID');
+    } else {
+        // Store topic ID in localStorage
+        localStorage.setItem('currentTopicID', topicID);
     }
     const topicTitleElement = document.querySelector('.topic-title');
     if (topicID) {
