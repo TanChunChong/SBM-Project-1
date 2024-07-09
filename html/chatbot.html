@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/chatbot.css">
+    <link rel="stylesheet" href="../css/chatbotDark.css" id="dark-mode-stylesheet" disabled>
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
+    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
+    <link rel="manifest" href="../manifest.json">
+    <title>Chatbot</title>
+</head>
+<body>
+    <a href="home.html" class="back-link">
+        <img src="../resources/backArrow.svg" alt="Back" class="back-icon">
+    </a>
+    <p class="chatbotTitle">AI chatbot</p>
+    <div class="navbar">
+        <a href="../html/home.html"><img src="../resources/home.svg" alt="Home"></a>
+        <a href="../html/friendsList.html"><img src="../resources/Friends.svg" alt="Friends"></a>
+        <a href="../html/discussionBoard.html"><img src="../resources/Discussion_Board.svg" alt="Discussion Board"></a>
+        <a href="../html/settings.html"><img src="../resources/settings.svg" alt="Settings"></a>
+    </div>
+    <div class="chat-container">
+        <!-- Chat messages will go here -->
+    </div>
+    <div class="input-container">
+        <input type="text" class="chat-input" placeholder="Type your message...">
+        <img src="../resources/send.svg" alt="Send" class="send-button">
+    </div>
+    <script type="module" src="../js/chatbot.js"></script>
+    <script src="../js/darkMode.js"></script>
+    <script src="../js/pullSW.js"></script>
+</body>
+</html>
