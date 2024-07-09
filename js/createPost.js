@@ -1,5 +1,5 @@
 import { auth, db, storage } from './firebaseConfig.js';
-import { collection, doc, setDoc, getDocs, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, doc, setDoc, getDocs, updateDoc, increment, runTransaction } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -93,8 +93,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const createdAt = new Date().toISOString(); // Get the current date and time as ISO string
-            const customID = `${createdAt}_${title}_${username}`; // Create custom ID
 
+            // Increment the postsID counter and get the new ID
+            const newPostID = await runTransaction(db, async (transaction) => {
+                const counterDocRef = doc(db, 'counters', 'postsCounter');
+                const counterDoc = await transaction.get(counterDocRef);
+
+                if (!counterDoc.exists()) {
+                    throw "Counter document does not exist!";
+                }
+
+                const currentPostID = counterDoc.data().currentPostID;
+                const newPostID = currentPostID + 1;
+                transaction.update(counterDocRef, { currentPostID: newPostID });
+
+                return newPostID;
+            });
+
+            const customID = `${createdAt}_${title}_${username}`; // Create custom ID
             const postDocRef = doc(db, "posts", customID); // Reference to the document with custom ID
 
             await setDoc(postDocRef, {
@@ -108,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 createdAt: createdAt,
                 likes: 0,
                 commentCount: 0,
-                comments: []
+                postsID: newPostID // Assign the new postsID
             });
 
             console.log("Document added with custom ID:", customID);

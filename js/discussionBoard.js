@@ -1,5 +1,5 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username');
@@ -58,7 +58,9 @@ function loadTopics() {
 
 function loadPosts() {
     const postsContainer = document.querySelector('.posts-container');
-    getDocs(collection(db, 'posts'))
+    const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    
+    getDocs(postsQuery)
         .then(postsSnapshot => {
             const userPromises = {};
             postsSnapshot.forEach(postDoc => {
@@ -77,6 +79,8 @@ function loadPosts() {
                         usersData[userData.username] = userData;
                     }
                 });
+
+                postsContainer.innerHTML = ''; // Clear existing posts before appending
 
                 postsSnapshot.forEach(postDoc => {
                     const post = postDoc.data();
