@@ -97,8 +97,6 @@ function loadPosts() {
                     const user = usersData[post.username];
                     const userAvatar = user ? user.imagepath : '../resources/default-avatar.png';
 
-                    console.log(`User: ${post.username}, Avatar: ${userAvatar}`); // Debugging line to check the fetched avatar URL
-
                     postBox.innerHTML = `
                         <div class="profile-image" style="background-image: url(${userAvatar});"></div>
                         <div class="posts-text-container">
@@ -117,7 +115,7 @@ function loadPosts() {
                             <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                         </svg>
                         <p class="votes">${post.likes} votes</p>
-                        <a href="viewSpecificPost.html">
+                        <a href="viewSpecificPost.html?postId=${post.postsID}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
@@ -181,8 +179,8 @@ function toggleLike(icon, postId) {
     });
 }
 
-function toggleSaved(icon, postId) {
-    const postDocRef = doc(db, 'posts', postId);
+function toggleSaved(icon, postsId) {
+    const postDocRef = doc(db, 'posts', postsId);
     getDoc(postDocRef).then(docSnapshot => {
         if (docSnapshot.exists()) {
             const isSaved = icon.getAttribute('data-saved') === 'true';

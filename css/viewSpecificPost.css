@@ -17,11 +17,12 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #ccc;
     position: relative;
     top: 0;
     left: 0;
     z-index: 1;
+    background-size: cover;
+    background-position: center;
 }
 
 .mainPosts-title,
@@ -196,4 +197,9 @@ body {
     cursor: pointer;
     border: none;
     margin-bottom: calc(-15px);
+}
+
+.vertical-saved-icon.saved {
+    stroke: blue;
+    fill: blue;
 }
