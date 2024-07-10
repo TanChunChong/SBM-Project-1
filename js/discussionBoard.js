@@ -107,12 +107,12 @@ function loadPosts() {
                                 <p class="posts-username">${post.username}</p>
                             </div>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon" data-saved="false">
                             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                         </svg>
                         <p class="posts-text-description">${post.description}</p>
                         ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
-                        ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file">${fileName}</a>` : ''}
+                        ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file" data-url="${post.fileUrl}" data-filename="${fileName}">${fileName}</a>` : ''}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon ${post.likedByUser ? 'liked' : ''}">
                             <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                         </svg>
@@ -132,6 +132,21 @@ function loadPosts() {
                         const icon = event.target.closest('.posts-like-icon');
                         const postId = icon.closest('.posts-rectangular-box').dataset.postId;
                         toggleLike(icon, postId);
+                    }
+
+                    if (event.target.closest('.vertical-saved-icon')) {
+                        const icon = event.target.closest('.vertical-saved-icon');
+                        const postId = icon.closest('.posts-rectangular-box').dataset.postId;
+                        toggleSaved(icon, postId);
+                    }
+
+                    if (event.target.closest('.download-file')) {
+                        event.preventDefault();
+                        const link = event.target.closest('.download-file');
+                        const url = link.getAttribute('data-url');
+                        const fileName = link.getAttribute('data-filename');
+                        console.log(`Downloading file from: ${url} with filename: ${fileName}`); // Debugging line
+                        fetchAndDownloadFile(url, fileName);
                     }
                 });
             });
@@ -157,6 +172,27 @@ function toggleLike(icon, postId) {
                 })
                 .catch(error => {
                     console.error('Error updating likes: ', error);
+                });
+        } else {
+            console.error('No such post!');
+        }
+    }).catch(error => {
+        console.error('Error getting post:', error);
+    });
+}
+
+function toggleSaved(icon, postId) {
+    const postDocRef = doc(db, 'posts', postId);
+    getDoc(postDocRef).then(docSnapshot => {
+        if (docSnapshot.exists()) {
+            const isSaved = icon.getAttribute('data-saved') === 'true';
+            updateDoc(postDocRef, { saved: !isSaved })
+                .then(() => {
+                    icon.setAttribute('data-saved', !isSaved);
+                    icon.classList.toggle('saved', !isSaved);
+                })
+                .catch(error => {
+                    console.error('Error updating saved status: ', error);
                 });
         } else {
             console.error('No such post!');
@@ -227,4 +263,20 @@ function truncateText() {
             description.appendChild(readMore);
         }
     });
+}
+
+function fetchAndDownloadFile(url, fileName) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => console.error('Error downloading file:', error));
 }

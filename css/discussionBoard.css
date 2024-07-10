@@ -315,3 +315,8 @@ h2 {
     background-position: center;
 }
 
+.vertical-saved-icon.saved {
+    stroke: blue;
+    fill: blue;
+}
+
