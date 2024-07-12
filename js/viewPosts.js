@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     displayTopicTitle();
     updateCreatePostLink();
     loadPosts();
+
+    const searchInput = document.querySelector('.viewPost-search-box');
+    searchInput.addEventListener('input', filterPostsByTitle);
 });
 
 function adjustColouredLayerHeight() {
@@ -185,6 +188,22 @@ function loadPosts() {
         .catch(error => {
             console.error('Error fetching posts: ', error);
         });
+}
+
+function filterPostsByTitle() {
+    const searchInput = document.querySelector('.viewPost-search-box');
+    const query = searchInput.value.toLowerCase();
+    const postsContainer = document.querySelector('.viewPosts-container');
+    const postBoxes = postsContainer.querySelectorAll('.posts-rectangular-box');
+
+    postBoxes.forEach(postBox => {
+        const titleElement = postBox.querySelector('.posts-title');
+        if (titleElement.textContent.toLowerCase().includes(query)) {
+            postBox.style.display = 'block';
+        } else {
+            postBox.style.display = 'none';
+        }
+    });
 }
 
 function toggleLike(icon, postId) {
