@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig.js';
-import { collection, query, where, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, query, where, getDocs, doc, getDoc, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -7,18 +7,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (postId) {
         loadPostDetails(postId);
+        loadComments(postId);
     }
 
     const commentInput = document.querySelector('.comment-input');
     const sendIcon = document.querySelector('.send-icon');
 
     // Function to handle sending the comment
-    function sendComment() {
+    async function sendComment() {
         const comment = commentInput.value.trim();
         if (comment !== '') {
-            // Your logic to handle sending the comment
-            console.log('Comment sent:', comment);
-            commentInput.value = ''; // Clear input after sending
+            const username = localStorage.getItem('username'); // Get username from local storage
+
+            if (!username) {
+                console.error('No username found in local storage');
+                return;
+            }
+
+            try {
+                // Add the comment to Firestore
+                const newComment = {
+                    comment: comment,
+                    likes: 0,
+                    postsID: postId,
+                    username: username
+                };
+
+                await addDoc(collection(db, 'comments'), newComment);
+                console.log('Comment added:', newComment);
+
+                // Clear input after sending
+                commentInput.value = '';
+                loadComments(postId); // Reload comments after adding new one
+            } catch (error) {
+                console.error('Error adding comment:', error);
+            }
         }
     }
 
@@ -60,6 +83,41 @@ async function loadUserDetails(userId) {
         }
     } catch (error) {
         console.error('Error getting user:', error);
+        return null;
+    }
+}
+
+async function loadComments(postId) {
+    try {
+        const commentsQuery = query(collection(db, 'comments'), where('postsID', '==', postId));
+        const querySnapshot = await getDocs(commentsQuery);
+        const commentsContainer = document.querySelector('.replies-container');
+
+        commentsContainer.innerHTML = ''; // Clear existing comments
+
+        for (const commentDoc of querySnapshot.docs) {
+            const comment = commentDoc.data();
+            const user = await loadUserDetailsByUsername(comment.username);
+            displayComment(comment, user, commentDoc.id);
+        }
+    } catch (error) {
+        console.error('Error loading comments:', error);
+    }
+}
+
+async function loadUserDetailsByUsername(username) {
+    try {
+        const usersQuery = query(collection(db, 'users'), where('username', '==', username));
+        const querySnapshot = await getDocs(usersQuery);
+
+        if (!querySnapshot.empty) {
+            return querySnapshot.docs[0].data();
+        } else {
+            console.error('No user found with username:', username);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error getting user details by username:', error);
         return null;
     }
 }
@@ -114,6 +172,60 @@ function displayPost(post, user, postDocId) {
         likesCountElement.textContent = `${post.likes} votes`;
         await updateLikesCount(postDocId, post.likes);
     });
+}
+
+function displayComment(comment, user, commentDocId) {
+    const commentsContainer = document.querySelector('.replies-container');
+    const userAvatar = user ? user.imagepath : '../resources/bear.png';
+
+    const commentHTML = `
+        <div class="replies-rectangular-box">
+            <div class="profile-image" style="background-image: url('${userAvatar}');"></div>
+            <div class="replies-text-container">
+                <div class="title-and-username">
+                    <p class="replies-username">${comment.username}</p>
+                </div>
+            </div>
+            <p class="posts-text-description">${comment.comment}</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up comment-like-icon" data-id="${commentDocId}">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <p class="votes">${comment.likes} votes</p>
+        </div>
+    `;
+
+    commentsContainer.innerHTML += commentHTML;
+
+    // Add event listener for like icon
+    const likeIcon = commentsContainer.querySelector(`.comment-like-icon[data-id="${commentDocId}"]`);
+    const likesCountElement = likeIcon.nextElementSibling;
+
+    likeIcon.addEventListener('click', async () => {
+        likeIcon.classList.toggle('liked');
+        if (likeIcon.classList.contains('liked')) {
+            likeIcon.style.stroke = 'blue';
+            likeIcon.style.fill = 'blue';
+            comment.likes += 1;
+        } else {
+            likeIcon.style.stroke = '';
+            likeIcon.style.fill = '';
+            comment.likes -= 1;
+        }
+        likesCountElement.textContent = `${comment.likes} votes`;
+        await updateCommentLikesCount(commentDocId, comment.likes);
+    });
+}
+
+async function updateCommentLikesCount(commentDocId, newLikesCount) {
+    try {
+        const commentRef = doc(db, 'comments', commentDocId);
+        await updateDoc(commentRef, {
+            likes: newLikesCount
+        });
+        console.log('Comment likes count updated successfully');
+    } catch (error) {
+        console.error('Error updating comment likes count:', error);
+    }
 }
 
 async function updateLikesCount(postDocId, newLikesCount) {
