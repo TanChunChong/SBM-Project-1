@@ -203,3 +203,9 @@ body {
     stroke: blue;
     fill: blue;
 }
+
+.bookmarked {
+    fill: blue;
+    stroke: blue;
+}
+

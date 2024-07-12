@@ -37,11 +37,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Comment added:', newComment);
 
                 // Update comment count in posts collection
-                await updateCommentCount(postId);
+                const newCommentCount = await updateCommentCount(postId);
 
                 // Clear input after sending
                 commentInput.value = '';
                 loadComments(postId); // Reload comments after adding new one
+
+                // Update the comment count in the DOM
+                document.querySelector('.comments').textContent = `${newCommentCount} comments`;
+
             } catch (error) {
                 console.error('Error adding comment:', error);
             }
@@ -55,11 +59,24 @@ document.addEventListener('DOMContentLoaded', function () {
             const querySnapshot = await getDocs(commentsQuery);
             const commentCount = querySnapshot.size;
 
-            const postDocRef = doc(db, 'posts', postId);
-            await updateDoc(postDocRef, {
-                commentCount: commentCount
-            });
-            console.log('Comment count updated successfully');
+            const postsQuery = query(collection(db, 'posts'), where('postsID', '==', parseInt(postId)));
+            const querySnapshotPosts = await getDocs(postsQuery);
+
+            if (!querySnapshotPosts.empty) {
+                const postDoc = querySnapshotPosts.docs[0];
+                const postDocRef = doc(db, 'posts', postDoc.id);
+
+                await updateDoc(postDocRef, {
+                    commentCount: commentCount
+                });
+
+                console.log('Comment count updated successfully in post');
+            } else {
+                console.error('No post found with postsID:', postId);
+            }
+
+            return commentCount;
+
         } catch (error) {
             console.error('Error updating comment count:', error);
         }
@@ -206,7 +223,7 @@ function displayPost(post, user, postDocId) {
 
     const likeIcon = postContainer.querySelector('.feather-thumbs-up');
     const likesCountElement = postContainer.querySelector('.votes');
-    
+
     likeIcon.addEventListener('click', async () => {
         likeIcon.classList.toggle('liked');
         if (likeIcon.classList.contains('liked')) {
@@ -221,7 +238,14 @@ function displayPost(post, user, postDocId) {
         likesCountElement.textContent = `${post.likes} votes`;
         await updateLikesCount(postDocId, post.likes);
     });
+
+    const bookmarkIcon = postContainer.querySelector('.feather-bookmark');
+    
+    bookmarkIcon.addEventListener('click', () => {
+        bookmarkIcon.classList.toggle('bookmarked');
+    });
 }
+
 
 function displayComment(comment, user) {
     const commentsContainer = document.querySelector('.replies-container');
