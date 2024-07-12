@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const commentInput = document.querySelector('.comment-input');
     const sendIcon = document.querySelector('.send-icon');
 
-    // Function to handle sending the comment
     async function sendComment() {
         const comment = commentInput.value.trim();
         if (comment !== '') {
@@ -25,25 +24,25 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             try {
-                // Add the comment to Firestore
                 const newComment = {
                     comment: comment,
                     likes: "0",
                     postsID: postId,
-                    username: username
+                    username: username,
+                    commentID: ""
                 };
 
-                await addDoc(collection(db, 'comments'), newComment);
+                const docRef = await addDoc(collection(db, 'comments'), newComment);
+                newComment.commentID = docRef.id; // Assign the document ID as commentID
+                await updateDoc(docRef, { commentID: docRef.id });
+
                 console.log('Comment added:', newComment);
 
-                // Update comment count in posts collection
                 const newCommentCount = await updateCommentCount(postId);
 
-                // Clear input after sending
                 commentInput.value = '';
-                loadComments(postId); // Reload comments after adding new one
+                await loadComments(postId); // Reload comments after adding new one
 
-                // Update the comment count in the DOM
                 document.querySelector('.comments').textContent = `${newCommentCount} comments`;
 
             } catch (error) {
@@ -52,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Function to update comment count in posts collection
     async function updateCommentCount(postId) {
         try {
             const commentsQuery = query(collection(db, 'comments'), where('postsID', '==', postId));
@@ -66,9 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const postDoc = querySnapshotPosts.docs[0];
                 const postDocRef = doc(db, 'posts', postDoc.id);
 
-                await updateDoc(postDocRef, {
-                    commentCount: commentCount
-                });
+                await updateDoc(postDocRef, { commentCount: commentCount });
 
                 console.log('Comment count updated successfully in post');
             } else {
@@ -82,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Event listener for click on the send icon
     sendIcon.addEventListener('click', sendComment);
 });
 
@@ -134,16 +129,17 @@ async function loadComments(postId) {
 
         for (const commentDoc of querySnapshot.docs) {
             const comment = commentDoc.data();
+            comment.id = commentDoc.id; // Add the document ID to the comment object
             const user = await loadUserDetailsByUsername(comment.username);
             displayComment(comment, user);
         }
 
-        // Update the replies count in the DOM
         const commentCount = querySnapshot.size;
         document.querySelector('.replies-text').textContent = `Replies (${commentCount})`;
 
-        // Update the comment count in Firestore
         await updateCommentCountInPost(postId, commentCount);
+        attachLikeEventListeners(); // Attach event listeners to like buttons
+
     } catch (error) {
         console.error('Error loading comments:', error);
     }
@@ -158,9 +154,7 @@ async function updateCommentCountInPost(postId, commentCount) {
             const postDoc = querySnapshot.docs[0];
             const postDocRef = doc(db, 'posts', postDoc.id);
 
-            await updateDoc(postDocRef, {
-                commentCount: commentCount
-            });
+            await updateDoc(postDocRef, { commentCount: commentCount });
 
             console.log('Comment count updated successfully in post');
         } else {
@@ -246,7 +240,6 @@ function displayPost(post, user, postDocId) {
     });
 }
 
-
 function displayComment(comment, user) {
     const commentsContainer = document.querySelector('.replies-container');
     const userAvatar = user ? user.imagepath : '../resources/default-avatar.png';
@@ -258,43 +251,52 @@ function displayComment(comment, user) {
                 <div class="title-and-username">
                     <p class="replies-username">${comment.username}</p>
                 </div>
+                <p class="posts-text-description">${comment.comment}</p>
             </div>
-            <p class="posts-text-description">${comment.comment}</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up savedPosts-like-icon">
-                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
-            </svg>
-            <p class="votes">${comment.likes} votes</p>
+            <div class="likes-section">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up savedPosts-like-icon" data-comment-id="${comment.commentID}">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                </svg>
+                <p class="votes">${comment.likes} votes</p>
+            </div>
         </div>
     `;
 
     commentsContainer.innerHTML += commentHTML;
+}
 
-    // Add like functionality to comments
-    const likeIcon = commentsContainer.querySelector('.replies-rectangular-box:last-child .feather-thumbs-up');
-    const likesCountElement = commentsContainer.querySelector('.replies-rectangular-box:last-child .votes');
+function attachLikeEventListeners() {
+    const likeIcons = document.querySelectorAll('.feather-thumbs-up');
 
-    likeIcon.addEventListener('click', async () => {
-        likeIcon.classList.toggle('liked');
-        if (likeIcon.classList.contains('liked')) {
-            likeIcon.style.stroke = 'blue';
-            likeIcon.style.fill = 'blue';
-            comment.likes = parseInt(comment.likes) + 1;
-        } else {
-            likeIcon.style.stroke = '';
-            likeIcon.style.fill = '';
-            comment.likes = parseInt(comment.likes) - 1;
-        }
-        likesCountElement.textContent = `${comment.likes} votes`;
-        await updateCommentLikes(comment.id, comment.likes);
+    likeIcons.forEach(likeIcon => {
+        const commentId = likeIcon.getAttribute('data-comment-id');
+        const likesCountElement = likeIcon.nextElementSibling;
+
+        console.log(`Setting event listener for comment ID: ${commentId}`); // Debugging statement
+
+        likeIcon.addEventListener('click', async () => {
+            console.log(`Like icon clicked for comment ID: ${commentId}`); // Debugging statement
+            likeIcon.classList.toggle('liked');
+            let likesCount = parseInt(likesCountElement.textContent);
+            if (likeIcon.classList.contains('liked')) {
+                likeIcon.style.stroke = 'blue';
+                likeIcon.style.fill = 'blue';
+                likesCount += 1;
+            } else {
+                likeIcon.style.stroke = '';
+                likeIcon.style.fill = '';
+                likesCount -= 1;
+            }
+            likesCountElement.textContent = `${likesCount} votes`;
+            await updateCommentLikes(commentId, likesCount);
+        });
     });
 }
 
 async function updateLikesCount(postDocId, newLikesCount) {
     try {
         const postRef = doc(db, 'posts', postDocId);
-        await updateDoc(postRef, {
-            likes: newLikesCount
-        });
+        await updateDoc(postRef, { likes: newLikesCount });
         console.log('Likes count updated successfully');
     } catch (error) {
         console.error('Error updating likes count:', error);
@@ -304,10 +306,8 @@ async function updateLikesCount(postDocId, newLikesCount) {
 async function updateCommentLikes(commentId, newLikesCount) {
     try {
         const commentRef = doc(db, 'comments', commentId);
-        await updateDoc(commentRef, {
-            likes: newLikesCount.toString()
-        });
-        console.log('Comment likes count updated successfully');
+        await updateDoc(commentRef, { likes: newLikesCount.toString() });
+        console.log(`Comment likes count updated successfully for comment ID: ${commentId}`);
     } catch (error) {
         console.error('Error updating comment likes count:', error);
     }
