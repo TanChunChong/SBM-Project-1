@@ -99,8 +99,9 @@ function loadPosts() {
 
             postsSnapshot.forEach(postDoc => {
                 const post = postDoc.data();
+                console.log(`Loaded post: ${postDoc.id}`, post); // Debugging line
                 if (post.topicID === topicID) {
-                    filteredPosts.push(post);
+                    filteredPosts.push({ id: postDoc.id, ...post });
                     if (!userPromises[post.username]) {
                         const userDocRef = doc(db, 'users', post.userId);
                         userPromises[post.username] = getDoc(userDocRef);
@@ -123,6 +124,7 @@ function loadPosts() {
                     const postBox = document.createElement('div');
                     postBox.classList.add('posts-rectangular-box');
                     postBox.dataset.postId = post.id;
+                    console.log(`Appending post with ID: ${post.id}`); // Debugging line
 
                     let fileName = "";
                     if (post.fileUrl) {
@@ -141,7 +143,7 @@ function loadPosts() {
                                 <p class="posts-username">${post.username}</p>
                             </div>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon" data-saved="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon" data-saved="${post.saved}">
                             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                         </svg>
                         <p class="posts-text-description">${post.description}</p>
@@ -151,7 +153,7 @@ function loadPosts() {
                             <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                         </svg>
                         <p class="votes">${post.likes} votes</p>
-                        <a href="viewSpecificPost.html?postId=${post.postsID}">
+                        <a href="viewSpecificPost.html?postId=${post.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
@@ -207,6 +209,7 @@ function filterPostsByTitle() {
 }
 
 function toggleLike(icon, postId) {
+    console.log(`Toggling like for post ID: ${postId}`); // Debugging line
     const postDocRef = doc(db, 'posts', postId);
     getDoc(postDocRef).then(docSnapshot => {
         if (docSnapshot.exists()) {
@@ -231,8 +234,9 @@ function toggleLike(icon, postId) {
     });
 }
 
-function toggleSaved(icon, postsId) {
-    const postDocRef = doc(db, 'posts', postsId);
+function toggleSaved(icon, postId) {
+    console.log(`Toggling saved for post ID: ${postId}`); // Debugging line
+    const postDocRef = doc(db, 'posts', postId);
     getDoc(postDocRef).then(docSnapshot => {
         if (docSnapshot.exists()) {
             const isSaved = icon.getAttribute('data-saved') === 'true';

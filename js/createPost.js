@@ -3,6 +3,18 @@ import { collection, doc, setDoc, getDocs, updateDoc, increment, runTransaction 
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    const backLink = document.getElementById('back-link');
+    const urlParams = new URLSearchParams(window.location.search);
+    const topicID = urlParams.get('topicID');
+
+    if (topicID) {
+        backLink.href = `viewPosts.html?topicID=${encodeURIComponent(topicID)}`;
+    } else {
+        backLink.href = 'viewPosts.html'; // Fallback in case topicID is not found
+    }
+
+    // Existing code...
+
     // Select DOM elements
     const postForm = document.getElementById('create-post-form');
     const postButton = document.querySelector('.post-button');
@@ -60,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Extract topicID from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
         const topicID = urlParams.get('topicID');
         if (!topicID) {
             alert('Topic ID not found. Please go back and select a topic.');
