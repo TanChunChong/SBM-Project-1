@@ -121,10 +121,36 @@ async function loadComments(postId) {
             displayComment(comment, user);
         }
 
-        // Update the replies count
-        document.querySelector('.replies-text').textContent = `Replies (${querySnapshot.size})`;
+        // Update the replies count in the DOM
+        const commentCount = querySnapshot.size;
+        document.querySelector('.replies-text').textContent = `Replies (${commentCount})`;
+
+        // Update the comment count in Firestore
+        await updateCommentCountInPost(postId, commentCount);
     } catch (error) {
         console.error('Error loading comments:', error);
+    }
+}
+
+async function updateCommentCountInPost(postId, commentCount) {
+    try {
+        const postsQuery = query(collection(db, 'posts'), where('postsID', '==', parseInt(postId)));
+        const querySnapshot = await getDocs(postsQuery);
+
+        if (!querySnapshot.empty) {
+            const postDoc = querySnapshot.docs[0];
+            const postDocRef = doc(db, 'posts', postDoc.id);
+
+            await updateDoc(postDocRef, {
+                commentCount: commentCount
+            });
+
+            console.log('Comment count updated successfully in post');
+        } else {
+            console.error('No post found with postsID:', postId);
+        }
+    } catch (error) {
+        console.error('Error updating comment count in post:', error);
     }
 }
 
