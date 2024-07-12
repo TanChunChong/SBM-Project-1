@@ -270,6 +270,10 @@ function attachLikeEventListeners() {
 
     likeIcons.forEach(likeIcon => {
         const commentId = likeIcon.getAttribute('data-comment-id');
+        if (!commentId) {
+            console.error('No comment ID found for like icon', likeIcon);
+            return;
+        }
         const likesCountElement = likeIcon.nextElementSibling;
 
         console.log(`Setting event listener for comment ID: ${commentId}`); // Debugging statement
@@ -305,6 +309,9 @@ async function updateLikesCount(postDocId, newLikesCount) {
 
 async function updateCommentLikes(commentId, newLikesCount) {
     try {
+        if (!commentId) {
+            throw new Error('Comment ID is null or undefined');
+        }
         const commentRef = doc(db, 'comments', commentId);
         await updateDoc(commentRef, { likes: newLikesCount.toString() });
         console.log(`Comment likes count updated successfully for comment ID: ${commentId}`);

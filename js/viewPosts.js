@@ -1,39 +1,20 @@
+import { db } from './firebaseConfig.js';
+import { collection, getDocs, doc, getDoc, updateDoc, query } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
     window.addEventListener('resize', adjustColouredLayerHeight);
 
-    const likeIcons = document.querySelectorAll('.posts-like-icon');
-    const savedIcons = document.querySelectorAll('.vertical-saved-icon');
-
-    likeIcons.forEach(function (icon) {
-        icon.addEventListener('click', function () {
-            toggleFillColor(icon);
-        });
-    });
-
-    savedIcons.forEach(function (icon) {
-        icon.addEventListener('click', function () {
-            toggleFillColor(icon);
-        });
-    });
-
     truncateText();
     displayTopicTitle();
-    updateCreatePostLink(); // Call the function to update the create post link
+    updateCreatePostLink();
+    loadPosts();
 });
 
 function adjustColouredLayerHeight() {
     const colouredLayer = document.querySelector('.viewPost-coloured-layer');
     const postsContainer = document.querySelector('.viewPosts-container');
     colouredLayer.style.height = `calc(${postsContainer.offsetTop + postsContainer.offsetHeight}px - 70%)`;
-}
-
-function toggleFillColor(icon) {
-    if (icon.style.fill === 'lightblue') {
-        icon.style.fill = '#fff';
-    } else {
-        icon.style.fill = 'lightblue';
-    }
 }
 
 function truncateText() {
@@ -94,32 +75,176 @@ function updateCreatePostLink() {
     }
 }
 
-// Replace this with actual server-side handling logic
-const downloadFile = async () => {
-    try {
-        // Simulating server-side storage logic
-        const fileData = "Sample file content"; // What is inside the text file
-        const blob = new Blob([fileData], { type: 'application/octet-stream' });
+function loadPosts() {
+    const postsContainer = document.querySelector('.viewPosts-container');
+    const urlParams = new URLSearchParams(window.location.search);
+    const topicID = urlParams.get('topicID');
 
-        // Create a link element to trigger download
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'sample.txt'; // Replace with actual file name
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    } catch (error) {
-        console.error('Error downloading file:', error);
+    if (!topicID) {
+        console.error('No topicID specified in the URL.');
+        return;
     }
-};
 
-// Event for clicking on download-file class
-document.addEventListener('DOMContentLoaded', function () {
-    const downloadLinks = document.querySelectorAll('.download-file');
-    downloadLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            downloadFile();
+    const postsQuery = query(
+        collection(db, 'posts')
+    );
+
+    getDocs(postsQuery)
+        .then(postsSnapshot => {
+            const userPromises = {};
+            const filteredPosts = [];
+
+            postsSnapshot.forEach(postDoc => {
+                const post = postDoc.data();
+                if (post.topicID === topicID) {
+                    filteredPosts.push(post);
+                    if (!userPromises[post.username]) {
+                        const userDocRef = doc(db, 'users', post.userId);
+                        userPromises[post.username] = getDoc(userDocRef);
+                    }
+                }
+            });
+
+            Promise.all(Object.values(userPromises)).then(userSnapshots => {
+                const usersData = {};
+                userSnapshots.forEach(userDoc => {
+                    if (userDoc.exists()) {
+                        const userData = userDoc.data();
+                        usersData[userData.username] = userData;
+                    }
+                });
+
+                postsContainer.innerHTML = ''; // Clear existing posts before appending
+
+                filteredPosts.forEach(post => {
+                    const postBox = document.createElement('div');
+                    postBox.classList.add('posts-rectangular-box');
+                    postBox.dataset.postId = post.id;
+
+                    let fileName = "";
+                    if (post.fileUrl) {
+                        const url = new URL(post.fileUrl);
+                        fileName = decodeURIComponent(url.pathname.split('/').pop().split('%2F').pop());
+                    }
+
+                    const user = usersData[post.username];
+                    const userAvatar = user ? user.imagepath : '../resources/default-avatar.png';
+
+                    postBox.innerHTML = `
+                        <div class="profile-image" style="background-image: url(${userAvatar});"></div>
+                        <div class="posts-text-container">
+                            <div class="title-and-username">
+                                <p class="posts-title">${post.title}</p>
+                                <p class="posts-username">${post.username}</p>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon" data-saved="false">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <p class="posts-text-description">${post.description}</p>
+                        ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
+                        ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file" data-url="${post.fileUrl}" data-filename="${fileName}">${fileName}</a>` : ''}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up posts-like-icon ${post.likedByUser ? 'liked' : ''}">
+                            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                        </svg>
+                        <p class="votes">${post.likes} votes</p>
+                        <a href="viewSpecificPost.html?postId=${post.postsID}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </a>
+                        <p class="comments">${post.commentCount} comments</p>
+                    `;
+                    postsContainer.appendChild(postBox);
+                });
+
+                postsContainer.addEventListener('click', function (event) {
+                    if (event.target.closest('.posts-like-icon')) {
+                        const icon = event.target.closest('.posts-like-icon');
+                        const postId = icon.closest('.posts-rectangular-box').dataset.postId;
+                        toggleLike(icon, postId);
+                    }
+
+                    if (event.target.closest('.vertical-saved-icon')) {
+                        const icon = event.target.closest('.vertical-saved-icon');
+                        const postId = icon.closest('.posts-rectangular-box').dataset.postId;
+                        toggleSaved(icon, postId);
+                    }
+
+                    if (event.target.closest('.download-file')) {
+                        event.preventDefault();
+                        const link = event.target.closest('.download-file');
+                        const url = link.getAttribute('data-url');
+                        const fileName = link.getAttribute('data-filename');
+                        console.log(`Downloading file from: ${url} with filename: ${fileName}`); // Debugging line
+                        fetchAndDownloadFile(url, fileName);
+                    }
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching posts: ', error);
         });
+}
+
+function toggleLike(icon, postId) {
+    const postDocRef = doc(db, 'posts', postId);
+    getDoc(postDocRef).then(docSnapshot => {
+        if (docSnapshot.exists()) {
+            const postData = docSnapshot.data();
+            const currentLikes = postData.likes || 0;
+            const newLikes = icon.classList.contains('liked') ? currentLikes - 1 : currentLikes + 1;
+
+            updateDoc(postDocRef, { likes: newLikes })
+                .then(() => {
+                    icon.classList.toggle('liked');
+                    const likesCountElement = icon.nextElementSibling;
+                    likesCountElement.textContent = `${newLikes} votes`;
+                })
+                .catch(error => {
+                    console.error('Error updating likes: ', error);
+                });
+        } else {
+            console.error('No such post!');
+        }
+    }).catch(error => {
+        console.error('Error getting post:', error);
     });
-});
+}
+
+function toggleSaved(icon, postsId) {
+    const postDocRef = doc(db, 'posts', postsId);
+    getDoc(postDocRef).then(docSnapshot => {
+        if (docSnapshot.exists()) {
+            const isSaved = icon.getAttribute('data-saved') === 'true';
+            updateDoc(postDocRef, { saved: !isSaved })
+                .then(() => {
+                    icon.setAttribute('data-saved', !isSaved);
+                    icon.classList.toggle('saved', !isSaved);
+                })
+                .catch(error => {
+                    console.error('Error updating saved status: ', error);
+                });
+        } else {
+            console.error('No such post!');
+        }
+    }).catch(error => {
+        console.error('Error getting post:', error);
+    });
+}
+
+function fetchAndDownloadFile(url, fileName) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => console.error('Error downloading file:', error));
+}
