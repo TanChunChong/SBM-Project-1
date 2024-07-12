@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/friendsList.css">
     <link rel="stylesheet" href="../css/friendsListDark.css" id="dark-mode-stylesheet" disabled>
     <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
     <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
-    <title>App Bar Example</title>
+    <title>Friends List</title>
 </head>
 <body>
     <div class="app-bar" id="appBar">
@@ -23,74 +24,13 @@
             <a href="userProfile.html" id="profileLink">
                 <div class="profile-picture" id="profilePicture"></div>
             </a>
-            <div class="search-bar" id="searchBar">
+            <div class="search-bar" id="searchBar" style="display: none;">
                 <input type="text" placeholder="Search" id="searchInput">
                 <img src="../resources/close.svg" alt="Close" id="closeIcon">
             </div>
         </div>
     </div>
-    <div class="friends-list" id="friendsList">
-        <div class="friend-item">
-            <img src="../resources/bear.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">John Doe</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/cat.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Jane Smith</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/chicken.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Alice Johnson</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/dog.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Michael Brown</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/giraffe.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Emily Davis</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/gorilla.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Daniel Wilson</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/panda.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Sophia Moore</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/rabbit.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">James Anderson</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/cat.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Chloe Thompson</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/chicken.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Liam Martinez</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/dog.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Olivia Garcia</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-        <div class="friend-item">
-            <img src="../resources/giraffe.png" alt="Profile" class="friend-pic">
-            <div class="friend-name">Noah Martinez</div>
-            <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
-        </div>
-    </div>
+    <div class="friends-list" id="friendsList"></div>
     <div class="navbar">
         <a href="../html/home.html">
             <img src="../resources/home.svg" alt="Home">
@@ -105,7 +45,9 @@
             <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
-    <script src="../js/friendsList.js"></script>
+    <script type="module" src="../js/friendsList.js"></script>
     <script src="../js/darkMode.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
+    <script type="module" src="../js/pullSW.js"></script>
 </body>
 </html>

@@ -1,74 +1,64 @@
-.pfp{
+.pfp {
     display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 7px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 7px;
 }
 
-body{
-    height: 881px;
+.bodyContainer {
+    margin-bottom: 10vh;
 }
 
-.container {
+.profileContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #FFFFFF ;
-    height: 500px;
+    background-color: #FFFFFF;
     padding-left: 35px;
     padding-right: 35px;
     border: solid 2px #707070;
     border-radius: 20px;
     width: 72%;
-    margin-left: 20px;
+    margin: 20px auto;
+    min-height: 500px
 }
-
 
 .name {
     font-size: 25px;
     padding-bottom: 10px;
     padding-top: 10px;
-    /* position: relative;
-    bottom: 5px; */
-
 }
 
 .date {
     font-size: 15px;
-    /* position: relative;
-    bottom: 0px; */
 }
 
 .description {
     font-size: 18px;
-    /* position: relative;
-    top:20px; */
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
     height: auto;
-
 }
 
-.title{
+.title {
     height: 10px;
     font-size: 25px;
     padding-top: 30px;
-    /* position: relative;
-    top:60px; */
 }
 
-.overview{
+.overview {
     position: relative;
     top: 45px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.card{
+
+.card {
     background-color: #fffced;
-    border: solid 2px #707070;  
+    border: solid 2px #707070;
     height: 75px;
     width: 150px;
     border-radius: 13px;
@@ -76,47 +66,59 @@ body{
     margin: 5px;
 }
 
-.big{
+.big {
     font-size: 25px;
     position: relative;
     bottom: 18px;
 }
-.small{
+
+.small {
     font-size: 12px;
     position: relative;
     bottom: 18px;
 }
 
-.svg-image{
+.svg-image {
     padding-top: 7px;
     padding-right: 90px;
 }
-.svg-image3{
+
+.svg-image3 {
     padding-top: 7px;
     padding-right: 90px;
     padding-bottom: 8px;
 }
 
-
-.svg-image2{
+.svg-image2 {
     padding-top: 5px;
     padding-right: 90px;
 }
 
-.button {
+.primaryButton,
+.acceptButton {
     background-color: #BAC4FF;
-    border: solid 2px #707070 ;
-    color: black;   
+    border: solid 2px #707070;
+    color: black;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;    
-    position: fixed;
-    bottom: 65px;
+    font-size: 20px;
     border-radius: 16px;
     width: 362px;
-  }
+    margin: 20px 0;
+}
 
-.fill{
+.acceptButton {
+    margin-top: calc(-10px);
+}
+
+.fill {
     height: 35px;
+}
+
+.friendButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }

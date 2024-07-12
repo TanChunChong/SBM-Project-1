@@ -10,65 +10,71 @@
     <link rel="manifest" href="../manifest.json">
 </head>
 <body>
-    <div class="header">
+    <div class="bodyContainer">
+        <div class="header">
+            <a href="../html/friendsList.html">
+                <img src="../resources/backArrow.svg" alt="Back Arrow" width="40" height="40">
+            </a>
+        </div>
+        <img class="pfp" src="../resources/superhero.png" alt="Profile Picture" height="185" width="185">
+        <div class="profileContainer">
+            <div class="name">
+                Friend Username
+            </div>
+            <div class="date">
+                Joined January 2024
+            </div>
+            <div class="description">
+                Strategies without tactics is the slowest route to victory. Tactics without Strategy is the noise before defeat - Friend About Me. 
+            </div>
+            <div class="title">Overview</div>
+            <div class="overview">
+                <div class="card">
+                    <img class="svg-image" src="../resources/zap.svg" alt="Streak">
+                    <div class="big">64</div>
+                    <div class="small">Day Streak</div>
+                </div>
+                <div class="card">
+                    <img class="svg-image3" src="../resources/battery-charging.svg" alt="Reviews">
+                    <div class="big">64</div>
+                    <div class="small">Reviews</div>
+                </div>
+            </div>
+            <div class="overview">
+                <div class="card">
+                    <img class="svg-image2" src="../resources/award.svg" alt="Points - Qns">
+                    <div class="big">64</div>
+                    <div class="small">Points - Qns</div>
+                </div>
+                <div class="card">
+                    <img class="svg-image2" src="../resources/award.svg" alt="Points - Tests">
+                    <div class="big">64</div>
+                    <div class="small">Points - Tests</div>
+                </div>
+            </div>
+        </div>  
+        <div class="friendButtons">
+            <input type="button" class="primaryButton" id="primaryButton" value="Send friend request">
+            <input type="button" class="acceptButton" id="acceptButton" value="Accept friend request">
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="../html/home.html">
+          <img src="../resources/home.svg" alt="Home">
+        </a>
+        <a href="../html/friendsList.html">
+          <img src="../resources/Friends.svg" alt="Friends">
+        </a>
+        <a href="../html/discussionBoard.html">
+          <img src="../resources/Discussion_Board.svg" alt="Discussion Board">
+        </a>
         <a href="../html/settings.html">
-            <img src="../resources/arrow-left.svg" alt="Back Arrow" width="40" height="40">
+          <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
-    <img class="pfp" src="../resources/superhero.png" alt="SVG Example" height="185" width="185">
-    <div class="container">
-        <div class="name">
-            Friend Username
-        </div>
-        <div class="date">
-            Joined January 2024
-        </div>
-        <div class="description">
-            Strategies without tactics is the slowest route to victory. Tactics without Strategy is the noise before defeat- Friend About Me. 
-        </div>
-        <div class="title">Overview</div>
-        <div class="overview">
-            <div class="card">
-                <img class="svg-image" src="../resources/zap.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Day Streak</div><br>
-            </div>
-            <div class="card">
-                <img class="svg-image3" src="../resources/battery-charging.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Reviews</div><br>
-            </div>
-        </div>
-        <div class="overview">
-            <div class="card">
-                <img class="svg-image2" src="../resources/award.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Points - Qns</div><br>
-
-            </div>
-            <div class="card">
-                <img class="svg-image2" src="../resources/award.svg" alt="SVG Example">
-                <div class="big">64</div>
-                <div class="small">Points - Tests</div><br>
-
-            </div>
-    </div>
-    
-        <input type="button" class="button" value="Add Friend/Remove Friend">
-        
-        <div class="navbar">
-            <a href="../html/home.html">
-              <img src="../resources/home.svg" alt="Home">
-            </a>
-            <a href="../html/friendsList.html">
-              <img src="../resources/Friends.svg" alt="Friends">
-            </a>
-            <a href="../html/discussionBoard.html">
-              <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
-            </a>
-            <a href="../html/settings.html">
-              <img src="../resources/settings.svg" alt="Settings">
-            </a>
-        </div>
+    <script type="module" src="../js/friendprofile.js"></script>
+    <script src="../js/darkMode.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
+    <script type="module" src="../js/pullSW.js"></script>
 </body>
 </html>
