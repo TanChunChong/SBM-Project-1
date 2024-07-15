@@ -21,29 +21,7 @@ let email;
 
 document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
-    const username = localStorage.getItem('username');
-    if (username) {
-        document.querySelector('.greeting').textContent = "Hi, " + username;
-    } else {
-        console.log("Username not found in localStorage.");
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                const userDocRef = doc(db, 'users', user.uid);
-                getDoc(userDocRef).then((doc) => {
-                    if (doc.exists()) {
-                        const userData = doc.data();
-                        document.querySelector('.greeting').textContent = "Hi, " + userData.username;
-                    } else {
-                        console.log("No such document!");
-                    }
-                }).catch((error) => {
-                    console.log("Error getting document:", error);
-                });
-            } else {
-                console.log("No user is signed in.");
-            }
-        });
-    } 
+    
 
     MyModules();
 });
@@ -108,4 +86,3 @@ async function MyModules() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', MyModules);
