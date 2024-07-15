@@ -1,5 +1,5 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs, doc, getDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc, updateDoc, addDoc, deleteDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username');
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     searchIcon.addEventListener('click', toggleSearchBox);
 
     loadTopics();
-    loadPosts();
+    loadSavedPostsAndThenPosts();
 
     const searchInput = document.querySelector('.search-box');
     searchInput.addEventListener('input', filterPostsByTitle);
@@ -59,10 +59,24 @@ function loadTopics() {
         });
 }
 
-function loadPosts() {
+async function loadSavedPostsAndThenPosts() {
+    const username = localStorage.getItem('username');
+    if (!username) {
+        console.error('Username is not available in localStorage');
+        return;
+    }
+
+    const savesQuery = query(collection(db, 'saves'), where('userWhoSavedPost', '==', username));
+    const savedPostsSnapshot = await getDocs(savesQuery);
+    const savedPosts = savedPostsSnapshot.docs.map(doc => doc.data().postsID);
+
+    loadPosts(savedPosts);
+}
+
+function loadPosts(savedPosts) {
     const postsContainer = document.querySelector('.posts-container');
     const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
-    
+
     getDocs(postsQuery)
         .then(postsSnapshot => {
             const userPromises = {};
@@ -100,6 +114,10 @@ function loadPosts() {
                     const user = usersData[post.username];
                     const userAvatar = user ? user.imagepath : '../resources/default-avatar.png';
 
+                    const saved = savedPosts.includes(post.postsID);
+                    const savedClass = saved ? 'saved' : '';
+                    const savedData = saved ? 'true' : 'false';
+
                     postBox.innerHTML = `
                         <div class="profile-image" style="background-image: url(${userAvatar});"></div>
                         <div class="posts-text-container">
@@ -108,7 +126,7 @@ function loadPosts() {
                                 <p class="posts-username">${post.username}</p>
                             </div>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon" data-saved="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon ${savedClass}" data-saved="${savedData}">
                             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                         </svg>
                         <p class="posts-text-description">${post.description}</p>
@@ -153,7 +171,7 @@ function loadPosts() {
             });
         })
         .catch(error => {
-            console.error('Error fetching posts: ', error);
+            console.error('Error fetching posts:', error);
         });
 }
 
@@ -202,15 +220,68 @@ function toggleSaved(icon, postsId) {
     const postDocRef = doc(db, 'posts', postsId);
     getDoc(postDocRef).then(docSnapshot => {
         if (docSnapshot.exists()) {
+            const postData = docSnapshot.data();
+            console.log('Post Data:', postData); // Debugging line
             const isSaved = icon.getAttribute('data-saved') === 'true';
-            updateDoc(postDocRef, { saved: !isSaved })
-                .then(() => {
-                    icon.setAttribute('data-saved', !isSaved);
-                    icon.classList.toggle('saved', !isSaved);
-                })
-                .catch(error => {
-                    console.error('Error updating saved status: ', error);
+            const username = localStorage.getItem('username');
+
+            if (!username) {
+                console.error('Username is not available in localStorage');
+                return;
+            }
+
+            if (!postData.userId) {
+                console.error('User ID is not available in postData', postData);
+                return;
+            }
+
+            const saveData = {
+                commentCount: postData.commentCount,
+                createdAt: postData.createdAt,
+                description: postData.description,
+                fileUrl: postData.fileUrl,
+                imageUrl: postData.imageUrl,
+                likes: postData.likes,
+                postsID: postData.postsID,
+                title: postData.title,
+                topicID: postData.topicID,
+                userID: postData.userId,
+                userWhoSavedPost: username,
+                username: postData.username,
+            };
+
+            console.log('Save Data:', saveData); // Debugging line
+
+            if (!isSaved) {
+                // Save the post
+                addDoc(collection(db, 'saves'), saveData)
+                    .then(() => {
+                        icon.setAttribute('data-saved', 'true');
+                        icon.classList.add('saved');
+                    })
+                    .catch(error => {
+                        console.error('Error saving post:', error);
+                    });
+            } else {
+                // Unsave the post
+                const savesQuery = query(
+                    collection(db, 'saves'),
+                    where('userWhoSavedPost', '==', username),
+                    where('postsID', '==', postData.postsID)
+                );
+                getDocs(savesQuery).then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        deleteDoc(doc.ref).then(() => {
+                            icon.setAttribute('data-saved', 'false');
+                            icon.classList.remove('saved');
+                        }).catch(error => {
+                            console.error('Error unsaving post:', error);
+                        });
+                    });
+                }).catch(error => {
+                    console.error('Error finding saved post:', error);
                 });
+            }
         } else {
             console.error('No such post!');
         }

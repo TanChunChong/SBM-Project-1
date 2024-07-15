@@ -1,5 +1,5 @@
-import { db } from './firebaseConfig.js';
-import { collection, query, where, getDocs, doc, getDoc, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { auth, db } from './firebaseConfig.js';
+import { collection, getDocs, query, where, doc, getDoc, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const commentInput = document.querySelector('.comment-input');
     const sendIcon = document.querySelector('.send-icon');
+
+    sendIcon.addEventListener('click', sendComment);
 
     async function sendComment() {
         const comment = commentInput.value.trim();
@@ -77,20 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error updating comment count:', error);
         }
     }
-
-    sendIcon.addEventListener('click', sendComment);
 });
 
 async function loadPostDetails(postId) {
     try {
-        console.log("Fetching post with postsID:", postId); // Debugging statement
         const postsQuery = query(collection(db, 'posts'), where('postsID', '==', parseInt(postId)));
         const querySnapshot = await getDocs(postsQuery);
 
         if (!querySnapshot.empty) {
             const postDoc = querySnapshot.docs[0];
             const post = postDoc.data();
-            console.log("Post data retrieved:", post); // Debugging statement
             const user = await loadUserDetails(post.userId); // Fetch user details by userId
             displayPost(post, user, postDoc.id);
         } else {
@@ -107,7 +105,6 @@ async function loadUserDetails(userId) {
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
             const userData = userDoc.data();
-            console.log("User data retrieved:", userData); // Debugging statement
             return userData;
         } else {
             console.error('No such user!');
@@ -187,8 +184,6 @@ function displayPost(post, user, postDocId) {
     const fileName = post.fileUrl ? decodeURIComponent(new URL(post.fileUrl).pathname.split('/').pop().split('%2F').pop()) : '';
     const userAvatar = user ? user.imagepath : '../resources/default-avatar.png';
 
-    console.log("Displaying post with user avatar:", userAvatar); // Debugging statement
-
     postContainer.innerHTML = `
         <div class="profile-image" style="background-image: url('${userAvatar}');"></div>
         <div class="posts-text-container">
@@ -198,9 +193,9 @@ function displayPost(post, user, postDocId) {
             </div>
             <p class="posts-text-description">${post.description}</p>
             ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="sampleImage">` : ''}
-            ${post.fileUrl ? `<a href="${post.fileUrl}" class="download-file">${fileName}</a>` : ''}
+            ${post.fileUrl ? `<a href="#" class="download-file" data-url="${post.fileUrl}" data-filename="${fileName}">${fileName}</a>` : ''}
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon" data-saved="false" data-post-id="${postDocId}">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
         <div class="likes-section">
@@ -235,9 +230,92 @@ function displayPost(post, user, postDocId) {
 
     const bookmarkIcon = postContainer.querySelector('.feather-bookmark');
     
-    bookmarkIcon.addEventListener('click', () => {
-        bookmarkIcon.classList.toggle('bookmarked');
+    bookmarkIcon.addEventListener('click', async () => {
+        const isSaved = bookmarkIcon.getAttribute('data-saved') === 'true';
+        const username = localStorage.getItem('username');
+        
+        if (!username) {
+            console.error('Username is not available in localStorage');
+            return;
+        }
+
+        if (isSaved) {
+            // Unsave the post
+            const savesQuery = query(
+                collection(db, 'saves'),
+                where('userWhoSavedPost', '==', username),
+                where('postsID', '==', post.postsID)
+            );
+            const querySnapshot = await getDocs(savesQuery);
+            querySnapshot.forEach(async (doc) => {
+                await deleteDoc(doc.ref);
+                bookmarkIcon.setAttribute('data-saved', 'false');
+                bookmarkIcon.classList.remove('saved');
+            });
+        } else {
+            // Save the post
+            const saveData = {
+                commentCount: post.commentCount,
+                createdAt: post.createdAt,
+                description: post.description,
+                fileUrl: post.fileUrl,
+                imageUrl: post.imageUrl,
+                likes: post.likes,
+                postsID: post.postsID,
+                title: post.title,
+                topicID: post.topicID,
+                userID: post.userId,
+                userWhoSavedPost: username,
+                username: post.username,
+            };
+            await addDoc(collection(db, 'saves'), saveData);
+            bookmarkIcon.setAttribute('data-saved', 'true');
+            bookmarkIcon.classList.add('saved');
+        }
     });
+
+    // Check if the post is already saved for the user
+    checkIfPostIsSaved(post.postsID);
+}
+
+async function checkIfPostIsSaved(postId) {
+    const username = localStorage.getItem('username');
+    if (!username) {
+        console.error('Username is not available in localStorage');
+        return;
+    }
+
+    const savesQuery = query(collection(db, 'saves'), where('userWhoSavedPost', '==', username), where('postsID', '==', postId));
+    const querySnapshot = await getDocs(savesQuery);
+
+    if (!querySnapshot.empty) {
+        const bookmarkIcon = document.querySelector('.feather-bookmark');
+        bookmarkIcon.setAttribute('data-saved', 'true');
+        bookmarkIcon.classList.add('saved');
+    }
+}
+
+async function updateLikesCount(postDocId, newLikesCount) {
+    try {
+        const postRef = doc(db, 'posts', postDocId);
+        await updateDoc(postRef, { likes: newLikesCount });
+        console.log('Likes count updated successfully');
+    } catch (error) {
+        console.error('Error updating likes count:', error);
+    }
+}
+
+async function updateCommentLikes(commentId, newLikesCount) {
+    try {
+        if (!commentId) {
+            throw new Error('Comment ID is null or undefined');
+        }
+        const commentRef = doc(db, 'comments', commentId);
+        await updateDoc(commentRef, { likes: newLikesCount.toString() });
+        console.log(`Comment likes count updated successfully for comment ID: ${commentId}`);
+    } catch (error) {
+        console.error('Error updating comment likes count:', error);
+    }
 }
 
 function displayComment(comment, user) {
@@ -276,10 +354,7 @@ function attachLikeEventListeners() {
         }
         const likesCountElement = likeIcon.nextElementSibling;
 
-        console.log(`Setting event listener for comment ID: ${commentId}`); // Debugging statement
-
         likeIcon.addEventListener('click', async () => {
-            console.log(`Like icon clicked for comment ID: ${commentId}`); // Debugging statement
             likeIcon.classList.toggle('liked');
             let likesCount = parseInt(likesCountElement.textContent);
             if (likeIcon.classList.contains('liked')) {
@@ -295,27 +370,4 @@ function attachLikeEventListeners() {
             await updateCommentLikes(commentId, likesCount);
         });
     });
-}
-
-async function updateLikesCount(postDocId, newLikesCount) {
-    try {
-        const postRef = doc(db, 'posts', postDocId);
-        await updateDoc(postRef, { likes: newLikesCount });
-        console.log('Likes count updated successfully');
-    } catch (error) {
-        console.error('Error updating likes count:', error);
-    }
-}
-
-async function updateCommentLikes(commentId, newLikesCount) {
-    try {
-        if (!commentId) {
-            throw new Error('Comment ID is null or undefined');
-        }
-        const commentRef = doc(db, 'comments', commentId);
-        await updateDoc(commentRef, { likes: newLikesCount.toString() });
-        console.log(`Comment likes count updated successfully for comment ID: ${commentId}`);
-    } catch (error) {
-        console.error('Error updating comment likes count:', error);
-    }
 }
