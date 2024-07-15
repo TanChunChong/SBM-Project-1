@@ -6,14 +6,9 @@
     padding: 0;
 }
 
-body {
+body { 
     font-family: 'Poppins', sans-serif;
     background-color: #FFFCED;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    position: relative; /* Ensures the go-back button stays in place */
     overflow: hidden; /* Prevent body scroll */
 }
 
@@ -30,7 +25,6 @@ body {
 
 .bodyContainer {
     padding: 20px;
-    width: 90%;
     max-width: 500px;
     text-align: center;
     margin-top: 60px; /* Increased margin to move the container lower */
@@ -110,16 +104,13 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: auto; /* Make subjects scrollable */
     max-height: 400px; /* Set a max height for the subjects container */
 }
 
 .subject {
     display: flex;
-    align-items: center;
-    padding: 10px; /* Padding around the text */
-    border-radius: 10px; /* Rounded corners */
-    position: relative; /* Add relative positioning to subject */
+    align-items: left;
+    margin: 10px 0;
     background-color: #FFFCED; /* Add background color to subjects */
 }
 
@@ -137,8 +128,9 @@ h1 {
 }
 
 .subject-icon img {
-    width: 80%; /* Adjust icon size within container */
-    height: auto;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
 }
 
 .subject-info {
@@ -203,33 +195,4 @@ h1 {
     cursor: pointer;
     width: 100%; /* Make button full width */
     margin-bottom: 30px;
-}
-
-/* Media query for iPhone 14 Pro Max dimensions */
-@media only screen and (max-width: 430px) and (max-height: 932px) {
-    .icons {
-        top: 10px; /* Adjust top position for iPhone 14 Pro Max */
-    }
-
-    .container {
-        margin-top: 80px; /* Adjust margin to move the container lower */
-    }
-
-    .materials-image {
-        border-radius: 20px; /* Increase border radius for the image */
-    }
-
-    .go-back i {
-        font-size: 36px; /* Further increase size */
-    }
-
-    .icons .icon {
-        width: 36px; /* Further increase width */
-        height: 36px; /* Further increase height */
-    }
-
-    .profile-icon {
-        width: 45px; /* Further increase width */
-        height: 45px; /* Further increase height */
-    }
 }

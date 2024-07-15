@@ -28,6 +28,7 @@ document.querySelector('.login-form').addEventListener('submit', async function 
             localStorage.setItem('username', userData.username);
             localStorage.setItem('description', userData.description);
             localStorage.setItem('userId', user.uid);
+            localStorage.setItem('email', userData.email);
             // Redirect to home.html
             window.location.href = 'home.html';
         } else {
