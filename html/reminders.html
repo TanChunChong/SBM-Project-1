@@ -12,12 +12,16 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <a href="home.html" class="go-back">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <div class="title">Reminders</div>
-        </header>
+        <div class="app-bar" id="appBar">
+            <div class="app-bar-left">
+                <a href="home.html">
+                    <img src="../resources/backArrow.svg" alt="Back" class="icon" id="backArrow">
+                </a>
+            </div>
+            <div class="app-bar-right">
+                <div class="search-bar" id="searchBar" style="display: none;"></div>
+            </div>
+        </div>
         <div class="date-selector">
             <div class="current-date">
                 <a href="newReminders.html">

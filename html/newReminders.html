@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/newReminders.css">
+    <link rel="stylesheet" href="../css/newRemindersDark.css" id="dark-mode-stylesheet" disabled>
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
+    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
     <title>New Reminders</title>
 </head>
 <body>
-    <header>
-        <a href="reminders.html" class="go-back">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-        <div class="title">Calendar</div>
-    </header>
+    <div class="app-bar" id="appBar">
+        <div class="app-bar-left">
+            <a href="home.html">
+                <img src="../resources/backArrow.svg" alt="Back" class="icon" id="backArrow">
+            </a>
+        </div>
+        <div class="app-bar-right">
+            <div class="search-bar" id="searchBar" style="display: none;"></div>
+        </div>
+    </div>
     <div class="container">
         <div class="calendar">
             <div class="current-date">

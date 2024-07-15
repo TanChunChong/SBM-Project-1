@@ -21,13 +21,25 @@ body {
     padding-bottom: 60px; /* Space for the navbar */
 }
 
-header {
+.app-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 70px;
     background-color: #BAC4FF;
-    padding: 10px;
-    height: 50px;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.app-bar-left {
+    display: flex;
+    align-items: center;
+}
+
+.app-bar-right {
+    display: flex;
+    align-items: center;
 }
 
 .go-back {
@@ -164,26 +176,6 @@ header {
     font-size: 14px;
     font-weight: 700;
     text-align: center;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-around;
-    background-color: #FFFFFF;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    border-top: 1px solid #ddd;
-}
-
-.navbar a {
-    display: inline-block;
-}
-
-.navbar img {
-    width: 30px;
-    height: 30px;
 }
 
 /* Media query for iPhone 14 Pro Max dimensions */
