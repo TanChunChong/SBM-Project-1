@@ -22,11 +22,11 @@ let email;
 document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
     subjectSettings();
+    console.log(email);
 });
 
 async function subjectSettings() {
     const subjectsContainer = document.querySelector('.subjects');
-    subjectsContainer.innerHTML = ''; // Clear any existing content
     try {
         const userModulesSnapshot = await getDocs(collection(db, 'userModules'));
         const userModules = [];

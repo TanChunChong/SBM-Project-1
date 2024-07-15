@@ -22,8 +22,8 @@ let email;
 document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
     
-
-    MyModules();
+    console.log(email);
+    
 });
 
 async function MyModules() {
