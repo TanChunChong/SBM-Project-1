@@ -106,7 +106,6 @@ async function loadPosts() {
 
             postsSnapshot.forEach(postDoc => {
                 const post = postDoc.data();
-                console.log(`Loaded post: ${postDoc.id}`, post); // Debugging line
                 if (post.topicID === topicID) {
                     filteredPosts.push({ id: postDoc.id, ...post });
                     if (!userPromises[post.username]) {
@@ -131,7 +130,6 @@ async function loadPosts() {
                     const postBox = document.createElement('div');
                     postBox.classList.add('posts-rectangular-box');
                     postBox.dataset.postId = post.id;
-                    console.log(`Appending post with ID: ${post.id}`); // Debugging line
 
                     let fileName = "";
                     if (post.fileUrl) {
@@ -164,7 +162,7 @@ async function loadPosts() {
                             <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                         </svg>
                         <p class="votes">${post.likes} votes</p>
-                        <a href="viewSpecificPost.html?postId=${post.id}">
+                        <a href="viewSpecificPost.html?postId=${post.postsID}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
@@ -192,7 +190,7 @@ async function loadPosts() {
                         const link = event.target.closest('.download-file');
                         const url = link.getAttribute('data-url');
                         const fileName = link.getAttribute('data-filename');
-                        console.log(`Downloading file from: ${url} with filename: ${fileName}`); // Debugging line
+                        console.log(`Downloading file from: ${url} with filename: ${fileName}`);
                         fetchAndDownloadFile(url, fileName);
                     }
                 });
@@ -220,7 +218,7 @@ function filterPostsByTitle() {
 }
 
 function toggleLike(icon, postId) {
-    console.log(`Toggling like for post ID: ${postId}`); // Debugging line
+    console.log(`Toggling like for post ID: ${postId}`);
     const postDocRef = doc(db, 'posts', postId);
     getDoc(postDocRef).then(docSnapshot => {
         if (docSnapshot.exists()) {
@@ -250,7 +248,7 @@ function toggleSaved(icon, postsId) {
     getDoc(postDocRef).then(docSnapshot => {
         if (docSnapshot.exists()) {
             const postData = docSnapshot.data();
-            console.log('Post Data:', postData); // Debugging line
+            console.log('Post Data:', postData);
             const isSaved = icon.getAttribute('data-saved') === 'true';
             const username = localStorage.getItem('username');
 
@@ -279,7 +277,7 @@ function toggleSaved(icon, postsId) {
                 username: postData.username,
             };
 
-            console.log('Save Data:', saveData); // Debugging line
+            console.log('Save Data:', saveData);
 
             if (!isSaved) {
                 // Save the post
