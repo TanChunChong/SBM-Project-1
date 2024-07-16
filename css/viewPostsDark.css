@@ -2,17 +2,20 @@ body {
     background-color: #333;
 }
 
-.search-icon {
+.back-icon {
     filter: invert(100%) brightness(100%) sepia(0%) saturate(100%) hue-rotate(0deg) contrast(100%);
 }
 
-.heading h2,
-.find-topics,
-.popular-topics,
-.greeting {
+.topic-title {
     color: white;
 }
 
-.coloured-layer {
+.viewPost-coloured-layer {
     background-color: #4D4D4D4D;
+}
+
+.create-post-btn {
+    background-color: #707070;
+    color: white;
+    border-color: grey;
 }
