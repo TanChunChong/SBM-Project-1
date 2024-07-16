@@ -1,21 +1,6 @@
 import { auth, db } from './firebaseConfig.js';
 import { collection, getDocs, addDoc, doc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
-const inProgressButton = document.getElementById('inProgressButton');
-const leaderboardButton = document.getElementById('leaderboardButton');
-const personaliseButton = document.getElementById('personaliseButton');
-
-inProgressButton.addEventListener('click', () => {
-    window.location.href = 'studyMaterials.html';
-}); 
-
-leaderboardButton.addEventListener('click', () => {
-    window.location.href = 'leaderboard1.html';
-});
-
-personaliseButton.addEventListener('click', () => {
-    window.location.href = 'subjectSettings.html';
-}); 
 
 let email;
 

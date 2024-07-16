@@ -1,29 +1,18 @@
 import { auth, db } from './firebaseConfig.js';
 import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
-const inProgressButton = document.getElementById('inProgressButton');
-const leaderboardButton = document.getElementById('leaderboardButton');
-const personaliseButton = document.getElementById('personaliseButton');
 
-inProgressButton.addEventListener('click', () => {
-    window.location.href = 'studyMaterials.html';
-});
-
-leaderboardButton.addEventListener('click', () => {
-    window.location.href = 'leaderboard1.html';
-});
-
-personaliseButton.addEventListener('click', () => {
-    window.location.href = 'subjectSettings.html';
-});
+console.log("hello");
 
 let email;
 
 document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
     subjectSettings();
-    console.log(email);
+    console.log("hello");
+    
 });
+
 
 async function subjectSettings() {
     const subjectsContainer = document.querySelector('.subjects');
@@ -36,7 +25,7 @@ async function subjectSettings() {
                 userModules.push(doc.data());
             }
         });
-
+        console.log("not working");
         if (userModules.length > 0) {
             const modulesSnapshot = await getDocs(collection(db, 'module'));
             modulesSnapshot.forEach((moduleDoc) => {
@@ -49,7 +38,6 @@ async function subjectSettings() {
                     const imgElement = document.createElement('img');
                     imgElement.classList.add('icon');
                     imgElement.src = data.moduleImgPath;
-                    imgElement.alt = `Image for ${data.moduleName}`;
 
                     const infoDiv = document.createElement('div');
                     infoDiv.classList.add('details');
@@ -73,3 +61,4 @@ async function subjectSettings() {
     }
 }
 
+console.log("line 80");
