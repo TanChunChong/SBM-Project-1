@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig.js';
-import { collection, getDocs, doc, getDoc, updateDoc, addDoc, query, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc, updateDoc, addDoc, query, where, deleteDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
