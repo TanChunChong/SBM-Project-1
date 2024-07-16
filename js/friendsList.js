@@ -73,7 +73,7 @@ function initializeApp(user) {
 
     if (searchInput) {
         searchInput.addEventListener("input", debounce(async () => {
-            await performSearch(searchInput.value.trim().toLowerCase(), currentUserName, friendsList);
+            await performSearch(searchInput.value.trim(), currentUserName, friendsList);
         }, 300));
     } else {
         console.error('Search input not found');

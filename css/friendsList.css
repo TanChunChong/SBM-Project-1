@@ -29,14 +29,15 @@ body {
 
 .icon {
     width: 41px;
+    margin-left: 20px; /* Add spacing between icons */
 }
 
 #backArrow {
     margin-top: 5px;
+    margin-left: 0; /* Ensure the back arrow aligns correctly */
 }
 
 #searchIcon {
-    margin-left: 20px;
     cursor: pointer;
 }
 
