@@ -1,0 +1,27 @@
+body {
+    background-color: #333;
+}
+
+.back-link {
+    filter: invert(100%) brightness(100%) sepia(0%) saturate(100%) hue-rotate(0deg) contrast(100%);
+}
+
+.mainPosts-rectangular-box,
+.replies-rectangular-box {
+    background-color: white;
+ }
+
+.posts-text-description,
+.title-and-username,
+.replies-username,
+.mainPosts-title,
+.mainPosts-username,
+.votes,
+.comments {
+    color: black
+
+}
+
+.replies-text {
+    color: white
+}
