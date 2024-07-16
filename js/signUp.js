@@ -88,7 +88,8 @@ document.querySelector('.sign-up-form').addEventListener('submit', async functio
             email: email,
             password: password, // Only for demonstration. Use hashed passwords in production.
             confirmPassword: confirmPassword,
-            imagepath: 'https://firebasestorage.googleapis.com/v0/b/sbm-the-project.appspot.com/o/avatar%2Fbear.png?alt=media&token=1c3c99e6-1351-4ad1-96ca-de40f3dee657'
+            imagepath: 'https://firebasestorage.googleapis.com/v0/b/sbm-the-project.appspot.com/o/avatar%2Fbear.png?alt=media&token=1c3c99e6-1351-4ad1-96ca-de40f3dee657',
+            userID: user.uid,
         });
 
         alert('User signed up successfully!');
