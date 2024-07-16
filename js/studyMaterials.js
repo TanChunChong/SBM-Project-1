@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
     
     console.log(email);
-    
+    MyModules();
 });
 
 async function MyModules() {
     const subjectsContainer = document.querySelector('.subjects');
-    try {
+    try {  
         const userModulesSnapshot = await getDocs(collection(db, 'userModules'));
         const userModules = [];
         
