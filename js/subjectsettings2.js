@@ -12,13 +12,27 @@ document.addEventListener('DOMContentLoaded', async function () {
     const modulesRef = collection(db, 'module');
     const modulesSnapshot = await getDocs(modulesRef);
     const moduleDropdown = document.getElementById('courses');
+    const moduleImage = document.getElementById('moduleImage');
 
     modulesSnapshot.forEach((doc) => {
         const moduleName = doc.data().moduleName;
         const option = document.createElement('option');
         option.value = moduleName;
         option.textContent = moduleName;
+        option.dataset.imgPath = doc.data().moduleImgPath;
         moduleDropdown.appendChild(option);
+    });
+
+    // Event listener for dropdown change
+    moduleDropdown.addEventListener('change', function () {
+        const selectedOption = moduleDropdown.options[moduleDropdown.selectedIndex];
+        const imgPath = selectedOption.dataset.imgPath;
+        if (imgPath) {
+            moduleImage.src = imgPath;
+            moduleImage.style.display = 'block';
+        } else {
+            moduleImage.style.display = 'none';
+        }
     });
 
     // Form submission handling
@@ -27,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         event.preventDefault();
         const selectedModule = moduleDropdown.value;
         if (selectedModule) {
-            try {
+            try { 
                 // Query to get the module document based on moduleName
                 const q = query(modulesRef, where("moduleName", "==", selectedModule));
                 const querySnapshot = await getDocs(q);
@@ -40,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const userModulesRef = collection(db, 'userModules');
                     const existingDocQuery = query(userModulesRef, where("email", "==", email), where("moduleID", "==", moduleID));
                     const existingDocSnapshot = await getDocs(existingDocQuery);
-
+                    
                     if (existingDocSnapshot.empty) {
                         // Create a new document in userModules collection with the moduleID
                         await addDoc(collection(db, 'userModules'), {
@@ -66,3 +80,4 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
 });
+
