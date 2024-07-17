@@ -1,109 +1,151 @@
 body {
-    background-color: #FFFCED;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  background-color: #fffced;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .body-page {
-    padding-bottom: 700px;
+  padding-bottom: 600px;
 }
 
 .back-link {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
 }
 
 .timer-title {
-    margin-top: 60px;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 7px;
-    margin-left: 20px;
+  margin-top: 60px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 7px;
+  margin-left: 20px;
+}
+
+.container-glass {
+  width: 75vw;
 }
 
 .timer-container {
-    position: absolute;
-    text-align: center;
-    padding-top: 20vh;
-    padding-left: 21vw;
+  position: absolute;
+  text-align: center;
+  padding-top: 20vh;
+  padding-left: 21vw;
 }
 
-.cup-container {
-    position: relative;
-    width: 238px;
-    height: 331px;
-}
-
-#steam {
-    width: 150px;
-}
-
-#cup-border {
-    width: 100%;
-    height: 100%;
-}
-
-#cup {
-    position: absolute;
-    top: 3.5%;
-    left: 2.5%;
-    width: 95%;
-    height: 92%;
-}
-
-/* Initially hide the cup-water by clipping it completely */
-#cup-water {
-    position: absolute;
-    z-index: 100;
-    fill: #4077BC;
-    clip-path: inset(331px 0 0 0); /* Initially fully clipped */
-    transition: clip-path 1s linear; /* Smooth transition for clip-path */
-    top: 3.5%;
-    left: 2.5%;
-    width: 95%;
-    height: 92%;
-}
-
-.steam-container {
-    position: relative;
-    display: inline-block;
-    width: 105px;
-    height: 105px;
-    margin-top: -120px;
-    animation: blink 1s infinite;
-    display: none;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.txt-center {
+  text-align: center;
 }
 
 .stopwatch {
-    font-size: 24px;
-    margin: 20px 0;
+  font-size: 24px;
+  margin: 20px 0;
+  margin-left: 29px;
 }
 
-#start-button, #reset-button {
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: bold;
-    width: 150px;
-    cursor: pointer;
-    border-radius: 100px;
-    border-style: solid;
-    border-color: black;
-    background-color: #fff;
-    margin-bottom: 10px;
+#toggleButton,
+#resetButton {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 150px;
+  cursor: pointer;
+  border-radius: 100px;
+  border-style: solid;
+  border-color: black;
+  background-color: #fff;
+  margin-bottom: 10px;
 }
 
 .buttons {
-    width: 50px;
-    display: block;
-    padding-left: 43px;
-    padding-bottom: 60px;
+  width: 50px;
+  display: block;
+  padding-left: 43px;
+  margin-top: calc(-30px);
+}
+
+.hourglass {
+  width: 150px;
+  height: 240px;
+  margin: 50px auto;
+  position: relative;
+  border: 5px solid #000;
+  border-radius: 10px;
+  position: relative;
+  margin-left: 38px;
+  margin-top: calc(-30px)
+}
+
+.top,
+.bottom {
+  width: 100px;
+  height: 80px;
+  background-color: #f0f0f0;
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.top {
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  top: 0;
+}
+
+.bottom {
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  bottom: 0;
+}
+
+.sand-top {
+  width: 100px;
+  height: 80px;
+  background-color: #ffd700;
+  position: absolute;
+  top: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.sand-bottom {
+  width: 100px;
+  height: 80px;
+  background-color: #ffd700;
+  position: absolute;
+  bottom: 0;
+  clip-path: polygon(50% 100%, 50% 100%, 50% 100%);
+}
+
+#stopwatch {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+  margin-left: 27px;
+}
+
+@keyframes sandFallTop {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+  100% {
+    clip-path: polygon(50% 100%, 50% 100%, 50% 100%);
+  }
+}
+
+@keyframes sandFallBottom {
+  0% {
+    clip-path: polygon(50% 100%, 50% 100%, 50% 100%);
+  }
+  100% {
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  }
+}
+
+.top,
+.sand-top,
+.bottom,
+.sand-bottom {
+  width: 150px;
+  height: 118px;
 }
