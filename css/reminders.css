@@ -131,6 +131,26 @@ body {
     justify-content: center;
 }
 
+.task-red{
+    background-color: #ff0000;
+}
+
+.task-pink{
+    background-color: #ffc0cb;
+}
+
+.task-purple{
+    background-color: #760bcc;
+}
+
+.task-blue{
+    background-color: #0147ab;
+}
+
+.task-cyan{
+    background-color: #01ffff;
+}
+
 .task-green {
     background-color: #0DFB5C;
 }
@@ -138,6 +158,7 @@ body {
 .task-yellow {
     background-color: #FBFB0A;
 }
+
 
 .task-title {
     font-size: 16px;
