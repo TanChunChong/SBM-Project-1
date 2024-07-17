@@ -59,8 +59,9 @@ body {
 .profile-pic {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background-color: #ccc; /* Placeholder color */
+    border-radius: 50%; /* Placeholder color */
+    background-size: cover;
+    background-position: center;
     margin-right: 15px; /* Space between the profile pic and content */
 }
 

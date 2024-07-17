@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign-Up Page</title>
+    <link rel="stylesheet" href="../css/signup.css" />
+    <link
+      rel="stylesheet"
+      href="../css/signupDark.css"
+      id="dark-mode-stylesheet"
+      disabled
+    />
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode" />
+    <link
+      rel="stylesheet"
+      href="../css/navBarDark.css"
+      id="nav-bar-dark-mode"
+      disabled
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="manifest" href="../manifest.json" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign-Up Page</title>
-  <link rel="stylesheet" href="../css/signup.css">
-  <link rel="stylesheet" href="../css/signupDark.css" id="dark-mode-stylesheet" disabled>
-  <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
-  <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="manifest" href="../manifest.json">
-</head>
-
-<body>
-  <div class="container">
-    <form class="sign-up-form">
-      <h1>SIGN-UP</h1>
-      <div class="input-container">
-        <i class="fa fa-user icon"></i>
-        <input type="text" placeholder="Username" required>
-      </div>
-      <div class="input-container">
-        <i class="fa fa-envelope icon"></i>
-        <input type="email" placeholder="Email" required>
-      </div>
-      <div class="input-container">
-        <i class="fa fa-lock icon"></i>
-        <input type="password" placeholder="Password" required>
-      </div>
-      <div class="input-container">
-        <i class="fa fa-lock icon"></i>
-        <input type="password" placeholder="Confirm Password" required>
-      </div>
-      <div class="checkbox-container">
-        <input type="checkbox" required>
-        <label>I read and agree to terms and conditions</label>
-      </div>
-      <button type="submit">SIGN-UP</button>
-      <p>Already have an Account? <a href="index.html">Log-in</a></p>
-    </form>
-  </div>
-  <script src="../js/jquery.js"></script>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
-  <script type="module" src="../js/firebaseConfig.js"></script>
-  <script type="module" src="../js/signUp.js"></script>
-  <script src="../js/darkMode.js"></script>
-</body>
-
+  <body>
+    <div class="container">
+      <form class="sign-up-form">
+        <h1>SIGN-UP</h1>
+        <div class="input-container">
+          <i class="fa fa-user icon"></i>
+          <input type="text" placeholder="Username" required />
+        </div>
+        <div class="input-container">
+          <i class="fa fa-envelope icon"></i>
+          <input type="email" placeholder="Email" required />
+        </div>
+        <div class="input-container">
+          <i class="fa fa-lock icon"></i>
+          <input type="password" placeholder="Password" required />
+        </div>
+        <div class="input-container">
+          <i class="fa fa-lock icon"></i>
+          <input type="password" placeholder="Confirm Password" required />
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" required />
+          <label>I read and agree to terms and conditions</label>
+        </div>
+        <button type="submit">SIGN-UP</button>
+        <p>Already have an Account? <a href="index.html">Log-in</a></p>
+      </form>
+    </div>
+    <script src="../js/jquery.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
+    <script type="module" src="../js/signUp.js"></script>
+    <script src="../js/darkMode.js"></script>
+  </body>
 </html>

@@ -1,200 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/notifications.css">
-    <link rel="stylesheet" href="../css/notificationsDark.css" id="dark-mode-stylesheet" disabled>
-    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
-    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
-    <link rel="manifest" href="../manifest.json">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/notifications.css" />
+    <link
+      rel="stylesheet"
+      href="../css/notificationsDark.css"
+      id="dark-mode-stylesheet"
+      disabled
+    />
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode" />
+    <link
+      rel="stylesheet"
+      href="../css/navBarDark.css"
+      id="nav-bar-dark-mode"
+      disabled
+    />
+    <link rel="manifest" href="../manifest.json" />
     <title>Notifications</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-bar">
-        <div class="app-bar-items">
-            <a href="home.html" class="back-link">
-                <img src="../resources/backArrow.svg" alt="Back" class="close-button">
-            </a>
-            <span class="title">Notifications</span>
-        </div>
+      <div class="app-bar-items">
+        <a href="home.html" class="back-link">
+          <img
+            src="../resources/backArrow.svg"
+            alt="Back"
+            class="close-button"
+          />
+        </a>
+        <span class="title">Notifications</span>
+      </div>
     </div>
     <div class="notification-container">
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Alice</div>
-                    <div class="notification-time">14:30</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
+      <div class="notification">
+        <div class="profile-pic"></div>
+        <div class="notification-content">
+          <div class="notification-header">
+            <div class="username"></div>
+            <div class="notification-time"></div>
+          </div>
+          <div class="notification-text"></div>
         </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Bob</div>
-                    <div class="notification-time">09:45</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Charlie</div>
-                    <div class="notification-time">12:20</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Diana</div>
-                    <div class="notification-time">08:15</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Eve</div>
-                    <div class="notification-time">16:50</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Frank</div>
-                    <div class="notification-time">11:30</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Grace</div>
-                    <div class="notification-time">07:00</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Henry</div>
-                    <div class="notification-time">15:40</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Ivy</div>
-                    <div class="notification-time">10:10</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Jack</div>
-                    <div class="notification-time">13:25</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Kate</div>
-                    <div class="notification-time">17:55</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Leo</div>
-                    <div class="notification-time">18:45</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Mona</div>
-                    <div class="notification-time">20:10</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Nick</div>
-                    <div class="notification-time">22:05</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Olivia</div>
-                    <div class="notification-time">06:20</div>
-                </div>
-                <div class="notification-text">liked your post.</div>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="profile-pic"></div>
-            <div class="notification-content">
-                <div class="notification-header">
-                    <div class="username">Paul</div>
-                    <div class="notification-time">05:15</div>
-                </div>
-                <div class="notification-text">commented on your post.</div>
-            </div>
-        </div>
+      </div>
     </div>
     <div class="navbar">
-        <a href="../html/home.html">
-          <img src="../resources/home.svg" alt="Home">
-        </a>
-        <a href="../html/friendsList.html">
-          <img src="../resources/Friends.svg" alt="Friends">
-        </a>
-        <a href="../html/discussionBoard.html">
-          <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
-        </a>
-        <a href="../html/settings.html">
-          <img src="../resources/settings.svg" alt="Settings">
-        </a>
+      <a href="../html/home.html">
+        <img src="../resources/home.svg" alt="Home" />
+      </a>
+      <a href="../html/friendsList.html">
+        <img src="../resources/Friends.svg" alt="Friends" />
+      </a>
+      <a href="../html/discussionBoard.html">
+        <img src="../resources/Discussion_Board.svg" alt="Discussion_Board" />
+      </a>
+      <a href="../html/settings.html">
+        <img src="../resources/settings.svg" alt="Settings" />
+      </a>
     </div>
     <script src="../js/darkMode.js"></script>
-</body>
+    <script type="module" src="../js/notifications.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
+    <script type="module" src="../js/pullSW.js"></script>
+  </body>
 </html>

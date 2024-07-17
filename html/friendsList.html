@@ -1,53 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Link to Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="manifest" href="../manifest.json">
-    <link rel="stylesheet" href="../css/friendsList.css">
-    <link rel="stylesheet" href="../css/friendsListDark.css" id="dark-mode-stylesheet" disabled>
-    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
-    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../css/friendsList.css" />
+    <link
+      rel="stylesheet"
+      href="../css/friendsListDark.css"
+      id="dark-mode-stylesheet"
+      disabled
+    />
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode" />
+    <link
+      rel="stylesheet"
+      href="../css/navBarDark.css"
+      id="nav-bar-dark-mode"
+      disabled
+    />
     <title>Friends List</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-bar" id="appBar">
-        <div class="app-bar-left">
-            <a href="home.html">
-                <img src="../resources/backArrow.svg" alt="Back" class="icon" id="backArrow">
-            </a>
-            <img src="../resources/search.svg" alt="Search" class="icon" id="searchIcon">
+      <div class="app-bar-left">
+        <a href="home.html">
+          <img
+            src="../resources/backArrow.svg"
+            alt="Back"
+            class="icon"
+            id="backArrow"
+          />
+        </a>
+        <img
+          src="../resources/search.svg"
+          alt="Search"
+          class="icon"
+          id="searchIcon"
+        />
+      </div>
+      <div class="app-bar-right">
+        <a href="userProfile.html" id="profileLink">
+          <div class="profile-picture" id="profilePicture"></div>
+        </a>
+        <div class="search-bar" id="searchBar" style="display: none">
+          <input type="text" placeholder="Search" id="searchInput" />
+          <img src="../resources/close.svg" alt="Close" id="closeIcon" />
         </div>
-        <div class="app-bar-right">
-            <a href="userProfile.html" id="profileLink">
-                <div class="profile-picture" id="profilePicture"></div>
-            </a>
-            <div class="search-bar" id="searchBar" style="display: none;">
-                <input type="text" placeholder="Search" id="searchInput">
-                <img src="../resources/close.svg" alt="Close" id="closeIcon">
-            </div>
-        </div>
+      </div>
     </div>
     <div class="friends-list" id="friendsList"></div>
     <div class="navbar">
-        <a href="../html/home.html">
-            <img src="../resources/home.svg" alt="Home">
-        </a>
-        <a href="../html/friendsList.html">
-            <img src="../resources/friends.svg" alt="Friends">
-        </a>
-        <a href="../html/discussionBoard.html">
-            <img src="../resources/discussion_board.svg" alt="Discussion Board">
-        </a>
-        <a href="../html/settings.html">
-            <img src="../resources/settings.svg" alt="Settings">
-        </a>
+      <a href="../html/home.html">
+        <img src="../resources/home.svg" alt="Home" />
+      </a>
+      <a href="../html/friendsList.html">
+        <img src="../resources/friends.svg" alt="Friends" />
+      </a>
+      <a href="../html/discussionBoard.html">
+        <img src="../resources/discussion_board.svg" alt="Discussion Board" />
+      </a>
+      <a href="../html/settings.html">
+        <img src="../resources/settings.svg" alt="Settings" />
+      </a>
     </div>
     <script type="module" src="../js/friendsList.js"></script>
     <script src="../js/darkMode.js"></script>
     <script type="module" src="../js/firebaseConfig.js"></script>
     <script type="module" src="../js/pullSW.js"></script>
-</body>
+  </body>
 </html>
