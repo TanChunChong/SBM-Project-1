@@ -1,7 +1,8 @@
 // Import Firebase functions
-import { auth, db } from './firebaseConfig.js';
+import { auth, db, storage } from './firebaseConfig.js';
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { onAuthStateChanged, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { getDownloadURL, ref } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 // Function to fetch and display user data
 async function displayUserData(user) {
@@ -13,6 +14,17 @@ async function displayUserData(user) {
             const userData = userSnap.data();
             document.querySelector('input[placeholder="Username"]').value = userData.username;
             document.querySelector('input[placeholder="Email"]').value = userData.email;
+
+            // Get the image path and display the profile picture
+            const imagePath = userData.imagepath;
+            if (imagePath) {
+                const imageRef = ref(storage, imagePath);
+                getDownloadURL(imageRef).then((url) => {
+                    document.querySelector('.profile-icon').src = url;
+                }).catch((error) => {
+                    console.error("Error fetching the profile image URL: ", error);
+                });
+            }
         } else {
             console.log("No such document!");
         }
@@ -50,9 +62,7 @@ async function updateUserProfile(event) {
             const userDoc = doc(db, 'users', user.uid);
             await updateDoc(userDoc, {
                 username: username,
-                email: email,
-                password: newPassword, // Update the password field in Firestore
-                confirmPassword: confirmNewPassword // Update the confirm password field in Firestore
+                email: email
             });
 
             alert('Profile updated successfully!');
