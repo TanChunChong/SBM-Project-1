@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("User is logged in:", user);
             if (!user.displayName) {
                 console.log("User displayName is not set. Using email as displayName.");
-                await updateProfile(user, { displayName: user.username });
+                await updateProfile(user, { displayName: user.email }); // Updated to use email as displayName if not set
             }
             initializeApp(user);
         } else {
@@ -45,6 +45,7 @@ function initializeApp(user) {
     const friendsList = document.getElementById("friendsList");
 
     let currentUserName = '';
+    let currentUserId = '';
 
     if (searchIcon) {
         searchIcon.addEventListener("click", () => {
@@ -65,7 +66,7 @@ function initializeApp(user) {
             profilePicture.style.display = "block";
             profileLink.style.display = "block";
             searchIcon.style.display = "block";
-            loadFriends(user);
+            loadFriends(user); // Reload friends list after closing search
         });
     } else {
         console.error('Close icon not found');
@@ -73,26 +74,30 @@ function initializeApp(user) {
 
     if (searchInput) {
         searchInput.addEventListener("input", debounce(async () => {
-            await performSearch(searchInput.value.trim(), currentUserName, friendsList);
+            await performSearch(searchInput.value.trim(), currentUserName, currentUserId, friendsList);
         }, 300));
     } else {
         console.error('Search input not found');
-    }    
+    }
+
     loadFriends(user);
     fetchCurrentUser(user).then((userData) => {
         currentUserName = userData.username;
+        currentUserId = userData.userID;
         setProfilePicture(userData.imagepath);
     });
 }
 
-async function performSearch(searchTerm, currentUserName, friendsList) {
+async function performSearch(searchTerm, currentUserName, currentUserId, friendsList) {
+    const searchInput = document.getElementById("searchInput");
+
+    friendsList.innerHTML = ''; // Clear the list before new search results
     if (searchTerm.length > 0) {
         console.log(`Searching for: ${searchTerm}`);
         try {
             const usersRef = collection(db, 'users');
             const q = query(usersRef, where('username', '>=', searchTerm), where('username', '<=', searchTerm + '\uf8ff'));
             const querySnapshot = await getDocs(q);
-            friendsList.innerHTML = '';
             if (querySnapshot.empty) {
                 console.log('No matching documents.');
             } else {
@@ -102,7 +107,7 @@ async function performSearch(searchTerm, currentUserName, friendsList) {
                     if (user.username !== currentUserName && !addedUsers.has(user.username)) {
                         addedUsers.add(user.username);
                         console.log(`Found user: ${user.username}`);
-                        const friendRequestStatus = await checkFriendRequestStatus(currentUserName, user.username);
+                        const friendRequestStatus = await checkFriendRequestStatus(currentUserId, user.userID);
                         const friendItem = document.createElement('div');
                         friendItem.classList.add('friend-item');
                         const iconSrc = friendRequestStatus === 'none' ? '../resources/plus.svg' : '../resources/close.svg';
@@ -112,15 +117,16 @@ async function performSearch(searchTerm, currentUserName, friendsList) {
                             <img src="${iconSrc}" alt="${friendRequestStatus === 'none' ? 'Add Friend' : 'Remove Friend'}" class="friend-action-icon">
                         `;
                         friendItem.querySelector('.friend-name').addEventListener('click', () => {
-                            window.location.href = `friendprofile.html?username=${user.username}`;
+                            window.location.href = `friendprofile.html?uid=${user.userID}`;
                         });
                         friendItem.querySelector('.friend-action-icon').addEventListener('click', async () => {
                             if (friendRequestStatus === 'none') {
-                                await sendFriendRequest(user.username);
+                                await sendFriendRequest(user.userID, user.username, currentUserId, currentUserName);
                             } else {
-                                await cancelFriendRequest(currentUserName, user.username);
+                                await cancelFriendRequest(currentUserId, currentUserName, user.userID, user.username);
                             }
-                            await performSearch(searchTerm, currentUserName, friendsList);
+                            searchInput.value = ''; // Clear search input after action
+                            await loadFriends(auth.currentUser); // Reload friends list after action
                         });
                         friendsList.appendChild(friendItem);
                     }
@@ -130,7 +136,38 @@ async function performSearch(searchTerm, currentUserName, friendsList) {
             console.error('Error getting documents: ', error);
         }
     } else {
-        loadFriends(auth.currentUser);
+        loadFriends(auth.currentUser); // If search term is empty, load all friends
+    }
+}
+
+async function removeFriend(friendUsername) {
+    const user = auth.currentUser;
+    console.log('Current user:', user);
+    if (user) {
+        try {
+            const userRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userRef);
+            console.log('User document data:', userDoc.exists() ? userDoc.data() : 'No document found');
+            if (!userDoc.exists()) {
+                throw new Error('Current user document does not exist');
+            }
+            const userData = userDoc.data();
+            const currentUserName = userData.username;
+
+            const friendRequestId = currentUserName < friendUsername ? `${currentUserName}+${friendUsername}` : `${friendUsername}+${currentUserName}`;
+
+            const friendRef = doc(db, 'friends', friendRequestId);
+            await deleteDoc(friendRef);
+
+            alert('Friend removed successfully!');
+            loadFriends(user); // Reload friends list after removing friend
+            await performSearch(searchInput.value.trim(), currentUserName, currentUserId, friendsList); // Update search results if applicable
+        } catch (error) {
+            console.error('Error removing friend:', error);
+            alert('Error removing friend: ' + error.message);
+        }
+    } else {
+        alert('Please log in to remove friends.');
     }
 }
 
@@ -149,32 +186,29 @@ async function fetchCurrentUser(user) {
     }
 }
 
-async function sendFriendRequest(receiverUsername) {
+async function sendFriendRequest(receiverUID, receiverUsername, currentUserId, currentUserName) {
     const user = auth.currentUser;
-    console.log('Current user:', user);
     if (user) {
         try {
             const userRef = doc(db, 'users', user.uid);
             const userDoc = await getDoc(userRef);
-            console.log('User document data:', userDoc.exists() ? userDoc.data() : 'No document found');
             if (!userDoc.exists()) {
                 throw new Error('Current user document does not exist');
             }
             const userData = userDoc.data();
-            const senderUsername = userData.username;
+            const senderUID = user.uid;
 
-            const friendRequestId = `${senderUsername}+${receiverUsername}`;
+            const friendRequestId = `${senderUID}+${receiverUID}`;
 
             const friendRef = doc(db, 'friends', friendRequestId);
             await setDoc(friendRef, {
-                sender: senderUsername,
-                receiver: receiverUsername,
+                sender: user.uid,
+                receiver: receiverUID,
                 status: 'pending',
                 timestamp: new Date()
             });
 
             alert('Friend request sent successfully!');
-            loadFriends(user);
         } catch (error) {
             console.error('Error sending friend request: ', error);
             alert('Error sending friend request: ' + error.message);
@@ -184,10 +218,10 @@ async function sendFriendRequest(receiverUsername) {
     }
 }
 
-async function cancelFriendRequest(currentUserName, friendUsername) {
+async function cancelFriendRequest(currentUserId, currentUserName, friendUID, friendUsername) {
     try {
-        const friendRequestId1 = `${currentUserName}+${friendUsername}`;
-        const friendRequestId2 = `${friendUsername}+${currentUserName}`;
+        const friendRequestId1 = `${currentUserId}+${friendUID}`;
+        const friendRequestId2 = `${friendUID}+${currentUserId}`;
 
         const friendRef1 = doc(db, 'friends', friendRequestId1);
         const friendRef2 = doc(db, 'friends', friendRequestId2);
@@ -213,34 +247,32 @@ async function cancelFriendRequest(currentUserName, friendUsername) {
         }
 
         const user = auth.currentUser;
-        loadFriends(user);
+        await loadFriends(user); // Reload friends list after canceling friend request
     } catch (error) {
         console.error('Error canceling friend request: ', error);
         alert('Error canceling friend request: ' + error.message);
     }
 }
 
-async function checkFriendRequestStatus(currentUserName, friendUsername) {
+async function checkFriendRequestStatus(currentUserId, friendUID) {
     try {
-        const friendRequestId1 = `${currentUserName}+${friendUsername}`;
-        const friendRequestId2 = `${friendUsername}+${currentUserName}`;
+        const friendsRef = collection(db, 'friends');
+        const q1 = query(friendsRef, where('sender', '==', currentUserId), where('receiver', '==', friendUID));
+        const q2 = query(friendsRef, where('sender', '==', friendUID), where('receiver', '==', currentUserId));
 
-        const friendRef1 = doc(db, 'friends', friendRequestId1);
-        const friendRef2 = doc(db, 'friends', friendRequestId2);
+        const querySnapshot1 = await getDocs(q1);
+        const querySnapshot2 = await getDocs(q2);
 
-        const friendDoc1 = await getDoc(friendRef1);
-        const friendDoc2 = await getDoc(friendRef2);
-
-        if (friendDoc1.exists() && friendDoc1.data().status === 'pending') {
+        if (!querySnapshot1.empty && querySnapshot1.docs[0].data().status === 'pending') {
             return 'pending';
         }
-        if (friendDoc2.exists() && friendDoc2.data().status === 'pending') {
+        if (!querySnapshot2.empty && querySnapshot2.docs[0].data().status === 'pending') {
             return 'pending';
         }
-        if (friendDoc1.exists() && friendDoc1.data().status === 'accepted') {
+        if (!querySnapshot1.empty && querySnapshot1.docs[0].data().status === 'accepted') {
             return 'accepted';
         }
-        if (friendDoc2.exists() && friendDoc2.data().status === 'accepted') {
+        if (!querySnapshot2.empty && querySnapshot2.docs[0].data().status === 'accepted') {
             return 'accepted';
         }
 
@@ -248,36 +280,6 @@ async function checkFriendRequestStatus(currentUserName, friendUsername) {
     } catch (error) {
         console.error('Error checking friend request status:', error);
         return 'none';
-    }
-}
-
-async function removeFriend(friendUsername) {
-    const user = auth.currentUser;
-    console.log('Current user:', user);
-    if (user) {
-        try {
-            const userRef = doc(db, 'users', user.uid);
-            const userDoc = await getDoc(userRef);
-            console.log('User document data:', userDoc.exists() ? userDoc.data() : 'No document found');
-            if (!userDoc.exists()) {
-                throw new Error('Current user document does not exist');
-            }
-            const userData = userDoc.data();
-            const currentUserName = userData.username;
-
-            const friendRequestId = currentUserName < friendUsername ? `${currentUserName}+${friendUsername}` : `${friendUsername}+${currentUserName}`;
-
-            const friendRef = doc(db, 'friends', friendRequestId);
-            await deleteDoc(friendRef);
-
-            alert('Friend removed successfully!');
-            loadFriends(user);
-        } catch (error) {
-            console.error('Error removing friend:', error);
-            alert('Error removing friend: ' + error.message);
-        }
-    } else {
-        alert('Please log in to remove friends.');
     }
 }
 
@@ -292,10 +294,11 @@ async function loadFriends(user) {
         if (userDoc.exists()) {
             const userData = userDoc.data();
             const currentUserName = userData.username;
+            const currentUserId = userData.userID;
 
             const friendsRef = collection(db, 'friends');
-            const q1 = query(friendsRef, where('sender', '==', currentUserName), where('status', '==', 'accepted'));
-            const q2 = query(friendsRef, where('receiver', '==', currentUserName), where('status', '==', 'accepted'));
+            const q1 = query(friendsRef, where('sender', '==', currentUserId), where('status', '==', 'accepted'));
+            const q2 = query(friendsRef, where('receiver', '==', currentUserId), where('status', '==', 'accepted'));
             const querySnapshot1 = await getDocs(q1);
             const querySnapshot2 = await getDocs(q2);
 
@@ -316,8 +319,8 @@ async function loadFriends(user) {
                 return;
             }
 
-            for (const friendUsername of friends) {
-                const friendQuery = query(collection(db, 'users'), where('username', '==', friendUsername));
+            for (const friendUID of friends) {
+                const friendQuery = query(collection(db, 'users'), where('userID', '==', friendUID));
                 const friendQuerySnapshot = await getDocs(friendQuery);
                 friendQuerySnapshot.forEach(doc => {
                     const friendData = doc.data();
@@ -329,9 +332,9 @@ async function loadFriends(user) {
                         <img src="../resources/close.svg" alt="Remove Friend" class="remove-friend-icon">
                     `;
                     friendItem.querySelector('.friend-name').addEventListener('click', () => {
-                        window.location.href = `friendprofile.html?username=${friendData.username}`;
+                        window.location.href = `friendprofile.html?uid=${friendData.userID}`;
                     });
-                    friendItem.querySelector('.remove-friend-icon').addEventListener('click', () => cancelFriendRequest(currentUserName, friendData.username));
+                    friendItem.querySelector('.remove-friend-icon').addEventListener('click', () => cancelFriendRequest(currentUserId, currentUserName, friendData.userID, friendData.username));
                     friendsList.appendChild(friendItem);
                 });
             }

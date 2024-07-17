@@ -9,20 +9,17 @@ const primaryButton = document.getElementById('primaryButton');
 const acceptButton = document.getElementById('acceptButton');
 
 const urlParams = new URLSearchParams(window.location.search);
-const friendUsername = urlParams.get('username');
+const friendUID = urlParams.get('uid');
 
-async function fetchFriendData(friendUsername) {
+async function fetchFriendData(friendUID) {
     try {
-        const usersRef = collection(db, 'users');
-        const q = query(usersRef, where("username", "==", friendUsername));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-            querySnapshot.forEach((doc) => {
-                const friendData = doc.data();
-                profilePicture.src = friendData.imagepath;
-                usernameElement.textContent = friendData.username;
-                descriptionElement.textContent = friendData.description;
-            });
+        const friendRef = doc(db, 'users', friendUID);
+        const friendDoc = await getDoc(friendRef);
+        if (friendDoc.exists()) {
+            const friendData = friendDoc.data();
+            profilePicture.src = friendData.imagepath;
+            usernameElement.textContent = friendData.username;
+            descriptionElement.textContent = friendData.description;
         } else {
             console.error('No such document!');
         }
@@ -31,9 +28,9 @@ async function fetchFriendData(friendUsername) {
     }
 }
 
-async function checkFriendStatus(currentUser, friendUsername) {
-    const friendDocId1 = `${currentUser}+${friendUsername}`;
-    const friendDocId2 = `${friendUsername}+${currentUser}`;
+async function checkFriendStatus(currentUserId, friendUID) {
+    const friendDocId1 = `${currentUserId}+${friendUID}`;
+    const friendDocId2 = `${friendUID}+${currentUserId}`;
     const friendDocRef1 = doc(db, 'friends', friendDocId1);
     const friendDocRef2 = doc(db, 'friends', friendDocId2);
     const friendDocSnap1 = await getDoc(friendDocRef1);
@@ -42,7 +39,7 @@ async function checkFriendStatus(currentUser, friendUsername) {
         button.value = text;
         button.onclick = async () => {
             await handler();
-            await checkFriendStatus(currentUser, friendUsername);
+            await checkFriendStatus(currentUserId, friendUID);
         };
         button.style.display = visible ? 'inline-block' : 'none';
     };
@@ -54,12 +51,12 @@ async function checkFriendStatus(currentUser, friendUsername) {
                 await deleteDoc(friendDocRef1);
             });
             acceptButton.style.display = 'none';
-        } else if (friendData1.sender === currentUser) {
+        } else if (friendData1.sender === currentUserId) {
             updateButton(primaryButton, 'Cancel friend request', async () => {
                 await deleteDoc(friendDocRef1);
             });
             acceptButton.style.display = 'none';
-        } else if (friendData1.receiver === currentUser && friendData1.status === 'pending') {
+        } else if (friendData1.receiver === currentUserId && friendData1.status === 'pending') {
             updateButton(primaryButton, 'Reject friend request', async () => {
                 await deleteDoc(friendDocRef1);
             });
@@ -77,12 +74,12 @@ async function checkFriendStatus(currentUser, friendUsername) {
                 await deleteDoc(friendDocRef2);
             });
             acceptButton.style.display = 'none';
-        } else if (friendData2.sender === currentUser) {
+        } else if (friendData2.sender === currentUserId) {
             updateButton(primaryButton, 'Cancel friend request', async () => {
                 await deleteDoc(friendDocRef2);
             });
             acceptButton.style.display = 'none';
-        } else if (friendData2.receiver === currentUser && friendData2.status === 'pending') {
+        } else if (friendData2.receiver === currentUserId && friendData2.status === 'pending') {
             updateButton(primaryButton, 'Reject friend request', async () => {
                 await deleteDoc(friendDocRef2);
             });
@@ -96,8 +93,8 @@ async function checkFriendStatus(currentUser, friendUsername) {
     } else {
         updateButton(primaryButton, 'Send friend request', async () => {
             await setDoc(doc(db, 'friends', friendDocId1), {
-                sender: currentUser,
-                receiver: friendUsername,
+                sender: currentUserId,
+                receiver: friendUID,
                 status: 'pending',
                 timestamp: new Date()
             });
@@ -116,7 +113,7 @@ async function fetchCurrentUser(user) {
             throw new Error('Current user document does not exist');
         }
     } catch (error) {
-        console.error('Error fetching current user data: ', error);
+        console.error('Error fetching current user data:', error);
         throw error;
     }
 }
@@ -124,9 +121,9 @@ async function fetchCurrentUser(user) {
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const userData = await fetchCurrentUser(user);
-        const currentUser = userData.username;
-        fetchFriendData(friendUsername);
-        checkFriendStatus(currentUser, friendUsername);
+        const currentUserId = userData.userID;
+        fetchFriendData(friendUID);
+        checkFriendStatus(currentUserId, friendUID);
     } else {
         console.error('No user is signed in.');
     }
