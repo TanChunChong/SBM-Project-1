@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("User is logged in:", user);
             if (!user.displayName) {
                 console.log("User displayName is not set. Using email as displayName.");
-                await updateProfile(user, { displayName: user.email }); // Updated to use email as displayName if not set
+                await updateProfile(user, { displayName: user.email });
             }
             initializeApp(user);
         } else {
@@ -66,7 +66,7 @@ function initializeApp(user) {
             profilePicture.style.display = "block";
             profileLink.style.display = "block";
             searchIcon.style.display = "block";
-            loadFriends(user); // Reload friends list after closing search
+            loadFriends(user);
         });
     } else {
         console.error('Close icon not found');
@@ -91,7 +91,7 @@ function initializeApp(user) {
 async function performSearch(searchTerm, currentUserName, currentUserId, friendsList) {
     const searchInput = document.getElementById("searchInput");
 
-    friendsList.innerHTML = ''; // Clear the list before new search results
+    friendsList.innerHTML = '';
     if (searchTerm.length > 0) {
         console.log(`Searching for: ${searchTerm}`);
         try {
@@ -125,8 +125,8 @@ async function performSearch(searchTerm, currentUserName, currentUserId, friends
                             } else {
                                 await cancelFriendRequest(currentUserId, currentUserName, user.userID, user.username);
                             }
-                            searchInput.value = ''; // Clear search input after action
-                            await loadFriends(auth.currentUser); // Reload friends list after action
+                            searchInput.value = '';
+                            await loadFriends(auth.currentUser);
                         });
                         friendsList.appendChild(friendItem);
                     }
@@ -136,7 +136,7 @@ async function performSearch(searchTerm, currentUserName, currentUserId, friends
             console.error('Error getting documents: ', error);
         }
     } else {
-        loadFriends(auth.currentUser); // If search term is empty, load all friends
+        loadFriends(auth.currentUser);
     }
 }
 
@@ -160,8 +160,8 @@ async function removeFriend(friendUsername) {
             await deleteDoc(friendRef);
 
             alert('Friend removed successfully!');
-            loadFriends(user); // Reload friends list after removing friend
-            await performSearch(searchInput.value.trim(), currentUserName, currentUserId, friendsList); // Update search results if applicable
+            loadFriends(user);
+            await performSearch(searchInput.value.trim(), currentUserName, currentUserId, friendsList);
         } catch (error) {
             console.error('Error removing friend:', error);
             alert('Error removing friend: ' + error.message);
@@ -247,7 +247,7 @@ async function cancelFriendRequest(currentUserId, currentUserName, friendUID, fr
         }
 
         const user = auth.currentUser;
-        await loadFriends(user); // Reload friends list after canceling friend request
+        await loadFriends(user);
     } catch (error) {
         console.error('Error canceling friend request: ', error);
         alert('Error canceling friend request: ' + error.message);
