@@ -29,9 +29,6 @@ async function loadSavedPosts() {
             userAvatar = userData.imagepath || userAvatar; // User's profile image path
         }
 
-        // Log userAvatar to check if it is correctly assigned
-        console.log('User Avatar:', userAvatar);
-
         let fileName = "";
         if (post.fileUrl) {
             const url = new URL(post.fileUrl);
@@ -46,27 +43,21 @@ async function loadSavedPosts() {
         postBox.dataset.postId = docSnap.id;
 
         postBox.innerHTML = `
-            <div class="profile-image"></div>
-            <div class="posts-text-container">
-                <div class="title-and-username">
-                    <p class="posts-title">${post.title}</p>
-                    <p class="posts-username">${post.username}</p>
+            <a href="viewSpecificPost.html?postId=${post.postsID}" class="post-link">
+                <div class="profile-image" style="background-image: url(${userAvatar});"></div>
+                <div class="posts-text-container">
+                    <div class="title-and-username">
+                        <p class="posts-title">${post.title}</p>
+                        <p class="posts-username">${post.username}</p>
+                    </div>
                 </div>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="blue" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon ${savedClass}" data-saved="true" data-post-id="${docSnap.id}">
-                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-            </svg>
-            <p class="posts-text-description">${post.description}</p>
-            ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
-            ${post.fileUrl ? `<a href="#" class="download-file" data-url="${post.fileUrl}" data-filename="${fileName}">${fileName}</a>` : ''}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="blue" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up savedPosts-like-icon ${likedClass}">
-                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
-            </svg>
-            <p class="votes">${post.likes} votes</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square posts-comment-icon" data-post-id="${post.postsID}">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-            <p class="comments">${post.commentCount} comments</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="blue" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark vertical-saved-icon ${savedClass}" data-saved="true" data-post-id="${docSnap.id}">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <p class="posts-text-description">${post.description}</p>
+                ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Description of image" class="posts-image">` : ''}
+                ${post.fileUrl ? `<a href="#" class="download-file" data-url="${post.fileUrl}" data-filename="${fileName}">${fileName}</a>` : ''}
+            </a>
         `;
         savedPostsContainer.appendChild(postBox);
 
@@ -75,10 +66,11 @@ async function loadSavedPosts() {
         profileImage.style.backgroundImage = `url(${userAvatar})`;
     }
 
-    // Add event listeners for like and save icons
-    const icons = document.querySelectorAll('.savedPosts-like-icon, .vertical-saved-icon');
+    // Add event listeners for save icons
+    const icons = document.querySelectorAll('.vertical-saved-icon');
     icons.forEach(function(icon) {
-        icon.addEventListener('click', function() {
+        icon.addEventListener('click', function(event) {
+            event.preventDefault();
             handleIconClick(icon);
         });
     });
@@ -91,15 +83,6 @@ async function loadSavedPosts() {
             const url = link.getAttribute('data-url');
             const fileName = link.getAttribute('data-filename');
             downloadFile(url, fileName);
-        });
-    });
-
-    // Add event listeners for comment icons
-    const commentIcons = document.querySelectorAll('.posts-comment-icon');
-    commentIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const postId = icon.getAttribute('data-post-id');
-            window.location.href = `viewSpecificPost.html?postId=${postId}`;
         });
     });
 }
@@ -115,11 +98,6 @@ async function handleIconClick(icon) {
         // Remove the post from the UI
         const postBox = icon.closest('.posts-rectangular-box');
         postBox.remove();
-    }
-
-    const isLiked = icon.classList.contains('savedPosts-like-icon');
-    if (isLiked) {
-        icon.classList.toggle('liked');
     }
 }
 

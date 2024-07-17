@@ -140,17 +140,46 @@ header .title{
     text-align: center;
 }
 
-input {
+input, select {
     width: 100%;
     padding: 15px; /* Increased padding for larger height */
     margin-bottom: 10px;
     border: none;
     border-radius: 5px;
     font-size: 16px; /* Increased font size */
+    appearance: none; /* Remove default arrow in some browsers */
+    position: relative;
 }
 
 input[readonly] {
     background-color: #f0f0f0;
+}
+
+select {
+    background-color: white;
+    padding-right: 40px; /* Adjust to make space for the arrow */
+}
+
+select:focus {
+    outline: none;
+    border: 2px solid #BAC4FF; /* Add focus border if needed */
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper select {
+    width: 100%;
+}
+
+.custom-arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .colors {
@@ -193,6 +222,11 @@ input[readonly] {
 
 .add-button:hover {
     background-color: #ccc;
+}
+
+.highlighted {
+    background-color: #bac4ff;
+    color: white;
 }
 
 /* Media query for iPhone 14 Pro Max dimensions */

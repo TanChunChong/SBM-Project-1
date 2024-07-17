@@ -42,33 +42,6 @@ document.addEventListener("DOMContentLoaded", function() {
         dateRange.appendChild(dateElement);
     }
 
-    // Function to load and display reminders
-    function loadReminders() {
-        let reminders = JSON.parse(localStorage.getItem('reminders')) || [];
-        tasksContainer.innerHTML = '<div class="section-title">Today\'s task</div>'; // Reset the tasks container
 
-        reminders.forEach(reminder => {
-            const taskElement = document.createElement('div');
-            taskElement.className = 'task';
-            taskElement.innerHTML = `
-                <div class="task-time">${reminder.startTime}</div>
-                <div class="task-details task-${reminder.color}">
-                    <div class="task-title">${reminder.title}</div>
-                    <div class="task-info">
-                        <div class="task-schedule">
-                            <img src="../resources/clock.svg" alt="Clock Icon" class="icon"> ${reminder.startTime} - ${reminder.endTime} <br>
-                            <img src="../resources/calendar2.svg" alt="Calendar Icon" class="icon"> ${reminder.date}
-                        </div>
-                        <div class="task-progress-circle">
-                            <div class="task-progress">0%</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            tasksContainer.appendChild(taskElement);
-        });
-    }
-
-    // Initial load of reminders
-    loadReminders();
 });
+

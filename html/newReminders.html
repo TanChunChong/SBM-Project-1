@@ -36,7 +36,18 @@
         <div class="add-reminders">
             <div class="section-title">Add Reminders</div>
             <input type="text" placeholder="Title">
-            <input type="text" placeholder="Location or Video Call">
+            <div class="select-wrapper">
+                <select id="location">
+                    <option value="" disabled selected>Select Location or Video Call</option>
+                    <option value="Home">Home</option>
+                    <option value="Office">Office</option>
+                    <option value="Meeting Room">Meeting Room</option>
+                    <option value="Video Call">Video Call</option>
+                </select>
+                <span class="custom-arrow">
+                    <img src="../resources/chevron-down.svg" alt="Dropdown Arrow">
+                </span>
+            </div>
             <input type="time" placeholder="Start Time" id="startTime">
             <input type="time" placeholder="End Time" id="endTime">
             <input type="text" placeholder="Duration" id="duration" readonly>
@@ -68,6 +79,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <script src="../js/newReminders.js"></script>
+    <script type="module" src="../js/newReminders.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
 </body>
 </html>
