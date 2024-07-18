@@ -28,17 +28,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function MyModules() {
     const subjectsContainer = document.querySelector('.subjects');
+    const personaliseButton = document.querySelector('.personaliseButton');
+    const loadingSpinner = document.querySelector('.loader');
     try {  
         const userModulesSnapshot = await getDocs(collection(db, 'userModules'));
         const userModules = [];
-        
+        loadingSpinner.style.visibility = 'visible';
         userModulesSnapshot.forEach(doc => {
             if (email === doc.data().email) {
                 userModules.push(doc.data());
             }
         });
-
-        if (userModules.length > 0) {
+        if (userModules.length === 0 ){
+            subjectsContainer.textContent= "You are currently not taking any modules"
+            personaliseButton.textContent= "Get Started"
+        }
+        else if (userModules.length > 0) {
             const modulesSnapshot = await getDocs(collection(db, 'module'));
             modulesSnapshot.forEach((moduleDoc) => {
                 const data = moduleDoc.data();
@@ -83,6 +88,9 @@ async function MyModules() {
         }
     } catch (error) {
         console.error('Error fetching documents: ', error);
+    }
+    finally {
+        loadingSpinner.remove(); // Hide the spinner
     }
 }
 

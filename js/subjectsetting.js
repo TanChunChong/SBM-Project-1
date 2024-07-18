@@ -16,10 +16,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function subjectSettings() {
     const subjectsContainer = document.querySelector('.subjects');
+    const loadingSpinner = document.querySelector('.loader');
+    
     try {
+        
         const userModulesSnapshot = await getDocs(collection(db, 'userModules'));
         const userModules = [];
-
+        loadingSpinner.style.visibility = 'visible'; // Show the spinner
         userModulesSnapshot.forEach(doc => {
             if (email === doc.data().email) {
                 userModules.push(doc.data());
@@ -59,6 +62,8 @@ async function subjectSettings() {
     } catch (error) {
         console.error('Error fetching documents: ', error);
     }
+    finally {
+        loadingSpinner.remove(); // Hide the spinner
+    }
 }
 
-console.log("line 80");

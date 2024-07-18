@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             moduleImage.style.display = 'block';
         } else {
             moduleImage.style.display = 'none';
+            
         }
     });
 
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         const selectedModule = moduleDropdown.value;
         if (selectedModule) {
             try {
-                console.log("Cuck")
                 // Query to get the module document based on moduleName
                 const q = query(modulesRef, where("moduleName", "==", selectedModule));
                 const querySnapshot = await getDocs(q);

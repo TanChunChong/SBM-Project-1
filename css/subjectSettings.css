@@ -18,9 +18,11 @@ body {
 }
 
 .header-top {
-    font-size: 28px;
+    font-size: 32px;
     text-align: left;
     display: inline;
+    position: relative;
+    right: 21.5px;
 }
 
 .go-back {
@@ -59,7 +61,6 @@ body {
 
 .bodyContainer {
     padding: 20px;
-    width: 90%;
     max-width: 500px;
     text-align: center;
     margin-top: 80px;
@@ -78,6 +79,11 @@ main {
     padding: 8px;
     border-radius: 8px;
     background-color: #FFFCED;
+    width: 100%;
+}
+
+.subjects {
+    width: 70vw;
 }
 
 .subject .icon{
@@ -95,8 +101,8 @@ main {
 }
 
 .subject .icon img, .create-subject .icon img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
 }
 
 .subject .details, .create-subject .details {
@@ -105,7 +111,6 @@ main {
 }
 
 .subject .details h2, .create-subject .details h2 {
-    margin: 0;
     font-size: 16px;
 }
 
@@ -118,6 +123,36 @@ main {
     text-decoration: none;
     color: #007bff;
 }
+
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+    position: relative;
+    left: 100px;
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #514b82;
+    animation:
+      l20-1 0.8s infinite linear alternate,
+      l20-2 1.6s infinite linear;
+  }
+  @keyframes l20-1{
+     0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+     12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+     25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+     50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+     62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+     75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+     100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+  }
+  @keyframes l20-2{ 
+    0%    {transform:scaleY(1)  rotate(0deg)}
+    49.99%{transform:scaleY(1)  rotate(135deg)}
+    50%   {transform:scaleY(-1) rotate(0deg)}
+    100%  {transform:scaleY(-1) rotate(-135deg)}
+  }
+  
 
 @media only screen and (max-width: 430px) and (max-height: 932px) {
     .go-back {
