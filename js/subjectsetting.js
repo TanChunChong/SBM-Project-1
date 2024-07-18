@@ -1,5 +1,5 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc, deleteDoc, query, where  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 
 console.log("hello");
@@ -28,7 +28,6 @@ async function subjectSettings() {
                 userModules.push(doc.data());
             }
         });
-        console.log("not working");
         if (userModules.length > 0) {
             const modulesSnapshot = await getDocs(collection(db, 'module'));
             modulesSnapshot.forEach((moduleDoc) => {
@@ -51,10 +50,33 @@ async function subjectSettings() {
                     const descriptionElement = document.createElement('p');
                     descriptionElement.innerHTML = `Module Code: ${data.moduleID}`; 
 
+                    const deleteRecord = document.createElement('div')
+                    deleteRecord.classList.add('edit')
+                    deleteRecord.innerHTML = `Delete`
+                    deleteRecord.addEventListener('click', async () => {
+                        try {
+                            // Find the document in userModules collection to delete
+                            
+                            const userModulesQuery = query(collection(db, 'userModules'), where('email', '==', email), where('moduleID', '==', data.moduleID));
+                            const userModulesQuerySnapshot = await getDocs(userModulesQuery);
+
+                            userModulesQuerySnapshot.forEach(async (doc) => {
+                                await deleteDoc(doc.ref);
+                            });
+
+                            moduleDiv.remove(); // Remove the module from the DOM
+                            console.log(`Module ${data.moduleName} deleted successfully.`);
+                        } catch (error) {
+                            console.error('Error deleting document: ', error);
+                        }
+                    });
+
                     infoDiv.appendChild(nameElement);
                     infoDiv.appendChild(descriptionElement);
+                    
                     moduleDiv.appendChild(imgElement);
                     moduleDiv.appendChild(infoDiv);
+                    moduleDiv.appendChild(deleteRecord);
                     subjectsContainer.appendChild(moduleDiv);
                 }
             });

@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -119,9 +118,11 @@ main {
     color: #777;
 }
 
-.subject .edit a {
+.edit {
     text-decoration: none;
     color: #007bff;
+    text-align: right;
+    font-size: 15px;
 }
 
 /* HTML: <div class="loader"></div> */
