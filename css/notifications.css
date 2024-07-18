@@ -1,95 +1,95 @@
 body {
-    background-color: #FFFCED;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-color: #fffced;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .app-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%; /* Ensure the app bar takes full width */
-    background-color: #BAC4FF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #bac4ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  box-sizing: border-box;
+  height: 70px;
 }
 
 .app-bar-items {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .close-button {
-    text-decoration: none;
-    color: #000;
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 10px; /* Space between X and the title */
+  text-decoration: none;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
 }
 
 .notification-container {
-    margin-top: 80px; /* Give space below the app bar */
-    padding: 0;
-    margin-bottom: 50px; /* Give space below the app bar */
+  margin-top: 10px;
+  padding: 0;
+  margin-bottom: 50px;
 }
 
 .notification {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px; /* Add horizontal padding for spacing */
-    width: 100%; /* Make notifications take full width */
-    box-sizing: border-box; /* Ensure padding is included in the width */
-    position: relative; /* Position for absolute positioning of the time */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* Placeholder color */
-    background-size: cover;
-    background-position: center;
-    margin-right: 15px; /* Space between the profile pic and content */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-right: 15px;
 }
 
 .notification-content {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 85px); /* Adjust width to consider the profile-pic space and padding */
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 85px);
 }
 
 .notification-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .username {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
 .notification-time {
-    font-size: 14px;
-    color: #888;
+  font-size: 14px;
+  color: #888;
 }
 
 .notification-text {
-    font-size: 16px;
-    color: #333;
-    margin-top: 5px; /* Space between username and notification text */
+  font-size: 16px;
+  color: #333;
+  margin-top: 5px;
 }

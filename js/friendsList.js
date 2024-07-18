@@ -108,6 +108,29 @@ function initializeApp(user) {
   });
 }
 
+async function createNotification(
+  senderUID,
+  senderUsername,
+  receiverUID,
+  receiverUsername,
+  status
+) {
+  try {
+    const notificationRef = doc(collection(db, "notifications"));
+    await setDoc(notificationRef, {
+      senderUID: senderUID,
+      senderUsername: senderUsername,
+      receiverUID: receiverUID,
+      receiverUsername: receiverUsername,
+      status: status,
+      timestamp: new Date(),
+    });
+    console.log("Notification created successfully!");
+  } catch (error) {
+    console.error("Error creating notification:", error);
+  }
+}
+
 async function performSearch(
   searchTerm,
   currentUserName,
@@ -279,6 +302,14 @@ async function sendFriendRequest(
         status: "pending",
         timestamp: new Date(),
       });
+
+      await createNotification(
+        senderUID,
+        currentUserName,
+        receiverUID,
+        receiverUsername,
+        "pending"
+      );
 
       alert("Friend request sent successfully!");
     } catch (error) {
@@ -465,5 +496,24 @@ async function loadFriends(user) {
     console.error("Error loading friends: ", error);
     friendsList.innerHTML =
       '<div class="error-message">Error loading friends.</div>';
+  }
+}
+
+async function acceptFriendRequest(friendDocRef, friendData) {
+  try {
+    await setDoc(friendDocRef, { ...friendData, status: "accepted" });
+
+    await createNotification(
+      friendData.sender,
+      "Sender Username",
+      friendData.receiver,
+      "Receiver Username",
+      "accepted"
+    ); // You'll need to pass the actual usernames here
+
+    alert("Friend request accepted successfully!");
+  } catch (error) {
+    console.error("Error accepting friend request: ", error);
+    alert("Error accepting friend request: " + error.message);
   }
 }
