@@ -1,94 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payment Options</title>
-    <link rel="stylesheet" href="../css/paymentOptions.css">
-    <link rel="stylesheet" href="../css/navBar.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="manifest" href="../manifest.json">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/paymentOptions.css" />
+    <link rel="stylesheet" href="../css/navBar.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="manifest" href="../manifest.json" />
+  </head>
+  <body>
     <div class="header">
       <a href="settings.html" class="back-link">
-        <img src="../resources/backArrow.svg" alt="Back" class="back-icon">
+        <img src="../resources/backArrow.svg" alt="Back" class="back-icon" />
       </a>
       <h2>Your Cards</h2>
       <a href="../html/paymentAddCard.html">
-        <img src="../resources/addCredit.svg" alt="Add Credit" width="40" height="40" id="addCard">
+        <img
+          src="../resources/addCredit.svg"
+          alt="Add Credit"
+          width="40"
+          height="40"
+          id="addCard"
+        />
       </a>
     </div>
     <div class="creditTopAndBottom">
       <div id="credit-top">
-          <img src="../resources/card.svg" alt="Credit Card" width="40" height="40" id="creditCard">
-          <img src="../resources/wifi.svg" alt="Wifi" width="40" height="40" id="wifi">
+        <img
+          src="../resources/card.svg"
+          alt="Credit Card"
+          width="40"
+          height="40"
+          id="creditCard"
+        />
+        <img
+          src="../resources/wifi.svg"
+          alt="Wifi"
+          width="40"
+          height="40"
+          id="wifi"
+        />
       </div>
       <div id="credit-bottom">
         <div id="credit-info">
-            <h2 id="card-number">Loading...</h2>
-            <div class="cvc-container">
-                <h5>CVC</h5>
-                <h3 id="cvc">***</h3>
-            </div>
+          <h2 id="card-number">Loading...</h2>
+          <div class="cvc-container">
+            <h5>CVC</h5>
+            <h3 id="cvc">***</h3>
+          </div>
         </div>
       </div>
-    </div>  
-    <div id="nextPages">
-      <a href="../html/paymentTopUp.html">
-          <div id="topUp">
-              <img src="../resources/topUpIcon.svg" alt="Add Credit" width="40" height="40" id="addCard">
-              <h3>Top Up</h3>
-          </div>
-      </a>
-      <div id="pay">
-          <img src="../resources/payIcon.svg" alt="Add Credit" width="40" height="40" id="addCard">
-          <h3>Pay</h3>
     </div>
-  </div>
-  <h2 id="subscribe">Subscription:</h2>
-  <div id="box-container">
-    <a href="../html/paymentPay.html?plan=Daily%20Payment&price=$0.10/Daily">
-      <div id="box">
-          <h3 class="one">Daily Payment</h3>
-          <h3 class="two">$0.10/Daily</h3>
-      </div>
-    </a>
-    <a href="../html/paymentPay.html?plan=Weekly%20Payment&price=$2/Weekly">
-      <div id="box">
-          <h3 class="one">Weekly Payment</h3>
-          <h3 class="two">$2/Weekly</h3>
-      </div>
-    </a>
-    <a href="../html/paymentPay.html?plan=Monthly%20Payment&price=$5/Monthly">
-      <div id="box">
-          <h3 class="one">Monthly Payment</h3>
-          <h3 class="two">$5/Monthly</h3>
-      </div>
-    </a>
-    <a href="../html/paymentPay.html?plan=Yearly%20Payment&price=$20/Yearly">
-      <div id="box">
-        <h3 class="one">Yearly Payment</h3>
-        <h3 class="two">$20/Yearly</h3>
-      </div>
-    </a>
+    <div id="subscription-section">
+      <div id="pricing-display">Select a plan to see the pricing</div>
+      <select id="plan-selector">
+        <option value="Daily Payment:$0.10/Daily">Daily Payment</option>
+        <option value="Weekly Payment:$2/Weekly">Weekly Payment</option>
+        <option value="Monthly Payment:$5/Monthly">Monthly Payment</option>
+        <option value="Yearly Payment:$20/Yearly">Yearly Payment</option>
+      </select>
+      <button id="confirm-subscription">Confirm Subscription</button>
+    </div>
+    <div id="subscription-details">
+      <h3>Application Subscription</h3>
+      <p id="subscription-expiry">Expires on: N/A</p>
+    </div>
+    <div id="payment-history">
+      <h3>Payment History</h3>
+      <div id="payment-records"></div>
     </div>
     <div class="navbar">
       <a href="../html/home.html">
-        <img src="../resources/home.svg" alt="Home">
+        <img src="../resources/home.svg" alt="Home" />
       </a>
       <a href="../html/friendsList.html">
-        <img src="../resources/Friends.svg" alt="Friends">
+        <img src="../resources/Friends.svg" alt="Friends" />
       </a>
       <a href="../html/discussionBoard.html">
-        <img src="../resources/Discussion_Board.svg" alt="Discussion_Board">
+        <img src="../resources/Discussion_Board.svg" alt="Discussion_Board" />
       </a>
       <a href="../html/settings.html">
-        <img src="../resources/settings.svg" alt="Settings">
+        <img src="../resources/settings.svg" alt="Settings" />
       </a>
     </div>
     <script src="../js/jquery.js"></script>
     <script src="../js/paymentOptions.js" type="module"></script>
     <script src="../js/pullSW.js"></script>
-</body>
+  </body>
 </html>

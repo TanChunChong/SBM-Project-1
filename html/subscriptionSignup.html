@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Sign-Up</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/subscriptionSignup.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Sign Up for Subscription</h2>
+    </div>
+    <form id="subscriptionForm" autocomplete="off">
+        <div class="form-group">
+            <input type="email" id="email" required placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" required placeholder="Password">
+        </div>
+        <div class="form-group">
+            <select id="subscriptionPlan" required>
+                <option value="" disabled selected>Select Subscription Plan</option>
+                <option value="Daily">Daily - $0.10/Daily</option>
+                <option value="Weekly">Weekly - $2/Weekly</option>
+                <option value="Monthly">Monthly - $5/Monthly</option>
+                <option value="Yearly">Yearly - $20/Yearly</option>
+            </select>
+        </div>
+        <button id="submitBtn" type="submit">Sign Up</button>
+    </form>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/firebaseConfig.js" type="module"></script>
+    <script src="../js/subscriptionSignup.js" type="module"></script>
+</body>
+</html>
