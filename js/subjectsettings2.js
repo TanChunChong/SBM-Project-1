@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         event.preventDefault();
         const selectedModule = moduleDropdown.value;
         if (selectedModule) {
-            try { 
+            try {
+                console.log("Cuck")
                 // Query to get the module document based on moduleName
                 const q = query(modulesRef, where("moduleName", "==", selectedModule));
                 const querySnapshot = await getDocs(q);
@@ -59,7 +60,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                         // Create a new document in userModules collection with the moduleID
                         await addDoc(collection(db, 'userModules'), {
                             email: email, // Assuming email is stored in localStorage
-                            moduleName: selectedModule,
                             moduleID: moduleID,
                             score: 0
                         });
@@ -80,4 +80,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
 });
+
+async function test(){
+    console.log("dong")
+}
 

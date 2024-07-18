@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!userId) {
         console.log('User ID not found in localStorage.');
         return;
-    }
-
+    } 
+  
     // Fetch the username from localStorage and update the DOM
     const username = localStorage.getItem('username');
     if (username) {
