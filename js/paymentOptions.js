@@ -140,23 +140,6 @@ document
     document.getElementById(
       "pricing-display"
     ).textContent = `Price: ${selectedPlan[1]}`;
-
-    const user = auth.currentUser;
-    if (user) {
-      const userId = user.uid;
-      const subscriptionDocRef = doc(db, "subscriptions", userId);
-      const subscriptionDocSnapshot = await getDoc(subscriptionDocRef);
-      if (subscriptionDocSnapshot.exists()) {
-        const confirmChange = confirm(
-          "Are you sure you would like to update your subscription plan?"
-        );
-        if (!confirmChange) {
-          event.target.value = "";
-          document.getElementById("pricing-display").textContent =
-            "Select a plan to see the pricing";
-        }
-      }
-    }
   });
 
 document
@@ -171,6 +154,22 @@ document
 
     if (user) {
       const userId = user.uid;
+      const subscriptionDocRef = doc(db, "subscriptions", userId);
+      const subscriptionDocSnapshot = await getDoc(subscriptionDocRef);
+
+      if (subscriptionDocSnapshot.exists()) {
+        const subscriptionData = subscriptionDocSnapshot.data();
+        const currentDate = new Date();
+        const expiryDate = new Date(subscriptionData.expiry);
+
+        if (currentDate < expiryDate) {
+          alert(
+            "You can only select a new option plan when your current plan has expired"
+          );
+          return;
+        }
+      }
+
       const userDoc = await getDoc(doc(db, "users", userId));
       if (userDoc.exists()) {
         const userData = userDoc.data();
