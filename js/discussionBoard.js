@@ -36,6 +36,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const searchInput = document.querySelector('.search-box');
     searchInput.addEventListener('input', filterPostsByTitle);
+
+    const trendingBoxes = document.querySelectorAll('.popular-trending-box');
+    trendingBoxes.forEach(box => {
+        box.addEventListener('click', function () {
+            const sortCriteria = box.getAttribute('data-sort');
+            loadPosts([], sortCriteria);
+        });
+    });
 });
 
 function loadTopics() {
@@ -73,9 +81,19 @@ async function loadSavedPostsAndThenPosts() {
     loadPosts(savedPosts);
 }
 
-function loadPosts(savedPosts) {
+function loadPosts(savedPosts, sortCriteria = 'createdAt_desc') {
     const postsContainer = document.querySelector('.posts-container');
-    const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    let postsQuery;
+
+    if (sortCriteria === 'likes') {
+        postsQuery = query(collection(db, 'posts'), orderBy('likes', 'desc'));
+    } else if (sortCriteria === 'commentCount') {
+        postsQuery = query(collection(db, 'posts'), orderBy('commentCount', 'desc'));
+    } else if (sortCriteria === 'createdAt_asc') {
+        postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'asc'));
+    } else {
+        postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    }
 
     getDocs(postsQuery)
         .then(postsSnapshot => {
