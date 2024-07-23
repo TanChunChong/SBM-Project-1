@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Profile Picture</title>
     <link rel="stylesheet" href="../css/navBar.css">
-    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/changePic.css">
+    <link rel="stylesheet" href="../css/changeDescDark.css" id="dark-mode-stylesheet" disabled>
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode">
+    <link rel="stylesheet" href="../css/navBarDark.css" id="nav-bar-dark-mode" disabled>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
             </a>
         </div>
         <div class="profile-pic-container">
-            <img src="../resources/bear.png" alt="Profile Picture" class="profile-pic large">
+            <img class="profile-pic large">
         </div>
         <h2 class="username">Username</h2>
         <div class="grid-container" id="image-grid">
@@ -47,7 +49,8 @@
         </a>
     </div>
     <script type="module" src="../js/changePic.js"></script>
-
+    <script src="../js/darkMode.js"></script>
+    <script src="../js/pullSW.js"></script>
 </body>
 
 </html>

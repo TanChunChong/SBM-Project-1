@@ -1,6 +1,5 @@
 body {
   background-color: #333;
-  color: #fff;
 }
 
 .back-icon {
@@ -8,15 +7,6 @@ body {
     hue-rotate(0deg) contrast(100%);
 }
 
-.container {
-  background-color: #4d4d4d;
-}
-
-.grid-container {
-  background-color: #333;
-}
-
-.user-message,
-.bot-message {
- color: black;
+.header h2{
+    color: white;
 }

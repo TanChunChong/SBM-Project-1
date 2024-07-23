@@ -15,8 +15,3 @@ body {
 .grid-container {
   background-color: #333;
 }
-
-.user-message,
-.bot-message {
- color: black;
-}
