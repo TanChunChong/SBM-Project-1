@@ -1,5 +1,21 @@
 {
   "dependencies": {
-    "firebase": "^10.12.3"
-  }
+    "@google/generative-ai": "^0.15.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "firebase": "^10.12.3",
+    "google-auth-library": "^9.11.0",
+    "node-fetch": "^3.3.2"
+  },
+  "name": "sbm-project-1",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
