@@ -23,12 +23,9 @@
             <div class="trophy-icon">
                 <img src="../resources/trophy-svgrepo-com.svg" alt="Trophy Icon">
             </div>
-            <div class="tabs">
-                <button id="today-tab" class="active" onclick="toggleTabs('today')">Today</button>
-                <button id="seven-days-tab" class="inactive" onclick="toggleTabs('seven-days')">7 Days</button>
-            </div>
-            <div class="leaderboard">
-                <div class="entry">
+            <div class="loader-container" id="loader-container"><div class="loader" ></div></div>
+            <div class="leaderboard" id="leaderboard">
+                <!-- <div class="entry">
                     <div class="rank">1</div>
                     <div class="circle"></div>
                     <div class="name">Alpha</div>
@@ -62,7 +59,7 @@
                     <div class="name">Echo</div>
                     <div class="points">30 pts</div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -80,7 +77,9 @@
           <img src="../resources/settings.svg" alt="Settings">
         </a>
     </div>
+    <script type="module" src ="../js/leaderboard1.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
     <script src="../js/darkMode.js"></script>
-    <script src="../js/leaderboard1.js"></script>
+    <script src="../js/colouredLayer.js"></script>
 </body>
 </html>

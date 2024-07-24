@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 link.style.display = 'none';
             }
     myModules();
+    
 });
 
 async function myModules() {
@@ -119,5 +120,9 @@ async function myModules() {
         
     } catch (error) {
         console.error('Error fetching documents: ', error);
+    }
+    finally{
+        const loaderContainer = document.getElementById('loader-container');
+        loaderContainer.style.display = 'none';
     }
 }
