@@ -80,8 +80,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
 });
-
-async function test(){
-    console.log("dong")
-}
+document.getElementById('backArrow').addEventListener('click', function() {
+    history.back();
+});
 

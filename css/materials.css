@@ -25,7 +25,6 @@ body {
 
 .bodyContainer {
     padding: 20px;
-    max-width: 500px;
     text-align: center;
     margin-top: 60px; /* Increased margin to move the container lower */
     overflow-y: auto; /* Add vertical scroll */
@@ -104,7 +103,6 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 400px; /* Set a max height for the subjects container */
 }
 
 .subject {

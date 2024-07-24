@@ -11,9 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh;
     position: relative;
-    overflow: hidden;
 }
 
 .header-top {
@@ -26,14 +24,11 @@ body {
 
 .go-back {
     position: absolute;
-    top: 20px;
-    left: 10px;
+    top: 19px;
+    left: 20px;
 }
 
-.go-back img {
-    width: 36px;
-    height: 36px;
-}
+
 
 .topIcons {
     display: flex;
@@ -63,8 +58,6 @@ body {
     max-width: 500px;
     text-align: center;
     margin-top: 80px;
-    overflow-y: auto;
-    height: calc(100vh - 100px);
 }
 
 main {
@@ -155,35 +148,4 @@ main {
   }
   
 
-@media only screen and (max-width: 430px) and (max-height: 932px) {
-    .go-back {
-        top: 10px;
-        left: 10px;
-    }
 
-    .go-back img {
-        width: 24px;
-        height: 24px;
-    }
-
-    .topIcons {
-        top: 10px;
-        right: 10px;
-    }
-
-    .topIcons .timerIcon,
-    .topIcons .remindersIcon,
-    .topIcons .notificationsIcon {
-        width: 24px;
-        height: 24px;
-    }
-
-    .profile-icon {
-        width: 30px;
-        height: 30px;
-    }
-
-    .bodyContainer {
-        margin-top: 60px;
-    }
-}

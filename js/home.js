@@ -1,7 +1,7 @@
 import { db } from './firebaseConfig.js';
 import { collection, doc, getDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
-let email;
+let email; 
 
 document.addEventListener('DOMContentLoaded', async function () {
     email = localStorage.getItem('email');
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     } else {
         console.log("Username not found in localStorage.");
     }
+    
 
     try {
         const userRef = doc(db, 'users', userId);
@@ -41,7 +42,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     } catch (error) {
         console.error('Error fetching user data:', error);
     }
-
+    const link = document.querySelector('.seeAll');
+            if (link) {
+                link.style.display = 'none';
+            }
     myModules();
 });
 
@@ -66,7 +70,22 @@ async function myModules() {
             button.addEventListener('click', () => {
                 window.location.href = 'subjectSettings.html';
             });
-        } else if (userModules.length > 0) {
+        } 
+        else if (userModules.length < 4 && userModules.length>0){
+            const button = document.createElement('button');
+            button.classList.add('start');
+            button.id = 'start';
+            button.textContent = 'My Modules';
+            subjectsContainer.appendChild(button);
+            button.addEventListener('click', () => {
+                window.location.href = 'studyMaterials.html';
+            });
+        }
+        else if (userModules.length >= 4) {
+            const link = document.querySelector('.seeAll');
+            if (link) {
+                link.style.display = 'inline';
+            }
             const modulesQuery = query(collection(db, 'module'), orderBy('moduleName'));
             const modulesSnapshot = await getDocs(modulesQuery);
             const modules = [];
@@ -78,20 +97,26 @@ async function myModules() {
                     modules.push(data);
                 }
             });
-
-            modules.forEach((data) => {
+            
+            for (let i = 0; i < Math.min(modules.length, 4); i++) {
+                const data = modules[i];
                 const moduleElement = document.createElement('a');
-                moduleElement.href = "studyMaterials.html";
+                //
+                moduleElement.addEventListener('click', () => {
+                    window.location.href = `questions.html?moduleID=${data.moduleID}`;
+                });
+                //
                 moduleElement.classList.add('subjectContainer');
-
+                
                 const imgElement = document.createElement('img');
                 imgElement.classList.add('subjectIcon');
                 imgElement.src = data.moduleImgPath;
-
+        
                 moduleElement.appendChild(imgElement);
                 subjectsContainer.appendChild(moduleElement);
-            });
+            }
         }
+        
     } catch (error) {
         console.error('Error fetching documents: ', error);
     }

@@ -22,7 +22,6 @@ let email;
 document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
     
-    console.log(email);
     MyModules();
 });
 
@@ -51,6 +50,7 @@ async function MyModules() {
                 if (userModule) {
                     const moduleDiv = document.createElement('div');
                     moduleDiv.classList.add('subject');
+                    moduleDiv.setAttribute('data-module-id', data.moduleID);
 
                     const imgElement = document.createElement('img');
                     imgElement.classList.add('subject-icon');
@@ -64,7 +64,7 @@ async function MyModules() {
                     nameElement.textContent = data.moduleName;
 
                     const descriptionElement = document.createElement('p');
-                    descriptionElement.innerHTML = `You have completed <span class="completed">${userModule.score || 0}</span> questions`; // Use actual data
+                    descriptionElement.innerHTML = `<span class="completed">${userModule.score || 0}</span> questions completed`; // Use actual data
 
                     const circularProgressDiv = document.createElement('div');
                     circularProgressDiv.classList.add('circular-progress');
@@ -83,6 +83,9 @@ async function MyModules() {
                     moduleDiv.appendChild(infoDiv);
                     moduleDiv.appendChild(circularProgressDiv);
                     subjectsContainer.appendChild(moduleDiv);
+                    moduleDiv.addEventListener('click', () => {
+                        window.location.href = `questions.html?moduleID=${data.moduleID}`;
+                    });
                 }
             });
         }
