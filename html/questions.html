@@ -43,13 +43,21 @@
                 <button>(c) \(a + b\)</button>
                 <button>(d) None of these</button> -->
             </div>
-            <div class="loader-container"><div class="loader"></div></div>
+            
             
 
             <audio id="correct-sound" src="../resources/correct Sound.mp3"></audio>
             <audio id="incorrect-sound" src="../resources/wrongSound.mp3"></audio>
     </div>
-    <script type="module" src ="../js/Questions.js"></script>
+
+    <!-- <div id="incorrectModal" class="modal">
+        <div class="modal-content">
+            <p>That's incorrect</p>
+            <a href="home.html"><div class ="desc">Go Back</div></a>
+        </div>
+    </div>   -->
+    <div class="loader-container" id="loader-container"><div class="loader"></div></div>
+    <script type="module" src ="../js/questions.js"></script>
     <script type="module" src="../js/firebaseConfig.js"></script>
     <script src="../js/darkMode.js"></script>
     <script src="../js/colouredLayer.js"></script>

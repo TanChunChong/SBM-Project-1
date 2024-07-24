@@ -22,7 +22,8 @@ async function getUserData() {
             username: userData.username,
             email: userData.email,
             imagepath: userData.imagepath || placeholderImage, // Use placeholder image if imagepath is null or empty
-            totalScore: totalScore
+            totalScore: totalScore,
+            userID: userData.userID // Include userID
         });
     }
 
@@ -40,6 +41,9 @@ function displayLeaderboard(users) {
     users.forEach((user, index) => {
         const entry = document.createElement('div');
         entry.classList.add('entry');
+        entry.addEventListener('click', () => {
+            window.location.href = `friendprofile.html?uid=${user.userID}`;
+        });
 
         const rank = document.createElement('div');
         rank.classList.add('rank');

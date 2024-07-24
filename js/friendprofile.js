@@ -56,7 +56,9 @@ async function fetchFriendData(friendUID) {
   } catch (error) {
     console.error("Error fetching friend data:", error);
   }
+  
   return null;
+  
 }
 
 async function checkFriendStatus(
@@ -169,16 +171,24 @@ async function checkFriendStatus(
 
 async function fetchCurrentUser(user) {
   try {
+    
     const userRef = doc(db, "users", user.uid);
     const userDoc = await getDoc(userRef);
     if (userDoc.exists()) {
       return userDoc.data();
+      
     } else {
       throw new Error("Current user document does not exist");
     }
   } catch (error) {
     console.error("Error fetching current user data:", error);
     throw error;
+  }
+  finally{
+    setTimeout(() => {
+      const loaderContainer = document.getElementById('loader-container');
+      loaderContainer.style.display = 'none';
+  }, 400)
   }
 }
 

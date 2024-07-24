@@ -158,7 +158,7 @@ body{
     width: 100%; /* Full width of the viewport */
     top: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.8); /* Optional: Background overlay */
+    background-color: #fffced; /* Optional: Background overlay */
     z-index: 9999; /* Make sure the loader is on top of other content */
 }
 

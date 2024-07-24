@@ -10,7 +10,6 @@ let selectedAnswer = null;
 let questionsArray = [];
 let currentQuestionIndex = 0;
 
-
 document.addEventListener('DOMContentLoaded', async function () {
     email = localStorage.getItem('email');
     const urlParams = new URLSearchParams(window.location.search);
@@ -20,8 +19,27 @@ document.addEventListener('DOMContentLoaded', async function () {
         await loadQuestions(moduleID);
         shuffleQuestions(); 
         displayQuestion(currentQuestionIndex);
+        
     } else {
         console.error('No module ID found in URL');
+    }
+
+    // Get the modal
+    const modal = document.getElementById("incorrectModal");
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 });
 
@@ -43,41 +61,48 @@ async function loadModuleName(moduleID) {
     }
 }
 
-async function loadQuestions(moduleID) {
-    try {
-        // loadingSpinner.style.visibility = 'visible';
-        // loadingSpinner.style.visibility = 'visible';
+    async function loadQuestions(moduleID) {
+        try {
+            // loadingSpinner.style.visibility = 'visible';
+            // loadingSpinner.style.visibility = 'visible';
 
-        const q = query(collection(db, 'questions'), where('moduleID', '==', moduleID));
-        const querySnapshot = await getDocs(q);
+            const q = query(collection(db, 'questions'), where('moduleID', '==', moduleID));
+            const querySnapshot = await getDocs(q);
 
-        const answeredQuery = query(collection(db, 'userAnsweredQuestions'), where('email', '==', email), where('moduleID', '==', moduleID));
-        const answeredSnapshot = await getDocs(answeredQuery);
-        const answeredQuestions = new Set();
+            const answeredQuery = query(collection(db, 'userAnsweredQuestions'), where('email', '==', email), where('moduleID', '==', moduleID));
+            const answeredSnapshot = await getDocs(answeredQuery);
+            const answeredQuestions = new Set();
 
-        answeredSnapshot.forEach(doc => {
-            answeredQuestions.add(doc.data().questionID);
-        });
+            answeredSnapshot.forEach(doc => {
+                answeredQuestions.add(doc.data().questionID);
+            });
 
-        querySnapshot.forEach((doc) => {
-            if (!answeredQuestions.has(doc.id)) {
-                const questionData = doc.data();
-                questionsArray.push({ id: doc.id, ...questionData });
+            querySnapshot.forEach((doc) => {
+                if (!answeredQuestions.has(doc.id)) {
+                    const questionData = doc.data();
+                    questionsArray.push({ id: doc.id, ...questionData });
+                }
+            });
+
+            
+            if (window.MathJax) {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                
+            } else {
+                console.error('MathJax is not loaded.');
             }
-        });
-
-        if (window.MathJax) {
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        } else {
-            console.error('MathJax is not loaded.');
+            
+        } catch (error) {
+            console.error('Error fetching questions: ', error);
         }
-    } catch (error) {
-        console.error('Error fetching questions: ', error);
+        finally{
+            setTimeout(() => {
+        const loaderContainer = document.getElementById('loader-container');
+        loaderContainer.style.display = 'none';
+    }, 400)
+        }
+
     }
-    // finally {
-    //     loadingSpinner.remove(); // Hide the spinner
-    // }
-}
 
 function shuffleQuestions() {
     for (let i = questionsArray.length - 1; i > 0; i--) {
@@ -132,6 +157,7 @@ function displayQuestion(index) {
 
     if (window.MathJax) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, questionsContainer]);
+        
     }
 }
 
@@ -151,8 +177,6 @@ async function checkAnswer(correctAnswer, optionsContainer, questionID, moduleID
         return;
     }
 
-    const body = document.body;
-
     if (selectedAnswer === correctAnswer) {
         console.log('Correct answer!');
         optionsContainer.querySelector('.selected').classList.add('correct');
@@ -164,27 +188,14 @@ async function checkAnswer(correctAnswer, optionsContainer, questionID, moduleID
         currentQuestionIndex++;
         displayQuestion(currentQuestionIndex);
     } else {
-        alert("Incorrect");
         console.log('Incorrect answer!');
         optionsContainer.querySelector('.selected').classList.add('incorrect');
 
-        body.classList.add('fade-out');
-
-        setTimeout(() => {
-            body.innerHTML = ''; 
-            const incorrectMessage = document.createElement('div');
-            incorrectMessage.classList.add('incorrect-message');
-            incorrectMessage.textContent = "That's incorrect";
-            body.appendChild(incorrectMessage); 
-
-            setTimeout(() => {
-                window.history.back();
-            }, 2000); 
-        }, 1000); 
+        // Show the modal
+        const modal = document.getElementById("incorrectModal");
+        modal.style.display = "block";
     }
 }
-
-
 
 async function incrementUserScore(email, moduleID) {
     try {
