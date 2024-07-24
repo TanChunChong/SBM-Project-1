@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig.js';
-import { collection, getDocs, doc, getDoc, updateDoc, addDoc, query, where, deleteDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, doc, getDoc, updateDoc, addDoc, query, where, deleteDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     adjustColouredLayerHeight();
@@ -98,7 +98,7 @@ async function loadPosts() {
     const savedPostsSnapshot = await getDocs(savesQuery);
     const savedPosts = savedPostsSnapshot.docs.map(doc => doc.data().postsID);
 
-    const postsQuery = query(collection(db, 'posts'));
+    const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
     getDocs(postsQuery)
         .then(postsSnapshot => {
             const userPromises = {};
