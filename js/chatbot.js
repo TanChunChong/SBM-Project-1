@@ -4,10 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendButton = document.querySelector('.send-button');
 
     const messages = [
-        { sender: 'bot', text: 'Hello! How can I assist you today?' },
-        { sender: 'user', text: 'What is the weather like today?' },
-        { sender: 'bot', text: 'The weather is sunny with a high of 25°C.' },
-        { sender: 'user', text: 'Thank you!' },
+        { sender: 'bot', text: 'Hello! How can I assist you today?' }
     ];
 
     const renderMessages = () => {
@@ -22,17 +19,29 @@ document.addEventListener('DOMContentLoaded', () => {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     };
 
-    sendButton.addEventListener('click', () => {
+    const sendMessageToAPI = async (userMessage) => {
+        const response = await fetch('http://localhost:3000/generate-response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: userMessage }),
+        });
+
+        const data = await response.json();
+        return data.response;
+    };
+
+    sendButton.addEventListener('click', async () => {
         const userMessage = chatInput.value.trim();
         if (userMessage) {
             messages.push({ sender: 'user', text: userMessage });
             chatInput.value = '';
             renderMessages();
-            // Simulate bot response after a short delay
-            setTimeout(() => {
-                messages.push({ sender: 'bot', text: 'I am here to help!' });
-                renderMessages();
-            }, 1000);
+            // Get bot response from API
+            const botResponse = await sendMessageToAPI(userMessage);
+            messages.push({ sender: 'bot', text: botResponse });
+            renderMessages();
         }
     });
 

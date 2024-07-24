@@ -25,21 +25,18 @@
         <div class="coloured-layer"></div>
         <div class="popular-trending-container">
             <!-- Rectangular boxes for the first row -->
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Popular</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Recommended</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Trending</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Latest</p>
-            </div>
-            <div class="popular-trending-box">
-                <p class="popular-trending-text">Hot</p>
-            </div> 
+                <div class="popular-trending-box" data-sort="likes">
+                    <p class="popular-trending-text">Popular</p>
+                </div>
+                <div class="popular-trending-box" data-sort="commentCount">
+                    <p class="popular-trending-text">Trending</p>
+                </div>
+                <div class="popular-trending-box" data-sort="createdAt_desc">
+                    <p class="popular-trending-text">Latest</p>
+                </div>
+                <div class="popular-trending-box" data-sort="createdAt_asc">
+                    <p class="popular-trending-text">Oldest</p>
+                </div>        
         </div>
         <p class="popular-topics">Popular Topics</p> <!-- Added "Popular Topics" text -->
         <div class="topics-container"> <!-- New container for square boxes -->
