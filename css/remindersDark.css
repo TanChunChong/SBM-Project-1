@@ -1,8 +1,20 @@
-body {
+body,
+.container,
+.current-date,
+.date-selector,
+.section-title,
+.tasks {
     font-family: 'Poppins', sans-serif;
     background-color: #333;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    color: white;
+}
+
+.calendar-icon,
+.icon {
+    filter: invert(100%) brightness(100%) sepia(0%) saturate(100%)
+    hue-rotate(0deg) contrast(100%);
+}
+
+.app-bar {
+    background-color: #4D4D4D;
 }
