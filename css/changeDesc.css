@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 body {
-    display: flex;
+    font-family: 'Poppins', sans-serif;
     justify-content: center;
     align-items: center;
     height: 60vh; /* Full height of the viewport */
