@@ -18,6 +18,8 @@ const primaryButton = document.getElementById("primaryButton");
 const acceptButton = document.getElementById("acceptButton");
 const dayStreakElement = document.querySelector('.card:nth-child(1) .big');
 const reviewsElement = document.querySelector('.card:nth-child(2) .big');
+const totalScoreElement = document.querySelector('.score1'); // Element to show total score
+const highScoreElement = document.querySelector('.score2'); // Element to show high score
 
 const urlParams = new URLSearchParams(window.location.search);
 const friendUID = urlParams.get("uid");
@@ -67,6 +69,9 @@ async function fetchFriendData(friendUID) {
       const commentsCount = commentsSnapshot.size;
       reviewsElement.textContent = commentsCount;
 
+      // Fetch and display scores
+      await fetchAndDisplayScores(friendUID);
+
       return friendData;
     } else {
       console.error("No such document!");
@@ -75,6 +80,31 @@ async function fetchFriendData(friendUID) {
     console.error("Error fetching friend data:", error);
   }
   return null;
+}
+
+async function fetchAndDisplayScores(friendUID) {
+  try {
+    console.log(`Fetching scores for UID: ${friendUID}`); // Debug log
+    const scoresQuery = query(collection(db, 'scores'), where('userID', '==', friendUID));
+    const scoresSnapshot = await getDocs(scoresQuery);
+
+    if (!scoresSnapshot.empty) {
+      scoresSnapshot.forEach(scoreDoc => {
+        const scoreData = scoreDoc.data();
+        console.log(`Score data for ${friendUID}:`, scoreData); // Debug log
+        totalScoreElement.textContent = scoreData.totalScore || 0;
+        highScoreElement.textContent = scoreData.highscore || 0;
+      });
+    } else {
+      console.log(`No score document found for ${friendUID}`); // Debug log
+      totalScoreElement.textContent = 0;
+      highScoreElement.textContent = 0;
+    }
+  } catch (error) {
+    console.error('Error fetching scores:', error);
+    totalScoreElement.textContent = 0;
+    highScoreElement.textContent = 0;
+  }
 }
 
 async function checkFriendStatus(
@@ -198,6 +228,12 @@ async function fetchCurrentUser(user) {
     console.error("Error fetching current user data:", error);
     throw error;
   }
+  finally {
+    const loaderContainer = document.getElementById('loader-container');
+    setTimeout(() => {
+        loaderContainer.style.display = 'none';
+    }, 400); // Delay in milliseconds (2000ms = 2 seconds)
+}
 }
 
 onAuthStateChanged(auth, async (user) => {

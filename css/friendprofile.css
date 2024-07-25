@@ -77,6 +77,16 @@ body {
   position: relative;
   bottom: 18px;
 }
+.score1 {
+  font-size: 25px;
+  position: relative;
+  bottom: 18px;
+}
+.score2 {
+  font-size: 25px;
+  position: relative;
+  bottom: 18px;
+}
 
 .small {
   font-size: 12px;
