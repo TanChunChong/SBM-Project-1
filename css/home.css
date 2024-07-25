@@ -1,189 +1,255 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-body{
-    padding-left: 20px;
-    padding-right: 20px;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background-color: #fffced;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
+body {
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background-color: #fffced;
 }
 
 .topIcons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .topIconsRight {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
-.first{
-    position: relative;
-    top: 12px;
-    padding-right: 10px;
+.first {
+  position: relative;
+  top: 12px;
+  padding-right: 10px;
 }
 
-.second{
-    position: relative;
-    top: 17px;
-    padding-right: 10px;
+.second {
+  position: relative;
+  top: 17px;
+  padding-right: 10px;
 }
 
-.third{
-    position: relative;
-    top: 13px;
-    padding-right: 10px;
+.third {
+  position: relative;
+  top: 13px;
+  padding-right: 10px;
 }
 
 .logo {
-    flex: 1;
-    padding: 0px;
+  flex: 1;
+  padding: 0px;
 }
 
-.hello{
-    font-size: 40px;
-    font-weight: 600;
+.hello {
+  font-size: 40px;
+  font-weight: 600;
 }
 
-.username{
-    font-size: 30px;
-    font-weight: 600;
+.username {
+  font-size: 30px;
+  font-weight: 600;
 }
 
-.seeAll{
-    font-size: 16px;
-    font-weight: 600;
-    display: none;
+.seeAll {
+  font-size: 16px;
+  font-weight: 600;
+  display: none;
 }
 
-.row{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.displayStudyYear{
-    font-size: 16px;
-    position: relative;
-    top: 5px;
+.displayStudyYear {
+  font-size: 16px;
+  position: relative;
+  top: 5px;
 }
 
 .subjectRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.subjectContainer{
-    height: 59px;
-    width: 59px;
-    border-radius: 14px;
-    border: solid 2px black;
-    background-color: white;
-    text-align: center;
-    /*  */
-    
+.subjectContainer {
+  height: 59px;
+  width: 59px;
+  border-radius: 14px;
+  border: solid 2px black;
+  background-color: white;
+  text-align: center;
+  /*  */
 }
 
-.aboutUsTitle{
-    font-size: 24px;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+.aboutUsTitle {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
 }
 
-.aboutUsText{
-    font-size: 16px;
-    padding-top: 5px;
-    padding-bottom: 30px;
+.aboutUsText {
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 30px;
 }
 
 .aboutUsImage,
 .headerImage {
-    margin-left: calc(-1.3vw);
-    width: calc(90vw)
+  margin-left: calc(-1.3vw);
+  width: calc(90vw);
 }
 
 .aiChatBot {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: #E3E5F4;
-    color: white;
-    border: none;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid black;
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #e3e5f4;
+  color: white;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid black;
 }
 
 .subjectIcon {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
 
 .start {
-    background-color: #BAC4FF;
-    border: none;
-    border-radius: 20px;
-    padding: 11px 30px; /* Increase padding for larger button */
-    font-size: 16px;
-    cursor: pointer;
-    width: 100%; /* Make button full width */
-    height: 40px;
-    text-align: center;
-    
+  background-color: #bac4ff;
+  border: none;
+  border-radius: 20px;
+  padding: 11px 30px; /* Increase padding for larger button */
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%; /* Make button full width */
+  height: 40px;
+  text-align: center;
 }
 
-.subjectsText{
-    font-size: 22px;
-    font-weight:bolder;
+.subjectsText {
+  font-size: 22px;
+  font-weight: bolder;
 }
 
 .loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full height of the viewport */
-    position: fixed; /* Fix position so it stays centered */
-    width: 100%; /* Full width of the viewport */
-    top: 0;
-    left: 0;
-    background-color: #fffced; /* Optional: Background overlay */
-    z-index: 9999; /* Make sure the loader is on top of other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
+  position: fixed; /* Fix position so it stays centered */
+  width: 100%; /* Full width of the viewport */
+  top: 0;
+  left: 0;
+  background-color: #fffced; /* Optional: Background overlay */
+  z-index: 9999; /* Make sure the loader is on top of other content */
 }
 
 .loader {
-    width: 50px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 8px solid #514b82;
-    animation:
-      l20-1 0.8s infinite linear alternate,
-      l20-2 1.6s infinite linear;
-  }
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #514b82;
+  animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+}
 
-  @keyframes l20-1{
-    0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-    12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-    25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-    50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-    62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-    75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-    100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
- }
- @keyframes l20-2{ 
-   0%    {transform:scaleY(1)  rotate(0deg)}
-   49.99%{transform:scaleY(1)  rotate(135deg)}
-   50%   {transform:scaleY(-1) rotate(0deg)}
-   100%  {transform:scaleY(-1) rotate(-135deg)}
- }
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}

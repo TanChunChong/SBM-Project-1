@@ -90,7 +90,7 @@ async function fetchPaymentHistory(userId) {
   }
 }
 
-async function confirmSubscription(userId, username, subscriptionType, amount) {
+async function confirmSubscription(userId, username, subscriptionType, amount, email) {
   const currentDate = new Date();
   let expiryDate = new Date();
   switch (subscriptionType) {
@@ -114,6 +114,7 @@ async function confirmSubscription(userId, username, subscriptionType, amount) {
     await setDoc(doc(db, "subscriptions", userId), {
       subscriptionType,
       expiry: expiryDate.toISOString(),
+      email: email // Add the user's email to the document
     });
 
     await setDoc(doc(db, "paymentHistory", `${userId}_${Date.now()}`), {
@@ -154,6 +155,7 @@ document
 
     if (user) {
       const userId = user.uid;
+      const email = user.email; // Get the user's email
       const subscriptionDocRef = doc(db, "subscriptions", userId);
       const subscriptionDocSnapshot = await getDoc(subscriptionDocRef);
 
@@ -178,7 +180,7 @@ document
         const cardDocRef = doc(db, "usersCard", `${username}Card`);
         const cardDocSnapshot = await getDoc(cardDocRef);
         if (cardDocSnapshot.exists()) {
-          confirmSubscription(userId, username, subscriptionType, amount);
+          confirmSubscription(userId, username, subscriptionType, amount, email); // Pass the email to the function
         } else {
           alert("You need to add a card before subscribing to a plan.");
         }
