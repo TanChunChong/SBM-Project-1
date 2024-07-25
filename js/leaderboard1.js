@@ -1,5 +1,5 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, getDocs, query, where, orderBy, limit, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 async function getUserData() {
     const userCollection = collection(db, 'users');
@@ -18,6 +18,9 @@ async function getUserData() {
             totalScore += moduleDoc.data().score;
         });
 
+        // Update the user's score in the scores collection
+        await updateUserTotalScore(userData.email, userData.userID, totalScore);
+
         usersData.push({
             username: userData.username,
             email: userData.email,
@@ -32,6 +35,21 @@ async function getUserData() {
     const topUsers = usersData.slice(0, 10);
 
     displayLeaderboard(topUsers);
+}
+
+async function updateUserTotalScore(email, userID, totalScore) {
+    try {
+        const scoreRef = doc(db, 'scores', email);
+        const scoreDoc = await getDoc(scoreRef);
+
+        if (scoreDoc.exists()) {
+            await updateDoc(scoreRef, { totalScore: totalScore, userID: userID });
+        } else {
+            await setDoc(scoreRef, { email: email, userID: userID, totalScore: totalScore });
+        }
+    } catch (error) {
+        console.error('Error updating user total score: ', error);
+    }
 }
 
 function displayLeaderboard(users) {
