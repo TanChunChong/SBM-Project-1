@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig.js';
-import { collection, doc, getDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, doc, getDoc, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 let email; 
 
@@ -43,11 +43,19 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error fetching user data:', error);
     }
     const link = document.querySelector('.seeAll');
-            if (link) {
-                link.style.display = 'none';
-            }
+    if (link) {
+        link.style.display = 'none';
+    }
+    await checkSubscriptionAndShowAd();
     myModules();
-    
+
+    // Add event listener for closing the advertisement
+    const closeAdButton = document.getElementById('close-advertisement');
+    const advertisementContainer = document.getElementById('advertisement-container');
+
+    closeAdButton.addEventListener('click', function () {
+        advertisementContainer.style.display = 'none';
+    });
 });
 
 async function myModules() {
@@ -124,5 +132,21 @@ async function myModules() {
     finally{
         const loaderContainer = document.getElementById('loader-container');
         loaderContainer.style.display = 'none';
+    }
+}
+
+async function checkSubscriptionAndShowAd() {
+    try {
+        const subscriptionsQuery = query(collection(db, 'subscriptions'), where('email', '==', email));
+        const subscriptionsSnapshot = await getDocs(subscriptionsQuery);
+
+        const advertisementContainer = document.getElementById('advertisement-container');
+
+        if (subscriptionsSnapshot.empty) {
+            // No matching subscription found, show advertisement
+            advertisementContainer.style.display = 'flex';
+        }
+    } catch (error) {
+        console.error('Error checking subscription:', error);
     }
 }
