@@ -1,5 +1,5 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, query, where, getDocs, doc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { collection, query, where, getDocs,getDoc, doc, updateDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 document.getElementById('goBackButton').addEventListener('click', () => {
     window.history.back();
@@ -178,6 +178,7 @@ async function checkAnswer(correctAnswer, optionsContainer, questionID, moduleID
 
         await incrementUserScore(email, moduleID);
         await markQuestionAsAnswered(email, moduleID, questionID);
+        await updateHighScore(email, correctAnswersCount); // Update the high score
 
         currentQuestionIndex++;
         displayQuestion(currentQuestionIndex);
@@ -220,5 +221,22 @@ async function markQuestionAsAnswered(email, moduleID, questionID) {
         });
     } catch (error) {
         console.error('Error marking question as answered: ', error);
+    }
+}
+
+async function updateHighScore(email, correctAnswersCount) {
+    try {
+        const scoreRef = doc(db, 'scores', email);
+        const scoreDoc = await getDoc(scoreRef);
+        if (scoreDoc.exists()) {
+            const currentHighScore = scoreDoc.data().highscore;
+            if (correctAnswersCount > currentHighScore) {
+                await updateDoc(scoreRef, { highscore: correctAnswersCount });
+            }
+        } else {
+            await setDoc(scoreRef, { email: email, highscore: correctAnswersCount });
+        }
+    } catch (error) {
+        console.error('Error updating high score: ', error);
     }
 }

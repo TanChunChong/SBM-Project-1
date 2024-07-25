@@ -5,6 +5,9 @@ import {
   setDoc,
   deleteDoc,
   collection,
+  query,
+  where,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
 
@@ -13,6 +16,8 @@ const usernameElement = document.querySelector(".name");
 const descriptionElement = document.querySelector(".description");
 const primaryButton = document.getElementById("primaryButton");
 const acceptButton = document.getElementById("acceptButton");
+const dayStreakElement = document.querySelector('.card:nth-child(1) .big');
+const reviewsElement = document.querySelector('.card:nth-child(2) .big');
 
 const urlParams = new URLSearchParams(window.location.search);
 const friendUID = urlParams.get("uid");
@@ -49,6 +54,19 @@ async function fetchFriendData(friendUID) {
       profilePicture.src = friendData.imagepath;
       usernameElement.textContent = friendData.username;
       descriptionElement.textContent = friendData.description;
+
+      // Count posts by the user
+      const postsQuery = query(collection(db, 'posts'), where('userId', '==', friendUID));
+      const postsSnapshot = await getDocs(postsQuery);
+      const postsCount = postsSnapshot.size;
+      dayStreakElement.textContent = postsCount;
+
+      // Count comments by the user
+      const commentsQuery = query(collection(db, 'comments'), where('userId', '==', friendUID));
+      const commentsSnapshot = await getDocs(commentsQuery);
+      const commentsCount = commentsSnapshot.size;
+      reviewsElement.textContent = commentsCount;
+
       return friendData;
     } else {
       console.error("No such document!");
@@ -56,9 +74,7 @@ async function fetchFriendData(friendUID) {
   } catch (error) {
     console.error("Error fetching friend data:", error);
   }
-  
   return null;
-  
 }
 
 async function checkFriendStatus(
@@ -171,24 +187,16 @@ async function checkFriendStatus(
 
 async function fetchCurrentUser(user) {
   try {
-    
     const userRef = doc(db, "users", user.uid);
     const userDoc = await getDoc(userRef);
     if (userDoc.exists()) {
       return userDoc.data();
-      
     } else {
       throw new Error("Current user document does not exist");
     }
   } catch (error) {
     console.error("Error fetching current user data:", error);
     throw error;
-  }
-  finally{
-    setTimeout(() => {
-      const loaderContainer = document.getElementById('loader-container');
-      loaderContainer.style.display = 'none';
-  }, 400)
   }
 }
 

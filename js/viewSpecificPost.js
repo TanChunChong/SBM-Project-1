@@ -19,9 +19,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const comment = commentInput.value.trim();
         if (comment !== '') {
             const username = localStorage.getItem('username'); // Get username from local storage
+            const userId = localStorage.getItem('userId'); // Get userID from local storage
 
-            if (!username) {
-                console.error('No username found in local storage');
+            if (!username || !userId) {
+                console.error('No username or userID found in local storage');
                 return;
             }
 
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     likes: "0",
                     postsID: postId,
                     username: username,
+                    userId: userId, // Add userId to the comment
                     commentID: ""
                 };
 
