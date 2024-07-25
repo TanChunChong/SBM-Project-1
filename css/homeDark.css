@@ -11,3 +11,7 @@ body {
     text-decoration: none;
     color: lightblue;
 }
+
+#advertisement-content span, p {
+    color: black;
+}
