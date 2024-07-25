@@ -193,29 +193,35 @@ h1 {
     height: 200px;
     background-color: #fefefe;
     margin: 5% auto; /* 15% from the top and centered */
-        padding: 20px;
+        padding: 20px;  
         border: 1px solid #888;
     width: 90%; /* Could be more or less, depending on screen size */
     border-radius: 36px;
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .desc {
     background-color: #BAC4FF;
     border: none;
-    border-radius: 8px;
-    padding: 11px 30px; /* Increase padding for larger button */
+    border-radius: 16px;
+    padding: 10px ; /* Increase padding for larger button */
     font-size: 16px;
     cursor: pointer;
     width: 100%; /* Make button full width */
-    height: 40px;
+    height: 35px;
     text-align: center;
     color: black;
     float: right;
-    font-size: 28px;
-    font-weight: bold;
     text-decoration: none;
 }
 
+.ModalBody{
+    font-size: 16px;
+}
+
+
+.score{
+    font-size: 16px;
+    color: black;
+}

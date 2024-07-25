@@ -9,6 +9,7 @@ let email;
 let selectedAnswer = null;
 let questionsArray = [];
 let currentQuestionIndex = 0;
+let correctAnswersCount = 0; // Counter for correct answers
 
 document.addEventListener('DOMContentLoaded', async function () {
     email = localStorage.getItem('email');
@@ -19,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         await loadQuestions(moduleID);
         shuffleQuestions(); 
         displayQuestion(currentQuestionIndex);
-        
     } else {
         console.error('No module ID found in URL');
     }
@@ -61,48 +61,41 @@ async function loadModuleName(moduleID) {
     }
 }
 
-    async function loadQuestions(moduleID) {
-        try {
-            // loadingSpinner.style.visibility = 'visible';
-            // loadingSpinner.style.visibility = 'visible';
+async function loadQuestions(moduleID) {
+    const loaderContainer = document.getElementById('loader-container');
+    try {
 
-            const q = query(collection(db, 'questions'), where('moduleID', '==', moduleID));
-            const querySnapshot = await getDocs(q);
+        const q = query(collection(db, 'questions'), where('moduleID', '==', moduleID));
+        const querySnapshot = await getDocs(q);
 
-            const answeredQuery = query(collection(db, 'userAnsweredQuestions'), where('email', '==', email), where('moduleID', '==', moduleID));
-            const answeredSnapshot = await getDocs(answeredQuery);
-            const answeredQuestions = new Set();
+        const answeredQuery = query(collection(db, 'userAnsweredQuestions'), where('email', '==', email), where('moduleID', '==', moduleID));
+        const answeredSnapshot = await getDocs(answeredQuery);
+        const answeredQuestions = new Set();
 
-            answeredSnapshot.forEach(doc => {
-                answeredQuestions.add(doc.data().questionID);
-            });
+        answeredSnapshot.forEach(doc => {
+            answeredQuestions.add(doc.data().questionID);
+        });
 
-            querySnapshot.forEach((doc) => {
-                if (!answeredQuestions.has(doc.id)) {
-                    const questionData = doc.data();
-                    questionsArray.push({ id: doc.id, ...questionData });
-                }
-            });
-
-            
-            if (window.MathJax) {
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-                
-            } else {
-                console.error('MathJax is not loaded.');
+        querySnapshot.forEach((doc) => {
+            if (!answeredQuestions.has(doc.id)) {
+                const questionData = doc.data();
+                questionsArray.push({ id: doc.id, ...questionData });
             }
-            
-        } catch (error) {
-            console.error('Error fetching questions: ', error);
-        }
-        finally{
-            setTimeout(() => {
-        const loaderContainer = document.getElementById('loader-container');
-        loaderContainer.style.display = 'none';
-    }, 400)
-        }
+        });
 
+        if (window.MathJax) {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        } else {
+            console.error('MathJax is not loaded.');
+        }
+    } catch (error) {
+        console.error('Error fetching questions: ', error);
+    } finally {
+        setTimeout(() => {
+            loaderContainer.style.display = 'none'; // Hide loader after delay
+        }, 400);
     }
+}
 
 function shuffleQuestions() {
     for (let i = questionsArray.length - 1; i > 0; i--) {
@@ -157,7 +150,6 @@ function displayQuestion(index) {
 
     if (window.MathJax) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, questionsContainer]);
-        
     }
 }
 
@@ -181,8 +173,10 @@ async function checkAnswer(correctAnswer, optionsContainer, questionID, moduleID
         console.log('Correct answer!');
         optionsContainer.querySelector('.selected').classList.add('correct');
 
-        await incrementUserScore(email, moduleID);
+        correctAnswersCount++; // Increment the counter for correct answers
+        document.querySelector('.score').textContent = `Your Score: ${correctAnswersCount}`;
 
+        await incrementUserScore(email, moduleID);
         await markQuestionAsAnswered(email, moduleID, questionID);
 
         currentQuestionIndex++;
