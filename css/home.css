@@ -284,9 +284,7 @@ body {
     transform: scaleY(-1) rotate(-135deg);
   }
 }
-<<<<<<< Updated upstream
 
-=======
 a {
   text-decoration: none;
   color: inherit; /* This ensures the link color is the same as the surrounding text */
@@ -297,4 +295,3 @@ a {
   padding-top: 5px;
   font-size: 13px;
 }
->>>>>>> Stashed changes

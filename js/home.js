@@ -45,9 +45,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (link) {
         link.style.display = 'none';
     }
-<<<<<<< Updated upstream
     await checkSubscriptionAndShowAd();
-    myModules();
 
     // Add event listener for closing the advertisement
     const closeAdButton = document.getElementById('close-advertisement');
@@ -56,9 +54,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     closeAdButton.addEventListener('click', function () {
         advertisementContainer.style.display = 'none';
     });
-=======
     myModules();
->>>>>>> Stashed changes
 });
 
 async function myModules() {
@@ -71,7 +67,7 @@ async function myModules() {
             if (email === doc.data().email) {
                 userModules.push(doc.data());
             }
-        });
+        }); 
 
         if (userModules.length === 0) {
             const button = document.createElement('button');
