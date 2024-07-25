@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     } else {
         console.log("Username not found in localStorage.");
     }
-    
 
     try {
         const userRef = doc(db, 'users', userId);
@@ -46,6 +45,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (link) {
         link.style.display = 'none';
     }
+<<<<<<< Updated upstream
     await checkSubscriptionAndShowAd();
     myModules();
 
@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     closeAdButton.addEventListener('click', function () {
         advertisementContainer.style.display = 'none';
     });
+=======
+    myModules();
+>>>>>>> Stashed changes
 });
 
 async function myModules() {
@@ -80,7 +83,7 @@ async function myModules() {
                 window.location.href = 'subjectSettings.html';
             });
         } 
-        else if (userModules.length < 4 && userModules.length>0){
+        else if (userModules.length < 4 && userModules.length > 0) {
             const button = document.createElement('button');
             button.classList.add('start');
             button.id = 'start';
@@ -110,26 +113,26 @@ async function myModules() {
             for (let i = 0; i < Math.min(modules.length, 4); i++) {
                 const data = modules[i];
                 const moduleElement = document.createElement('a');
-                //
-                moduleElement.addEventListener('click', () => {
-                    window.location.href = `questions.html?moduleID=${data.moduleID}`;
-                });
-                //
+                moduleElement.href = `questions.html?moduleID=${data.moduleID}`;
                 moduleElement.classList.add('subjectContainer');
-                
+
                 const imgElement = document.createElement('img');
                 imgElement.classList.add('subjectIcon');
                 imgElement.src = data.moduleImgPath;
-        
                 moduleElement.appendChild(imgElement);
+
+                const nameElement = document.createElement('div');
+                nameElement.classList.add('name');
+                nameElement.textContent = data.moduleCode;
+                moduleElement.appendChild(nameElement);
+
                 subjectsContainer.appendChild(moduleElement);
             }
         }
         
     } catch (error) {
         console.error('Error fetching documents: ', error);
-    }
-    finally{
+    } finally {
         const loaderContainer = document.getElementById('loader-container');
         loaderContainer.style.display = 'none';
     }

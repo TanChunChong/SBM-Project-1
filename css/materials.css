@@ -134,12 +134,13 @@ h1 {
 .subject-info {
     flex-grow: 1;
     text-align: left; /* Align text to the left */
-    padding-right: 60px; /* Add padding to make room for circular progress */
+    width:150px ;
 }
 
 .subject-info h3 {
     font-size: 16px;
     margin-bottom: 5px;
+    width: 200px;
 }
 
 .subject-info p {
@@ -166,6 +167,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-left: 30px;
 }
 
 .circular-progress .circle {

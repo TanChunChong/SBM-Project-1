@@ -17,7 +17,7 @@ body{
     justify-content: center;
     align-items: center;
     padding-left: 35px;
-    padding-right: 35px;
+    padding-right: 35px; 
     background-color: #FFFFFF ;
     height: 500px;
     border: solid 2px #707070;
@@ -151,3 +151,14 @@ body{
     margin-top: 12px;
     margin-left: calc(3.2%)
 }
+
+.score1 {
+    font-size: 25px;
+    position: relative;
+    bottom: 18px;
+  }
+  .score2 {
+    font-size: 25px;
+    position: relative;
+    bottom: 18px;
+  }

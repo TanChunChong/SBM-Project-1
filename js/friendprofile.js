@@ -62,7 +62,7 @@ async function fetchFriendData(friendUID) {
       const postsSnapshot = await getDocs(postsQuery);
       const postsCount = postsSnapshot.size;
       dayStreakElement.textContent = postsCount;
-
+ 
       // Count comments by the user
       const commentsQuery = query(collection(db, 'comments'), where('userId', '==', friendUID));
       const commentsSnapshot = await getDocs(commentsQuery);

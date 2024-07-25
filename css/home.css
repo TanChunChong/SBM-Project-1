@@ -284,4 +284,17 @@ body {
     transform: scaleY(-1) rotate(-135deg);
   }
 }
+<<<<<<< Updated upstream
 
+=======
+a {
+  text-decoration: none;
+  color: inherit; /* This ensures the link color is the same as the surrounding text */
+}
+/* To whoever doing dark theme, this is the class to change the color of icon text */
+.name{
+  text-align: center;
+  padding-top: 5px;
+  font-size: 13px;
+}
+>>>>>>> Stashed changes

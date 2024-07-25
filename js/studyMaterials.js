@@ -39,8 +39,8 @@ async function MyModules() {
             }
         });
         if (userModules.length === 0 ){
-            subjectsContainer.textContent= "You are currently not taking any modules"
-            personaliseButton.textContent= "Get Started"
+            subjectsContainer.textContent= "You are currently not taking any modules";
+            personaliseButton.textContent= "Get Started";
         }
         else if (userModules.length > 0) {
             const modulesSnapshot = await getDocs(collection(db, 'module'));
@@ -60,8 +60,9 @@ async function MyModules() {
                     const infoDiv = document.createElement('div');
                     infoDiv.classList.add('subject-info');
 
+                    // Include moduleCode in nameElement
                     const nameElement = document.createElement('h3');
-                    nameElement.textContent = data.moduleName;
+                    nameElement.textContent = `${data.moduleName} (${data.moduleCode})`;
 
                     const descriptionElement = document.createElement('p');
                     descriptionElement.innerHTML = `<span class="completed">${userModule.score || 0}</span> questions completed`; // Use actual data
@@ -91,9 +92,7 @@ async function MyModules() {
         }
     } catch (error) {
         console.error('Error fetching documents: ', error);
-    }
-    finally {
+    } finally {
         loadingSpinner.remove(); // Hide the spinner
     }
 }
-
