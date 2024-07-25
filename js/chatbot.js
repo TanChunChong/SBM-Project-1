@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const sendMessageToAPI = async (userMessage) => {
-        const response = await fetch('http://192.168.170.202:3000/generate-response', {
+        const response = await fetch('http://localhost:3000/generate-response', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
