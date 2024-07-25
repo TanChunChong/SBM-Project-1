@@ -1,18 +1,22 @@
 import { auth, db } from './firebaseConfig.js';
-import { collection, getDocs, addDoc, doc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-
+import { collection, getDocs, addDoc, query, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 let email;
 
 document.addEventListener('DOMContentLoaded', async function () {
     email = localStorage.getItem('email');
     
+    // Placeholder image
+    const placeholderImage = '../resources/book.png'; // Path to your placeholder image
+    const moduleImage = document.getElementById('moduleImage');
+    moduleImage.src = placeholderImage;
+    moduleImage.style.display = 'block';
+
     // Fetching module names from Firestore
     console.log("Fetching modules...");
     const modulesRef = collection(db, 'module');
     const modulesSnapshot = await getDocs(modulesRef);
     const moduleDropdown = document.getElementById('courses');
-    const moduleImage = document.getElementById('moduleImage');
 
     modulesSnapshot.forEach((doc) => {
         const moduleName = doc.data().moduleName;
@@ -27,12 +31,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     moduleDropdown.addEventListener('change', function () {
         const selectedOption = moduleDropdown.options[moduleDropdown.selectedIndex];
         const imgPath = selectedOption.dataset.imgPath;
+
         if (imgPath) {
             moduleImage.src = imgPath;
+            moduleImage.onerror = function() {
+                moduleImage.src = placeholderImage;
+            };
             moduleImage.style.display = 'block';
         } else {
-            moduleImage.style.display = 'none';
-            
+            moduleImage.src = placeholderImage;
+            moduleImage.style.display = 'block';
         }
     });
 
@@ -64,23 +72,59 @@ document.addEventListener('DOMContentLoaded', async function () {
                             score: 0
                         });
 
-                        alert('Document successfully created!');
+                        setModalMessage("Your module has been added.");
+                        openModal();
                     } else {
-                        alert('This module is already assigned to your email.');
+                        setModalMessage("This module is already assigned to your email.");
+                        openModal();
                     }
                 } else {
-                    alert('Module not found.');
+                    setModalMessage("Module not found.");
+                    openModal();
                 }
             } catch (error) {
                 console.error('Error creating document: ', error);
-                alert('Error creating document.');
+                setModalMessage('Error creating document.');
+                openModal();
             }
         } else {
-            alert('Please select a course.');
+            setModalMessage('Please select a module you would like to take.<br>Ensure you choose a valid module.');
+            openModal();
         }
     });
 });
+
+// Function to open the modal
+function openModal() {
+    const modal = document.getElementById("incorrectModal");
+    modal.style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+    const modal = document.getElementById("incorrectModal");
+    modal.style.display = "none";
+}
+
+// Function to set the modal message
+function setModalMessage(message) {
+    const modalMessageElement = document.querySelector('.ModalBody');
+    modalMessageElement.innerHTML = message; // Use innerHTML to support line breaks
+}
+
+// Event listener for the "Continue" button
+const continueButton = document.querySelector('.desc');
+continueButton.addEventListener('click', closeModal);
+
+// Event listener for clicks outside the modal content
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById("incorrectModal");
+    if (event.target == modal) {
+        closeModal();
+    }
+});
+
+// Back button event listener
 document.getElementById('backArrow').addEventListener('click', function() {
     history.back();
 });
-

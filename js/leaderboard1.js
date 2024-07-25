@@ -82,17 +82,12 @@ function displayLeaderboard(users) {
         points.classList.add('points');
         points.textContent = `${user.totalScore} pts`;
 
-        const arrow = document.createElement('div');
-        arrow.classList.add('arrow');
-        const icon = document.createElement('i');
-        icon.classList.add('fas', 'fa-chevron-right');
-        arrow.appendChild(icon);
+        
 
         entry.appendChild(rank);
         entry.appendChild(circle);
         entry.appendChild(name);
         entry.appendChild(points);
-        entry.appendChild(arrow);
 
         leaderboard.appendChild(entry);
     });
