@@ -48,4 +48,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     } catch (error) {
         console.error('Error fetching user data:', error);
     }
+    finally{
+        const loaderContainer = document.getElementById('loader-container');
+        loaderContainer.style.display = 'none';
+    }
 });
