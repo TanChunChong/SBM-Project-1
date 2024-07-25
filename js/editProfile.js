@@ -1,7 +1,7 @@
 // Import Firebase functions
 import { auth, db, storage } from './firebaseConfig.js';
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-import { onAuthStateChanged, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { onAuthStateChanged, signInWithEmailAndPassword, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
 import { getDownloadURL, ref } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
 // Function to fetch and display user data
@@ -33,6 +33,22 @@ async function displayUserData(user) {
     }
 }
 
+// Function to reauthenticate the user
+async function reauthenticateUser(user, oldPassword) {
+    const credential = EmailAuthProvider.credential(user.email, oldPassword);
+    await reauthenticateWithCredential(user, credential);
+}
+
+// Function to clear form fields except readonly fields
+function clearFormFields() {
+    const form = document.querySelector('.edit-profile-form');
+    form.querySelectorAll('input').forEach(input => {
+        if (!input.readOnly) {
+            input.value = '';
+        }
+    });
+}
+
 // Function to update user data
 async function updateUserProfile(event) {
     event.preventDefault();
@@ -52,9 +68,9 @@ async function updateUserProfile(event) {
         }
 
         try {
-            // Update user password if new password is provided
+            // Reauthenticate user if password is being updated
             if (newPassword && oldPassword) {
-                await signInWithEmailAndPassword(auth, user.email, oldPassword);
+                await reauthenticateUser(user, oldPassword);
                 await updatePassword(user, newPassword);
             }
 
@@ -66,6 +82,7 @@ async function updateUserProfile(event) {
             });
 
             alert('Profile updated successfully!');
+            clearFormFields(); // Clear the form fields after a successful update
         } catch (error) {
             console.error("Error updating profile: ", error);
             alert('Error updating profile: ' + error.message);
@@ -86,3 +103,6 @@ onAuthStateChanged(auth, (user) => {
 
 // Event listener for form submission
 document.querySelector('.edit-profile-form').addEventListener('submit', updateUserProfile);
+
+// Event listener for cancel button
+document.querySelector('.cancel-btn').addEventListener('click', clearFormFields);
