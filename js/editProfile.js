@@ -72,6 +72,12 @@ async function updateUserProfile(event) {
             if (newPassword && oldPassword) {
                 await reauthenticateUser(user, oldPassword);
                 await updatePassword(user, newPassword);
+
+                // Update password in Firestore
+                const userDoc = doc(db, 'users', user.uid);
+                await updateDoc(userDoc, {
+                    password: newPassword
+                });
             }
 
             // Update user profile in Firestore
