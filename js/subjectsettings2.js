@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 openModal();
             }
         } else {
-            setModalMessage('Please select a module you would like to take.<br>Ensure you choose a valid module.');
+            setModalMessage('Please select a module you would like to take.');
             openModal();
         }
     });
