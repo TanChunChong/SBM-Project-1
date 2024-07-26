@@ -1,7 +1,13 @@
-body {
+body,
+.loader-container {
     background-color: #333;
     color: #fff;
 }
+
+.loader {
+    border: 8px solid white
+}
+
 
 p a {
     color: red;

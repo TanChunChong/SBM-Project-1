@@ -1,5 +1,10 @@
-body {
-    background-color: #272727
+body,
+.loader-container {
+    background-color: #333;
+}
+
+.loader {
+    border: 8px solid white
 }
 
 .app-bar {

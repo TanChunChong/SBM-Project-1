@@ -1,6 +1,11 @@
-body {
+body,
+.loader-container {
     background-color: #333;
     color: #fff;
+}
+
+.loader {
+    border: 8px solid white
 }
 
 .topIconsRight img:not(.pfp) {
@@ -15,3 +20,4 @@ body {
 #advertisement-content span, p {
     color: black;
 }
+
