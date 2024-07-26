@@ -18,6 +18,11 @@ body,
   color: #000000;
 }
 
+.score1,
+.score2 {
+  color: black;
+}
+
 .button,
 .button2 {
   color: #ffffff;

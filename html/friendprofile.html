@@ -5,22 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Friend Profile</title>
     <link rel="stylesheet" href="../css/friendprofile.css" />
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/navBar.css" />
+    <link
+      rel="stylesheet"
+      href="../css/friendprofileDark.css"
+      id="dark-mode-stylesheet"
+      disabled
+    />
+    <link rel="stylesheet" href="../css/navBar.css" id="nav-bar-light-mode" />
+    <link
+      rel="stylesheet"
+      href="../css/navBarDark.css"
+      id="nav-bar-dark-mode"
+      disabled
+    />
     <link rel="manifest" href="../manifest.json" />
   </head>
   <body>
-    <div class="loader-container" id="loader-container"><div class="loader" ></div></div>
+    <div class="loader-container" id="loader-container">
+      <div class="loader"></div>
+    </div>
     <div class="bodyContainer">
       <div class="header">
-        <a href="javascript:void(0);" onclick="window.history.back();">
-          <img src="../resources/backArrow.svg" alt="Back Arrow" width="40" height="40" />
-      </a>
+        <a
+          href="javascript:void(0);"
+          onclick="window.history.back();"
+          class="back-icon"
+        >
+          <img
+            src="../resources/backArrow.svg"
+            alt="Back Arrow"
+            width="40"
+            height="40"
+          />
+        </a>
       </div>
       <img
         class="pfp"
-        src="../resources/superhero.png"
-        alt="Profile Picture"
         height="185"
         width="185"
       />
@@ -63,7 +83,7 @@
               class="svg-image2"
               src="../resources/award.svg"
               alt="Points - Tests"
-            /> 
+            />
             <div class="score2">64</div>
             <div class="small">Highscore</div>
           </div>
