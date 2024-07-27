@@ -10,7 +10,6 @@ const port = 3000;
 // Load service account credentials
 const serviceAccount = JSON.parse(fs.readFileSync('./service_account.json', 'utf8'));
 
-// Initialize GoogleAuth with service account credentials
 const auth = new GoogleAuth({
   credentials: serviceAccount,
   scopes: ['https://www.googleapis.com/auth/cloud-platform'],
