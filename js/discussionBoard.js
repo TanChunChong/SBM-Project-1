@@ -164,33 +164,39 @@ function loadPosts(savedPosts, sortCriteria = 'createdAt_desc') {
                     postsContainer.appendChild(postBox);
                 });
 
-                postsContainer.addEventListener('click', function (event) {
-                    if (event.target.closest('.posts-like-icon')) {
-                        const icon = event.target.closest('.posts-like-icon');
-                        const postId = icon.closest('.posts-rectangular-box').dataset.postId;
-                        toggleLike(icon, postId);
-                    }
-
-                    if (event.target.closest('.vertical-saved-icon')) {
-                        const icon = event.target.closest('.vertical-saved-icon');
-                        const postId = icon.closest('.posts-rectangular-box').dataset.postId;
-                        toggleSaved(icon, postId);
-                    }
-
-                    if (event.target.closest('.download-file')) {
-                        event.preventDefault();
-                        const link = event.target.closest('.download-file');
-                        const url = link.getAttribute('data-url');
-                        const fileName = link.getAttribute('data-filename');
-                        console.log(`Downloading file from: ${url} with filename: ${fileName}`); // Debugging line
-                        fetchAndDownloadFile(url, fileName);
-                    }
-                });
+                // Reattach event listeners after posts are loaded
+                reattachEventListeners(postsContainer);
             });
         })
         .catch(error => {
             console.error('Error fetching posts:', error);
         });
+}
+
+function reattachEventListeners(container) {
+    container.querySelectorAll('.posts-like-icon').forEach(icon => {
+        icon.addEventListener('click', function () {
+            const postId = this.closest('.posts-rectangular-box').dataset.postId;
+            toggleLike(this, postId);
+        });
+    });
+
+    container.querySelectorAll('.vertical-saved-icon').forEach(icon => {
+        icon.addEventListener('click', function () {
+            const postId = this.closest('.posts-rectangular-box').dataset.postId;
+            toggleSaved(this, postId);
+        });
+    });
+
+    container.querySelectorAll('.download-file').forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const url = this.getAttribute('data-url');
+            const fileName = this.getAttribute('data-filename');
+            console.log(`Downloading file from: ${url} with filename: ${fileName}`); // Debugging line
+            fetchAndDownloadFile(url, fileName);
+        });
+    });
 }
 
 function filterPostsByTitle() {
