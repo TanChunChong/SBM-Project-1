@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         backLink.href = 'viewPosts.html'; // Fallback in case topicID is not found
     }
 
-    // Existing code...
-
     // Select DOM elements
     const postForm = document.getElementById('create-post-form');
     const postButton = document.querySelector('.post-button');
@@ -58,6 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('post-title').value;
         const description = document.getElementById('post-content').value;
         const user = auth.currentUser;
+
+        // Check if title and description are filled
+        if (!title || !description) {
+            alert('Please fill out both the title and description fields before submitting a post.');
+            return;
+        }
 
         if (!user) {
             alert('User not authenticated. Please log in again.');
