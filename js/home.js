@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     console.log(`User ID from localStorage: ${userId}`);
 
     if (!userId) {
-        console.log('User ID not found in localStorage.');
+        console.log('User ID not found in localStorage. Redirecting to index.html.');
+        window.location.href = 'index.html';
         return;
     }
 
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     } catch (error) {
         console.error('Error fetching user data:', error);
     }
+
     const link = document.querySelector('.seeAll');
     if (link) {
         link.style.display = 'none';
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     closeAdButton.addEventListener('click', function () {
         advertisementContainer.style.display = 'none';
     });
+
     myModules();
 });
 
@@ -78,8 +81,7 @@ async function myModules() {
             button.addEventListener('click', () => {
                 window.location.href = 'subjectSettings.html';
             });
-        } 
-        else if (userModules.length < 4 && userModules.length > 0) {
+        } else if (userModules.length < 4 && userModules.length > 0) {
             const button = document.createElement('button');
             button.classList.add('start');
             button.id = 'start';
@@ -88,8 +90,7 @@ async function myModules() {
             button.addEventListener('click', () => {
                 window.location.href = 'studyMaterials.html';
             });
-        }
-        else if (userModules.length >= 4) {
+        } else if (userModules.length >= 4) {
             const link = document.querySelector('.seeAll');
             if (link) {
                 link.style.display = 'inline';

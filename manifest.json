@@ -1,7 +1,7 @@
 {
     "name": "ISP Project",
     "short_name": "ISP",
-    "start_url": "../html/index.html",
+    "start_url": "../html/home.html",
     "display": "standalone",
     "background_color": "#FFFCED",
     "theme_color": "#BAC4FF",
