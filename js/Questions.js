@@ -5,6 +5,7 @@ document.getElementById('goBackButton').addEventListener('click', () => {
     window.history.back();
 });
 
+let userID
 let email;
 let selectedAnswer = null;
 let questionsArray = [];
@@ -12,6 +13,7 @@ let currentQuestionIndex = 0;
 let correctAnswersCount = 0; // Counter for correct answers
 
 document.addEventListener('DOMContentLoaded', async function () {
+    userID = localStorage.getItem('userId');
     email = localStorage.getItem('email');
     const urlParams = new URLSearchParams(window.location.search);
     const moduleID = urlParams.get('moduleID');
@@ -229,12 +231,15 @@ async function updateHighScore(email, correctAnswersCount) {
         const scoreRef = doc(db, 'scores', email);
         const scoreDoc = await getDoc(scoreRef);
         if (scoreDoc.exists()) {
+            //Goes here
             const currentHighScore = scoreDoc.data().highscore;
             if (correctAnswersCount > currentHighScore) {
+                console.log("HightScore Exists")
                 await updateDoc(scoreRef, { highscore: correctAnswersCount });
             }
         } else {
-            await setDoc(scoreRef, { email: email, highscore: correctAnswersCount });
+            console.log("Score Doc has been Created")
+            await setDoc(scoreRef, { userID: userID, email: email, highscore: correctAnswersCount });
         }
     } catch (error) {
         console.error('Error updating high score: ', error);

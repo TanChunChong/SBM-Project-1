@@ -107,6 +107,30 @@ async function fetchAndDisplayScores(friendUID) {
   }
 }
 
+async function updateTotalScore(email, userID) {
+  try {
+    const userModulesSnapshot = await getDocs(query(collection(db, 'userModules'), where('email', '==', email)));
+    let totalScore = 0;
+
+    userModulesSnapshot.forEach(doc => {
+      totalScore += doc.data().score;
+    });
+
+    const scoreRef = doc(db, 'scores', email);
+    const scoreDoc = await getDoc(scoreRef);
+
+    if (scoreDoc.exists()) {
+      await updateDoc(scoreRef, { totalScore: totalScore });
+    } else {
+      await setDoc(scoreRef, { email: email, userID: userID, totalScore: totalScore });
+    }
+
+    totalScoreElement.textContent = totalScore;
+  } catch (error) {
+    console.error('Error updating total score:', error);
+  }
+}
+
 async function checkFriendStatus(
   currentUserId,
   currentUsername,
@@ -250,6 +274,9 @@ onAuthStateChanged(auth, async (user) => {
         friendUID,
         friendUsername
       );
+
+      // Update total score
+      await updateTotalScore(user.email, user.uid);
     }
   } else {
     console.error("No user is signed in.");
