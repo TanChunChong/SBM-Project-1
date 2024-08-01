@@ -264,6 +264,11 @@ async function fetchCurrentUser(user) {
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     const currentUserData = await fetchCurrentUser(user);
+    // Redirect to userProfile.html if the UID matches
+    if (user.uid === friendUID) {
+      window.location.href = "userProfile.html";
+      return;
+    }
     const friendData = await fetchFriendData(friendUID);
     if (currentUserData && friendData) {
       const currentUserId = currentUserData.userID;
