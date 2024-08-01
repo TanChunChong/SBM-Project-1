@@ -122,6 +122,7 @@ async function updateTotalScore(email, userID) {
     if (scoreDoc.exists()) {
       await updateDoc(scoreRef, { totalScore: totalScore });
     } else {
+      
       await setDoc(scoreRef, { email: email, userID: userID, totalScore: totalScore });
     }
 
@@ -153,7 +154,7 @@ async function checkFriendStatus(
         friendUID,
         friendUsername
       );
-    };
+    }; 
     button.style.display = visible ? "inline-block" : "none";
   };
 
