@@ -155,7 +155,7 @@ async function checkSubscriptionAndShowAd() {
         // Query the subscriptions collection for a matching userId
         const subscriptionsQuery = query(
             collection(db, 'subscriptions'),
-            where('userID', '==', userId)
+            where('userId', '==', userId)
         );
 
         const subscriptionsSnapshot = await getDocs(subscriptionsQuery);

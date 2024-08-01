@@ -175,6 +175,7 @@ h2 {
     font-weight: bold;
     color: #333;
     margin-bottom: -10px;
+    max-width: 220px;
 }
 
 .title-and-username {
@@ -321,4 +322,3 @@ h2 {
     stroke: blue;
     fill: blue;
 }
-

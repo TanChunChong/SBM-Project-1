@@ -24,6 +24,7 @@ body,
 
 .app-bar-left img.icon,
 .remove-friend-ico,
-.remove-friend-icon {
+.remove-friend-icon,
+.friend-action-icon {
     filter: invert(100%) brightness(100%) sepia(0%) saturate(100%) hue-rotate(0deg) contrast(100%);
 }

@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 body {
-  font-family: "Poppins", sans-serif;
+  background-color: #FFFCED;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .pfp {
@@ -158,6 +160,11 @@ body {
   border-radius: 50%;
   border: 8px solid #514b82;
   animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+}
+
+.back-icon{
+  margin-left: 10px;
+  margin-top: 15px
 }
 
 @keyframes l20-1 {

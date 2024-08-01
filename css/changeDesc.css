@@ -12,12 +12,12 @@ body {
 
 .container {
     width: 100vw;
-    height: 95%;
+    height: 100%;
     border-radius: 8px;
     padding: 10px; /* Reduce padding to move content up */
     background-color: #fffced;
     box-sizing: border-box; /* Include padding in height calculation */
-    margin-top: 15vh
+    margin-bottom: 20px
 }
 
 .header {

@@ -163,6 +163,7 @@ body {
 .task-title {
     font-size: 16px;
     font-weight: 600;
+    color: black;
 }
 
 .task-info {
@@ -172,14 +173,20 @@ body {
     margin-top: 5px;
 }
 
+.task-schedule svg {
+    filter: invert(0%) brightness(0%) sepia(0%) saturate(0%) hue-rotate(0deg) contrast(100%);
+}
+
 .task-schedule {
     font-size: 14px;
+    color: black;
 }
 
 .task-schedule .icon {
     width: 16px;
     height: 16px;
     margin-right: 5px;
+    fill: black;
 }
 
 .task-progress-circle {

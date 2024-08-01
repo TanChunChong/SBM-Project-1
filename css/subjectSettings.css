@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: flex-start;
     position: relative;
+    margin-bottom: 30px;
 }
 
 .header-top {

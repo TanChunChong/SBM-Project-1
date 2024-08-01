@@ -74,6 +74,7 @@ body {
     font-weight: bold;
     color: #333;
     margin-bottom: -10px;
+    max-width: 230px;
 }
 
 .title-and-username {

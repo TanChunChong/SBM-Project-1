@@ -116,7 +116,7 @@ async function updateTotalScore(email, userID) {
       totalScore += doc.data().score;
     });
 
-    const scoreRef = doc(db, 'scores', email);
+    const scoreRef = doc(db, 'scores', email, uid);
     const scoreDoc = await getDoc(scoreRef);
 
     if (scoreDoc.exists()) {

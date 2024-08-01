@@ -4,11 +4,12 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #faf8f3;
+    background-color: #fffde7;
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Changed from center to flex-start */
     height: 100vh;
+    margin-bottom: 7em
 }
 
 .container {

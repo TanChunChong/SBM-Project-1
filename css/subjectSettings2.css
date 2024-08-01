@@ -37,6 +37,7 @@ body {
     margin-top: 60px;
     overflow-y: auto;
     height: calc(100vh - 100px);
+    padding-bottom: 10em
 }
 
 header {

@@ -195,7 +195,7 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     width: 100%; /* Make button full width */
-    margin-bottom: 30px;
+    margin-bottom: 150px;
 }
 
 .circular-progress {

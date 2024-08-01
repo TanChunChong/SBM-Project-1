@@ -8,27 +8,11 @@ body,
     border: 8px solid white
 }
 
-
-.container {
-  background-color: #4d4d4d;
-}
-
-.big,
-.small {
-  color: #000000;
-}
-
-.score1,
-.score2 {
-  color: black;
-}
-
-.button,
-.button2 {
-  color: black;
-}
-
-.back-icon {
+#backArrow {
   filter: invert(100%) brightness(100%) sepia(0%) saturate(100%)
     hue-rotate(0deg) contrast(100%);
+}
+
+.ModalBody {
+  color: black;
 }
