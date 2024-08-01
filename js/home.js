@@ -1,11 +1,11 @@
 import { db } from './firebaseConfig.js';
 import { collection, doc, getDoc, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
-let email; 
+let userId;
 
+// Event listener for DOMContentLoaded to ensure the page is fully loaded
 document.addEventListener('DOMContentLoaded', async function () {
-    email = localStorage.getItem('email');
-    const userId = localStorage.getItem('userId');
+    userId = localStorage.getItem('userId');
     console.log(`User ID from localStorage: ${userId}`);
 
     if (!userId) {
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
+    // Get the username from local storage and display it
     const username = localStorage.getItem('username');
     if (username) {
         document.querySelector('.username').textContent = username;
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     try {
+        // Fetch user data from Firestore
         const userRef = doc(db, 'users', userId);
         console.log(`Firestore document reference: ${userRef.path}`);
 
@@ -32,9 +34,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             const userData = userDoc.data();
             console.log('User data fetched from Firestore:', userData);
 
+            // Set the profile picture path
             const profilePicElement = document.getElementById('profile-pic');
             profilePicElement.src = userData.imagepath || "../resources/bear.png";
-
             console.log(`Profile picture path: ${profilePicElement.src}`);
         } else {
             console.log('No such document!');
@@ -47,19 +49,25 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (link) {
         link.style.display = 'none';
     }
+
+    // Check subscription status and show/hide advertisement
     await checkSubscriptionAndShowAd();
 
     // Add event listener for closing the advertisement
     const closeAdButton = document.getElementById('close-advertisement');
     const advertisementContainer = document.getElementById('advertisement-container');
 
-    closeAdButton.addEventListener('click', function () {
-        advertisementContainer.style.display = 'none';
-    });
+    if (closeAdButton) {
+        closeAdButton.addEventListener('click', function () {
+            advertisementContainer.style.display = 'none';
+        });
+    }
 
+    // Initialize user modules
     myModules();
 });
 
+// Function to display user modules
 async function myModules() {
     const subjectsContainer = document.querySelector('.subjectRow');
 
@@ -67,12 +75,13 @@ async function myModules() {
         const userModulesSnapshot = await getDocs(collection(db, 'userModules'));
         const userModules = [];
         userModulesSnapshot.forEach(doc => {
-            if (email === doc.data().email) {
+            if (userId === doc.data().userID) {
                 userModules.push(doc.data());
             }
-        }); 
+        });
 
         if (userModules.length === 0) {
+            // If no modules found, prompt to get started
             const button = document.createElement('button');
             button.classList.add('start');
             button.id = 'start';
@@ -82,6 +91,7 @@ async function myModules() {
                 window.location.href = 'subjectSettings.html';
             });
         } else if (userModules.length < 4 && userModules.length > 0) {
+            // If some modules found, show 'My Modules' button
             const button = document.createElement('button');
             button.classList.add('start');
             button.id = 'start';
@@ -91,6 +101,7 @@ async function myModules() {
                 window.location.href = 'studyMaterials.html';
             });
         } else if (userModules.length >= 4) {
+            // Display user modules
             const link = document.querySelector('.seeAll');
             if (link) {
                 link.style.display = 'inline';
@@ -106,7 +117,7 @@ async function myModules() {
                     modules.push(data);
                 }
             });
-            
+
             for (let i = 0; i < Math.min(modules.length, 4); i++) {
                 const data = modules[i];
                 const moduleElement = document.createElement('a');
@@ -126,25 +137,44 @@ async function myModules() {
                 subjectsContainer.appendChild(moduleElement);
             }
         }
-        
+
     } catch (error) {
         console.error('Error fetching documents: ', error);
     } finally {
+        // Hide the loader after operations complete
         const loaderContainer = document.getElementById('loader-container');
-        loaderContainer.style.display = 'none';
+        if (loaderContainer) {
+            loaderContainer.style.display = 'none';
+        }
     }
 }
 
+// Function to check user's subscription status and manage advertisement display
 async function checkSubscriptionAndShowAd() {
     try {
-        const subscriptionsQuery = query(collection(db, 'subscriptions'), where('email', '==', email));
+        // Query the subscriptions collection for a matching userId
+        const subscriptionsQuery = query(
+            collection(db, 'subscriptions'),
+            where('userID', '==', userId)
+        );
+
         const subscriptionsSnapshot = await getDocs(subscriptionsQuery);
+        console.log(`Number of subscription documents found: ${subscriptionsSnapshot.size}`);
+
+        subscriptionsSnapshot.forEach(doc => {
+            console.log('Subscription document data:', doc.data());
+        });
 
         const advertisementContainer = document.getElementById('advertisement-container');
 
         if (subscriptionsSnapshot.empty) {
             // No matching subscription found, show advertisement
             advertisementContainer.style.display = 'flex';
+            console.log('No subscription found, showing advertisement.');
+        } else {
+            // Matching subscription found, hide advertisement
+            advertisementContainer.style.display = 'none';
+            console.log('Subscription found, hiding advertisement.');
         }
     } catch (error) {
         console.error('Error checking subscription:', error);
