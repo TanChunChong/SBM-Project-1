@@ -48,7 +48,7 @@ async function subjectSettings() {
                     nameElement.textContent = data.moduleName;
 
                     const descriptionElement = document.createElement('p');
-                    descriptionElement.innerHTML = `Module Code: ${data.moduleID}`; 
+                    descriptionElement.innerHTML = `Module ID: <br> ${data.moduleID}`; 
 
                     const deleteRecord = document.createElement('div')
                     deleteRecord.classList.add('edit')
