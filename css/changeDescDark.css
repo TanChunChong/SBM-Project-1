@@ -8,7 +8,7 @@ body,
     border: 8px solid white
 }
 
-.back-icon {
+#backArrow {
   filter: invert(100%) brightness(100%) sepia(0%) saturate(100%)
     hue-rotate(0deg) contrast(100%);
 }

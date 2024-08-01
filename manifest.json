@@ -1,11 +1,12 @@
 {
     "name": "ISP Project",
     "short_name": "ISP",
-    "start_url": "html/home.html",
+    "start_url": "../html/index.html",
     "display": "standalone",
     "background_color": "#FFFCED",
     "theme_color": "#BAC4FF",
-    "orientation": "portrait-primary",
+    "orientation": "portrait",
+    "scope": "../html/",
     "icons": [
         {
             "src": "/resources/IconLogo.jpg",
