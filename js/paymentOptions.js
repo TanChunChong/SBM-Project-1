@@ -153,11 +153,14 @@ document
 document
   .getElementById("confirm-subscription")
   .addEventListener("click", async () => {
-    const selectedPlan = document
-      .getElementById("plan-selector")
-      .value.split(":");
-    const subscriptionType = selectedPlan[0];
-    const amount = parseFloat(selectedPlan[1].replace(/[^0-9.]/g, ""));
+    const selectedPlan = document.getElementById("plan-selector").value;
+    if (!selectedPlan) {
+      alert("Please select a subscription plan first.");
+      return;
+    }
+
+    const [subscriptionType, amountText] = selectedPlan.split(":");
+    const amount = parseFloat(amountText.replace(/[^0-9.]/g, ""));
     const user = auth.currentUser;
 
     if (user) {
