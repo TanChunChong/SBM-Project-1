@@ -2,10 +2,11 @@ import { db } from './firebaseConfig.js';
 import { collection, doc, getDoc, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 let userId;
-
+let email;
 // Event listener for DOMContentLoaded to ensure the page is fully loaded
 document.addEventListener('DOMContentLoaded', async function () {
     userId = localStorage.getItem('userId');
+    email = localStorage.getItem('email');
     console.log(`User ID from localStorage: ${userId}`);
 
     if (!userId) {
@@ -72,16 +73,18 @@ async function myModules() {
     const subjectsContainer = document.querySelector('.subjectRow');
 
     try {
+        //checked
         const userModulesSnapshot = await getDocs(collection(db, 'userModules'));
         const userModules = [];
         userModulesSnapshot.forEach(doc => {
-            if (userId === doc.data().userID) {
+            if (email === doc.data().email) {
                 userModules.push(doc.data());
             }
         });
-
+        console.log(userModules)
         if (userModules.length === 0) {
             // If no modules found, prompt to get started
+            console.log(userModules.length)
             const button = document.createElement('button');
             button.classList.add('start');
             button.id = 'start';
@@ -99,7 +102,7 @@ async function myModules() {
             subjectsContainer.appendChild(button);
             button.addEventListener('click', () => {
                 window.location.href = 'studyMaterials.html';
-            });
+            }); 
         } else if (userModules.length >= 4) {
             // Display user modules
             const link = document.querySelector('.seeAll');
